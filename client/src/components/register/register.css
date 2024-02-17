@@ -1,0 +1,149 @@
+.reg_container
+{ 
+    margin-bottom: 55px;
+    display: flex;
+    height: auto;
+    width: auto;
+    /* background: red; */
+    /* margin: 28px 56px; */
+}
+
+.left_container
+{
+    padding: 10px 20px;
+    height: auto;
+    width: 100%;
+    /* display: flex; */
+    margin: auto;
+    background: var(--forth-color);
+    border-radius:  15px;
+    /* background: yellow; */
+    
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.right_container
+{
+    margin-inline-start: auto;
+    height: auto;
+    width: 100%;
+    /* background: orange; */
+    margin-top: 30px;
+}
+
+.right_form
+{
+    margin-inline: 168px;
+    border: 2px solid var(--third-color);
+    /* margin: 24px; */
+    
+    border-radius: 15px;
+}
+
+.right_form  .form_div
+{
+    font-size: 18px;
+    margin: 24px;
+    padding: 12px;
+}
+
+.right_form  .form_div input{
+    display: block;
+    width: 100%;
+    border: none;
+    /* border-bottom: 3px var(--primary-color); */
+    border-bottom: 3px solid var(--primary-color);
+    outline: none;
+    background-color: transparent;
+    padding: 5px;
+}
+
+ .form_div input:focus{
+    border-bottom: 2px solid;
+    border-bottom-color: var(--third-color); /* Change the color on focus */
+   transition: border-bottom-color 0.5s ease;
+}
+
+
+.form_div button
+{
+    background: #ffffff;
+    color: black;
+    padding: 7px 14px;
+    outline: none;
+    border-radius: 7px;
+}
+
+
+.form_div button:hover
+{
+    background: #313131;
+    color: white;
+    transition: 0.6s;
+}
+/* arrow button on input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.left_container h1{
+    font-size: 72px;
+    font-weight: 800;
+}
+
+.left_container .p_first
+{
+    font-size: 22px;
+    margin: 10px 20px;
+    padding: 15px 20px;
+    font-weight: 100;
+    font-style:italic;
+}
+.left_h1
+{
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.p_second
+{
+    font-size: 18px;
+}
+
+.txtarea{
+
+    /* border: none; */
+    border: 3px solid var(--primary-color);
+    outline: none;
+    background-color: transparent;
+    padding: 5px;
+    width: 100%;
+}
+.txtarea:focus
+{
+    border: 2px solid;
+    border-color: var(--third-color);
+   transition: border-bottom-color 0.5s ease;
+}
+
+
+@media (max-width: 768px)  {
+    /* body, html {
+        height: 100%;
+    }
+     */
+    
+    .reg_container {
+        align-items: center; 
+        display: flex;
+        flex-direction:column;
+        margin: 10px;
+    }
+
+    .right_form {
+        margin-inline: 0;
+        margin-top: 24px;
+    }
+} 

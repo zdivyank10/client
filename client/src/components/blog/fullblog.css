@@ -1,0 +1,112 @@
+/* Default styles */
+.fullblogcontainer {
+    height: 100%;
+    border: 1px solid var(--third-color);
+    margin: 5% auto; /* Center the container with 5% top and bottom margin */
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    border-radius: 15px;
+}
+
+.authorinfo {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.authorname {
+    font-size: 25px;
+    margin-left: 15px;
+}
+
+.fullblogimg {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.fullimg {
+    max-width: 100%; /* Ensure the image does not exceed its container */
+    height: auto;
+}
+
+.fullblogcontent {
+    text-align: justify;
+    width: 100%;
+    font-size: 20px;
+}
+
+.fullblog_like,
+.fullblog_likeinfo {
+    float: left;
+    margin: 15px;
+}
+
+.fullpost_cmt {
+    float: right;
+    margin: 15px;
+}
+
+/* Media Queries for responsiveness */
+
+/* Tablets (landscape) and larger */
+@media only screen and (min-width: 768px) {
+    .fullblogcontainer {
+        width: 70%; /* Reduce container width for larger screens */
+    }
+
+    .authorname {
+        font-size: 20px; /* Decrease font size for larger screens */
+    }
+
+    .fullblogcontent {
+        font-size: 18px; /* Decrease font size for larger screens */
+    }
+    .authorinfo
+    {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Desktops and larger */
+@media only screen and (min-width: 992px) {
+    .fullblogcontainer {
+        width: 50%; /* Further reduce container width for desktops */
+    }
+
+    .authorname {
+        font-size: 18px; /* Decrease font size for desktops */
+    }
+
+    .fullblogcontent {
+        font-size: 16px; /* Decrease font size for desktops */
+    }
+    .authorinfo
+    {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Large desktops and larger */
+@media only screen and (min-width: 1200px) {
+    .fullblogcontainer {
+        width: 40%; /* Further reduce container width for large desktops */
+    }
+
+    .authorname {
+        font-size: 16px; /* Decrease font size for large desktops */
+    }
+
+    .fullblogcontent {
+        font-size: 14px; /* Decrease font size for large desktops */
+    }
+    .authorinfo
+    {
+        display: flex;
+        flex-direction: column;
+    }
+}

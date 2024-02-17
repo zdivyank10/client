@@ -1,0 +1,123 @@
+
+.postcontainer {
+    text-decoration: none; 
+    color: inherit;
+    background: white;
+    width: auto;
+    border: 2px solid var(--third-color);
+    border-radius: 15px;
+    margin: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    transition: box-shadow 0.5s ease; 
+}
+
+.postcontainer:hover {
+    box-shadow:var(--forth-color) 0px 20px 40px, rgba(0, 0, 0, 0.27) 0px 15px 15px;
+    /* transform: scale(1.5); */
+}
+
+
+.banner_img {
+    width: 100%;
+    height: auto; /* Adjust height to auto for responsiveness */
+    border-radius: 15px;
+    border: 2px solid var(--secondary-color);
+}
+
+.postuserinfo {
+    margin-top: 20px;
+    display: flex;
+    /* align-items: center;  */
+    margin-left: 20px;
+}
+
+.postuserinfo p {
+    font-size: 24px;
+    margin-left: 7px;
+}
+
+.userpfp {
+    margin-bottom: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid ;
+    padding: 2px;
+}
+.info
+{
+    display: flex;
+    margin-top: 7px;
+}
+
+.postuserinfo .blogdate {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.content {
+    margin: 15px ; 
+    font-size: 14px;
+}
+
+
+.blogrow
+{
+    /* align-items: center; */
+    /* margin-top: 40px; */
+    justify-content: center;
+}
+
+.tag
+{
+    background-color: var(--third-color);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.actions
+{
+    margin-left: 25px;
+    padding: 25px;
+}
+
+.post_like
+{
+    margin-right: 100%;
+    margin: 5px;
+    /* display: flex; */
+}
+.post_likeinfo
+{
+    display:inline-block;
+}
+.post_cmt
+{
+    margin-left: 100%;
+    margin: 44px;
+}
+/* Media Query for tablets */
+@media (max-width: 768px) {
+    .postcontainer {
+        margin:  15px;
+        
+        /* max-width: calc(33.33% - 40px); */
+        /* width: 600px; */
+    }
+    
+}
+
+/* Media Query for mobile devices */
+@media (max-width: 576px) {
+    .postcontainer {
+        margin:  15px;
+        /* width: 100px; */
+        /* max-width: calc(50% - 20px);  */
+    }
+}
+
+

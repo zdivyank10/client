@@ -1,0 +1,18 @@
+*{
+ 
+    font-family: 'Asap Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
+}
+body{
+
+    overflow-x: hidden;
+}
+
+:root {
+    /* Define color variables */
+    --primary-color: #222831; /* Example primary color */
+    --secondary-color: #393E46;
+    --third-color : #00ADB5;
+    --forth-color:#EEEEEE;
+    --text-color : #000000;
+  }

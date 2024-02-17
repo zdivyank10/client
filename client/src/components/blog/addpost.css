@@ -1,0 +1,88 @@
+.addpostcontainer
+{
+    height: auto;
+    display: flex;
+    height: 100%;
+   
+}
+
+.addpostleft
+{
+    /* border: 2px solid salmon; */
+    width: 50%;
+    margin:auto;
+
+}
+.addpostright
+{
+    /* border: 2px solid yellow; */
+    width: 50%;
+    margin: 20px;
+    border: 1px solid var(--third-color);
+    border-radius: 15px;
+}
+.formcontrol{
+    margin: 10px 20px;
+    padding: 20px 30px;
+    justify-content: center;
+    align-content: center;
+}
+.addpostright label{
+    font-size: 22px;
+ 
+}
+
+.leftpreview
+{
+    background: #ffffff;
+    height: auto;
+    width: auto;
+    margin: 20px 170px;
+    padding: 20px 20px;
+    overflow-y: auto;
+}
+.leftpreview p{
+    display: inline;
+    background-color: transparent;
+    color: black;
+    padding: 20px;
+    margin-left: 40px;
+    font-size: 18px;
+}
+.img--align-left {
+    background-color: #fff;
+    float: left; /* replaces the style previously inherited by the browser */
+    margin: 10px ;
+    border-radius: 15px;
+    /* display: block; */
+     border: none;
+    outline: none;
+  }
+
+
+@media only screen and (max-width: 768px) {
+    .addpostcontainer
+    {
+        flex-direction: column;
+    }
+
+    .leftpreview
+    {
+        margin: 0;
+        width:200px;
+        opacity: 0.5;
+      
+    }
+
+    .addpostright
+    {
+        width: 100%;
+    }
+    .img--align-left {
+        
+        justify-content: center;
+        justify-items: center;
+        justify-self: center;
+        border-radius: 15px;
+      }
+  }
