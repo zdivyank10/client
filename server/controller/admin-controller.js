@@ -99,6 +99,7 @@ const updateBlogPermission = async (req, res) => {
       console.error('Error updating blog permission:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
+    // console.log('hellp');
   };
 
 
