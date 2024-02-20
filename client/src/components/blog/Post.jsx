@@ -16,21 +16,21 @@ function Post() {
           const { _id, title, author_id, cover_img, content, tags, createdAt, username } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
           return (
-            <Link to={`/blog/${_id}`} key={index} data-aos="fade-up" className="postcontainer col-md-3">
-              <div className="postimg">
+            <div key={index} data-aos="fade-up" className="postcontainer col-md-3">
+              <Link to={`/blog/${_id}`} className="postimg">
                 <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
-              </div>
+              </Link>
 
-              <div className="postuserinfo">
+              <Link to={`/blog/${_id}`} className="postuserinfo">
                 <FaUserAlt className='userpfp'/>
                 <div className="info">
                   <p>{author_id.username}</p>
                   <p className='blogdate'>{createdAt}</p>
                 </div>
-              </div>
+              </Link>
               <hr />
 
-              <div className="blogcontent">
+              <Link to={`/blog/${_id}`} className="blogcontent">
                 <h2>{title}</h2>
                 <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 <div className="tags">
@@ -39,13 +39,13 @@ function Post() {
                   ))}
                 </div>
                 <hr />
-              </div>
+              </Link>
               <div className="actions">
               <AiFillHeart size={25} className='post_like'/>
                 <p className='post_likeinfo'>likes</p>
                 <AiFillMessage size={25} className='post_cmt'/>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

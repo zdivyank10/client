@@ -1,3 +1,8 @@
+/* Global CSS rule to remove underline from all Link components */
+.blogcontent,.postuserinfo{
+    text-decoration: none !important;
+    color: inherit; /* Optional: ensure links inherit their parent's color */
+}
 
 .postcontainer {
     text-decoration: none; 
