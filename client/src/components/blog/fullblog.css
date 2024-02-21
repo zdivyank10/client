@@ -18,8 +18,8 @@
 }
 
 .authorname {
-    font-size: 25px;
-    margin-left: 15px;
+    font-size: 35px;
+
 }
 
 .fullblogimg {
@@ -48,7 +48,21 @@
     float: right;
     margin: 15px;
 }
+.comment_section
+{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin: 5% auto; */
+    width: 70%;
+}
 
+.send_icon
+{
+    border: 1px solid var(--primary-color);
+    margin: 5px;
+    padding: 5px;
+}
 /* Media Queries for responsiveness */
 
 /* Tablets (landscape) and larger */

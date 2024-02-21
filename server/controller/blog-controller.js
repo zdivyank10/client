@@ -57,20 +57,22 @@ const approvedBlogs = async (req, res) => {
   };
   const getfullblog = async (req, res) => {
     try {
-      const { id } = req.params; // Ensure that id is correctly received from the frontend
-      console.log('Received id:', id);
-      // Fetch the blog post using the id parameter
-      const blogPost = await blog.findById(id).populate('author_id','username');
-      if (!blogPost) {
-        console.log('Blog post not found for id:', id);
-        return res.status(404).json({ message: 'Blog post not found' });
-      }
-      res.json(blogPost);
+        const { id } = req.params; // Ensure that id is correctly received from the frontend
+        console.log('Received id:', id); // Log received id
+        // Fetch the blog post using the id parameter
+        const blogPost = await blog.findById(id).populate('author_id','username');
+        console.log('Full Blog Post:', blogPost); // Log the fetched blog post
+        if (!blogPost) {
+            console.log('Blog post not found for id:', id);
+            return res.status(404).json({ message: 'Blog post not found' });
+        }
+        res.json(blogPost);
     } catch (error) {
-      console.error('Error fetching full blog post:', error);
-      res.status(500).json({ message: 'Internal server error' });
+        console.error('Error fetching full blog post:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-  };
+};
+
   
 
 module.exports = {blogs,blogform,approvedBlogs,getfullblog}

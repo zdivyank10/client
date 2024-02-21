@@ -7,6 +7,7 @@ const contactRouter = require("./router/contact-router");
 const adminRouter = require("./router/admin-router");
 const blogRouter = require("./router/blog-router");
 const likeRoutes = require("./router/like-router");
+const commentRoutes = require("./router/comment-router");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 const path = require("path");
@@ -43,6 +44,7 @@ app.use("/api/blog",blogRouter);
 // let's define admin route
 app.use("/api/admin",adminRouter);
 app.use('/api/like', likeRoutes);
+app.use('/api/comment', commentRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
