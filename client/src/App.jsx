@@ -17,7 +17,8 @@ import Error from "./components/error/Error";
 import Adminlayout from "./components/layouts/Adminlayout";
 import AdminUsers from "./components/layouts/AdminUsers";
 import Admincontacts from "./components/layouts/Admincontacts";
-import Adminblogs from "./components/layouts/ADminblogs";
+// import Adminblogs from "./components/layouts/ADminblogs";
+import Adminblogs from "./components/layouts/Adminblogs";
 import AdminDashboard from "./components/layouts/AdminDashboard";
 import Userupdate from "./components/Admin/Userupdate";
 // animations
