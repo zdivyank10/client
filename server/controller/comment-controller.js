@@ -24,10 +24,10 @@ const addcomment = async(req,res)=>{
 const getcomment = async (req, res) => {
     try {
         const { blogid } = req.params;
-        console.log('Received blog post id:', blogid);
+        console.log('Received comment id:', blogid);
 
-        const response = await Comment.findById(blogid);
-        console.log('response', response);
+        const response = await Comment.findById({ blogId : blogid });
+        console.log('response',response);
         if (!response) {
             return res.status(404).json({ message: 'No Comment Found' });
         }
