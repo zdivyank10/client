@@ -35,7 +35,7 @@ const getcomment = async (req, res) => {
         }
 
         // Find comment by blogid and populate the 'userid' field to get 'username'
-        const response = await Comment.find({ blogid: ObjectId.createFromHexString(blogid) });
+        const response = await Comment.find({ blogid: ObjectId.createFromHexString(blogid) }).populate('userid', 'username');
         console.log(response);
 
         // Check if comment exists

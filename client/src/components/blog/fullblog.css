@@ -68,9 +68,30 @@
 {
     border: 1px solid var(--primary-color);
     margin: 15px;
-    padding: 15px;
+    padding: 25px;
+    width: 100%;
+}
+.comment
+{
+    border: 1px solid var(--primary-color);
+    margin: 15px;
+    padding: 25px;
+    /* width: 100%; */
+    display: flex;
 }
 
+
+  .cmt_user {
+    font-size: 18px;
+    margin-left: 15px;
+  }
+  
+  .cmt_content {
+    /* margin-top: 5px;  */
+    margin-left: 15px;
+    
+}
+  
 
 
 /* Media Queries for responsiveness */

@@ -126,8 +126,11 @@ function FullBlog() {
           draggable: true,
           progress: undefined,
         });
+        setComment('');
         // setComment(prevComments => [...prevComments, { content: comment }]);
-        setComment(prevComments => [...prevComments, { content: comment }]);
+        // setComment(prevComments => [...prevComments, { content: comment }]);
+        // setComment(prevComments => [...prevComments, { userid: userId, content: comment }]);
+
 
 
 
@@ -150,7 +153,7 @@ function FullBlog() {
       <div className="fullblogcontainer">
         <div className="authorinfo">
           <FaUserAlt className='userpfp' />
-          <p className='authorname'>{username}</p>
+          <p className='authorname'>{author_id.username}</p>
           <p className='authorname'>{createdAt}</p>
         </div>
         <div className="fullblogtitle">
@@ -180,17 +183,21 @@ function FullBlog() {
           <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} id='comment' name='content' onChange={handlechange} />
           <button className="btn btn-secondary m-3 " type="button" onClick={handleSubmit}><IoMdSend /></button>
         </div>
+        <hr />
 
+        <h1>Commnet Section</h1>
         <div className="comments">
-
-          {Array.isArray(comment) && comment.map((comment, index) => (
+          {Array.isArray(comment) && comment.map((commentItem, index) => (
             <div key={index} className="comment">
-              <FaUserAlt className='userpfp' />
-              <p>{comment.userid}</p>
-              <p>{comment.content}</p>
-              {/* Add more details if needed */}
+              <FaUserAlt  className='userpfp' size={25} />
+              <div className="comment-content">
+                <p className='cmt_user'>{commentItem.userid.username}</p>
+                <p className='cmt_user'>{commentItem.createdAt}</p>
+                <p className='cmt_content'>{commentItem.content}</p>
+              </div>
             </div>
           ))}
+
         </div>
       </div>
     </>

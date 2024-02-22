@@ -8,7 +8,7 @@ const comment_schema = new mongoose.Schema({
     },
    userid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'mern_test', 
+        ref: 'mern_test1', 
         required: true
     },
     content: {
