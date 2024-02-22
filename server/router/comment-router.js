@@ -5,6 +5,6 @@ const authMiddleware = require('../middlewares/auth-middleware');
 
 router.route('/:blogid/comment').post(commentController.addcomment);
 
-router.route('/:blogid/comment').get(commentController.getcomment);
+router.route('/:blogid').get(commentController.getcomment);
 
 module.exports = router;

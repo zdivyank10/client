@@ -63,6 +63,16 @@
     margin: 5px;
     padding: 5px;
 }
+
+.comments
+{
+    border: 1px solid var(--primary-color);
+    margin: 15px;
+    padding: 15px;
+}
+
+
+
 /* Media Queries for responsiveness */
 
 /* Tablets (landscape) and larger */
