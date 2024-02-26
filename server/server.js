@@ -52,8 +52,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.post('/api/blog/upload', upload.single('file'), function (req, res, next) {
   // const imagePath = 'http://localhost:8000/' + req.file.path;
   res.json(req.file.filename);
-
-
 })
 
 app.get('/api/blog/:blogid', async (req, res) => {

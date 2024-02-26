@@ -71,28 +71,42 @@
     padding: 25px;
     width: 100%;
 }
-.comment
-{
+.comment {
     border: 1px solid var(--primary-color);
     margin: 15px;
     padding: 25px;
-    /* width: 100%; */
     display: flex;
+    flex-direction: column; 
+     
 }
 
 
   .cmt_user {
-    font-size: 18px;
+    font-size: 22px;
     margin-left: 15px;
+    margin-right: 10px;
   }
   
-  .cmt_content {
-    /* margin-top: 5px;  */
+  .comment-content {
+    margin-top: 5px; 
     margin-left: 15px;
+    display: flex;
+    
     
 }
-  
 
+.cmt_container
+{
+    /* display: block; */
+    /* justify-content: start; */
+    margin-left: 45px;
+}
+  
+.cmt_content
+{
+    margin-left: 15px;
+
+}
 
 /* Media Queries for responsiveness */
 

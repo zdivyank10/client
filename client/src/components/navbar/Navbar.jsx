@@ -5,9 +5,10 @@ import { useAuth } from "../../store/auth";
 
  const Navbar = () => {
 
-  const {isLoggedIn} = useAuth();
+  const {isLoggedIn , user} = useAuth();
   const [showNav, setShowNav] = useState(false);
 
+  console.log('hello user info',user.isAdmin)
   const toggleNav = () => {
     // console.log("hello");
     setShowNav(!showNav);
@@ -38,6 +39,13 @@ import { useAuth } from "../../store/auth";
               <li  className="nav_li"><NavLink to="/about" onClick={closeNav}>About</NavLink></li>
               <li  className="nav_li"><NavLink to="/contact" onClick={closeNav}>Contact</NavLink></li>
 
+              {user.isAdmin ? <li  className="nav_li">
+                  <NavLink to="/admin" onClick={closeNav}>Admin Dashboard</NavLink>
+                  </li>
+                   :
+                null
+                
+              }
               {isLoggedIn ? <li  className="nav_li">
                   <NavLink to="/logout" onClick={closeNav}>Logout</NavLink>
                   </li>

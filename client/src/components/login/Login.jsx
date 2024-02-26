@@ -11,7 +11,7 @@ function Login() {
 
   const {userAuthentication ,storeTokenInLS} = useAuth();
 
-  const URL = "http://localhost:8000/api/auth/login"
+  const URL = "http://localhost:8000/api/auth/login";
      const navigate = useNavigate();
     const [user,setUser] = useState({
       email: "",
@@ -42,8 +42,9 @@ function Login() {
         });
         
         const res_data = await response.json();
-        console.log("res from sever",res_data.extraDetails); 
+        console.log("res from sever",res_data); 
 
+        // console.log(res_data);
         if(response.ok)
        {
         storeTokenInLS(res_data.token);
@@ -70,9 +71,12 @@ function Login() {
             navigate('/');
            
     
-          } else {
+          } 
+       
+          else {
 
-            toast.error(res_data.extraDetails,{
+            toast.error(res_data.message || res_data.msg,{
+
               style: {
                 background: '#212121',
                 color: 'white',
