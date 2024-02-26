@@ -1,0 +1,29 @@
+.contactdiv
+{
+    display: flex;
+}
+.contactcontainer
+{
+    height: 250px;
+    border: 1px solid black;
+    width: 350px;
+    margin: 20px;
+    padding: 20px;
+    
+   
+}
+.userinformation
+{
+    display: flex;
+}
+
+.useremail
+{
+    margin: 5px;
+    padding: 10px;
+}
+
+.contactmsg
+{
+    font-size: 22px;
+}

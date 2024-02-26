@@ -212,7 +212,7 @@ function FullBlog() {
         <hr />
 
         <h1>Comment Section</h1>
-        <div className="comments">
+        <div className="comments" id='comment'>
           {Array.isArray(comment) && comment.length > 0 ? (
             comment.map((commentItem, index) => (
               <div key={index} className="comment">

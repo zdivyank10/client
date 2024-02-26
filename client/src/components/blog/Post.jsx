@@ -65,7 +65,11 @@ function Post() {
                       <AiFillHeart size={25} color="blue" className="post_like" />
                     )}
                     <span>{isLiked ? 'Liked' : 'Like'}</span>
-                    <AiFillMessage size={25} className="post_cmt" />
+                    {/* <AiFillMessage size={25} className="post_cmt" /> */}
+                    <Link to={`/blog/${_id}`}>
+                      
+                        <AiFillMessage size={25} className='post_cmt' />
+                      </Link>
                   </div>
                 </div>
               </div>

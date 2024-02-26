@@ -12,9 +12,13 @@
   .sidebar h2 {
     color: #fff;
     text-align: center;
+    margin:15px;
     margin-bottom: 20px;
   }
-  
+  a{
+    
+    text-decoration: none;
+  }
   .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -28,6 +32,9 @@
     color: #fff;
     text-decoration: none;
     display: block;
+    font-size: 20px;
+    margin: 6px;
+    padding: 5px;
   }
   
   /* Main content area */
