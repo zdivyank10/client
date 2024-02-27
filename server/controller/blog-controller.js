@@ -55,6 +55,7 @@ const approvedBlogs = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
   const getfullblog = async (req, res) => {
     try {
         const { id } = req.params; // Ensure that id is correctly received from the frontend
@@ -73,6 +74,22 @@ const approvedBlogs = async (req, res) => {
     }
 };
 
+const getblogbyuserid = async(req,res)=>{
+
+    const { id } = req.params;
+    console.log('userid',id);
+
+    try {
+        const blogPostbyuid = await blog.find({author_id:id});
+        console.log('Full Blog Post By id:', blogPostbyuid);
+
+        res.json(blogPostbyuid);
+        
+    } catch (error) {
+        console.log('Error getting blog by id',error);
+    }
+}
+
   
 
-module.exports = {blogs,blogform,approvedBlogs,getfullblog}
+module.exports = {blogs,blogform,approvedBlogs,getfullblog,getblogbyuserid}
