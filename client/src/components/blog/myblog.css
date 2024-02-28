@@ -1,7 +1,7 @@
 .myblogcontainer {
-    display: flex;
+    /* display: flex; */
     justify-content: center; /* Horizontally center the .status container */
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   
   .status {
@@ -14,10 +14,13 @@
     align-items: center; /* Vertically center the content */
     padding: 15px;
     border-bottom: 1px solid var(--primary-color)  ;
+    margin-left: 25% ;
   }
   
   .status_info {
     padding: 15px;
+    color: var(--primary-color);
+    text-decoration: none;
   }
 
   .myblog

@@ -75,7 +75,7 @@ function FullBlog() {
   }, [blog_id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" />;
   }
 
   if (error) {
