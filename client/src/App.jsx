@@ -30,6 +30,9 @@ import NotApprovedblogs from "./components/layouts/NotApprovedblogs";
 import Pendingblogs from "./components/layouts/Pendingblogs";
 import FullBlog from "./components/blog/FullBlog";
 import Myblog from "./components/blog/Myblog";
+import MyApprovedblogs from "./components/blog/myblog/MyApprovedblogs";
+import MyNotapprovedblogs from "./components/blog/myblog/MyNotapprovedblogs";
+import MypPendingblogs from "./components/blog/myblog/MypPendingblogs";
 
 
 
@@ -57,6 +60,9 @@ function App() {
           <Route path="/eachpost" element={<Singlepost />} />
           <Route path="/blog/:blog_id" element={<FullBlog />} />
           <Route path='/myblog/:_id' element={<Myblog />} />
+          <Route path='/myblog/:_id/approved' element={<MyApprovedblogs />} />
+          <Route path='/myblog/:_id/notapproved' element={<MyNotapprovedblogs />} />
+          <Route path='/myblog/:_id/pending' element={<MypPendingblogs />} />
           {/* <Route path="/myblog" element={<Myblog />} /> */}
           <Route path="*" element={<Error />} />
 

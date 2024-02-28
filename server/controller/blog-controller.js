@@ -73,14 +73,14 @@ const approvedBlogs = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
+//userbyid
 const getblogbyuserid = async(req,res)=>{
 
     const { id } = req.params;
     console.log('userid',id);
 
     try {
-        const blogPostbyuid = await blog.find({author_id:id});
+        const blogPostbyuid = await blog.find({author_id:id}).populate('author_id','username');;
         console.log('Full Blog Post By id:', blogPostbyuid);
 
         res.json(blogPostbyuid);
@@ -89,7 +89,54 @@ const getblogbyuserid = async(req,res)=>{
         console.log('Error getting blog by id',error);
     }
 }
+const myapprovedblogs = async(req,res)=>{
+
+    const { id } = req.params;
+    console.log('userid',id);
+
+    try {
+        const blogPostbyuid = await blog.find({author_id:id , permission : true}).populate('author_id','username');;
+        console.log('Full approved Blog Post By id:', blogPostbyuid);
+
+        res.json(blogPostbyuid);
+        
+    } catch (error) {
+        console.log('Error getting blog by id',error);
+    }
+}
+const mynotapprovedblogs = async(req,res)=>{
+
+    const { id } = req.params;
+    console.log('userid',id);
+
+    try {
+        const blogPostbyuid = await blog.find({author_id:id , permission : false}).populate('author_id','username');;
+        console.log('Full approved Blog Post By id:', blogPostbyuid);
+
+        res.json(blogPostbyuid);
+        
+    } catch (error) {
+        console.log('Error getting blog by id',error);
+    }
+}
+const mypendingblogs = async(req,res)=>{
+
+    const { id } = req.params;
+    console.log('userid',id);
+
+    try {
+        const blogPostbyuid = await blog.find({author_id:id , permission : 'pending'}).populate('author_id','username');;
+        console.log('Full approved Blog Post By id:', blogPostbyuid);
+
+        res.json(blogPostbyuid);
+        
+    } catch (error) {
+        console.log('Error getting blog by id',error);
+    }
+}
+
+
 
   
 
-module.exports = {blogs,blogform,approvedBlogs,getfullblog,getblogbyuserid}
+module.exports = {blogs,blogform,approvedBlogs,getfullblog,getblogbyuserid,myapprovedblogs,mynotapprovedblogs,mypendingblogs}

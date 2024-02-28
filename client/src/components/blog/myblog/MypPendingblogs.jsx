@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom';
-import { FaUserAlt } from 'react-icons/fa';
-import './myblog.css';
-import { useAuth } from '../../store/auth';
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../../store/auth';
+import MiniNavbar from './MiniNavbar';
 import DOMPurify from 'dompurify';
-import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
-import MiniNavbar from './myblog/MiniNavbar';
+import { Link } from 'react-router-dom';
+import { FaUserAlt } from 'react-icons/fa';
 
-function Myblog() {
+
+function MypPendingblogs() {
     const { user } = useAuth();
     const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/blog/${user._id}`, {
+                const response = await fetch(`http://localhost:8000/api/blog/${user._id}/pending`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -23,6 +23,7 @@ function Myblog() {
                 }
                 const data = await response.json();
                 setBlogs(data); // Assuming data is an array of blog objects
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching blogs:', error);
             }
@@ -30,20 +31,41 @@ function Myblog() {
 
         getMyBlogs();
     }, [user._id]);
+    if (loading) {
+        return (
+            <>
+            <div className="text-center">
 
-    const toggleLike = (postId) => {
-        // Toggle like logic here
-    };
+            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+            </div>
+            </>
+        );
+    }
 
+    if (blogs.length === 0) {
+        return (
+            <>
+              <MiniNavbar />
+            <div className="text-center">
+
+            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='mt-3 m-3' />
+
+            <h3 className='m-3'>- No Pending blogs found-</h3>
+            <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 
+            </div>
+            </>
+
+        )
+    }
     return (
         <div className="myblogcontainer">
-            <MiniNavbar />
+           <MiniNavbar />
 
             <div className="row blogrow">
                 {blogs.map((post, index) => {
-                    const { _id, title, author_id, cover_img, content, tags, createdAt, username, permission } = post;
+                    const { _id, title, author_id, cover_img, content, tags, createdAt, username } = post;
                     const sanitizedContent = DOMPurify.sanitize(content);
-
+                    
 
                     return (
                         <div key={index} className="postcontainer col-md-3 text-center">
@@ -72,20 +94,9 @@ function Myblog() {
                                             </span>
                                         ))}
                                     </div>
-
+                                  
                                 </Link>
-                                <hr />
-                                <div className={`bg-${permission === 'true' ? 'success' : permission === 'false' ? 'danger' : 'warning'} text-light` }>
-                                <p >
-                                    
-                                    {permission == 'true'
-                                        ? 'Approved'
-                                        : permission == 'false'
-                                        ? 'Not Approved'
-                                        : 'Pending'
-                                    }
-                                </p>
-                                    </div>
+
                             </div>
                         </div>
                     );
@@ -93,6 +104,6 @@ function Myblog() {
             </div>
         </div>
     );
-}
 
-export default Myblog;
+}
+export default MypPendingblogs
