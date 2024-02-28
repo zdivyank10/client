@@ -5,7 +5,7 @@ const validate = (schema) => async(req,res,next)=>{
         const parsedBody = await schema.parseAsync(req.body);
         req.body = parsedBody;
         next();
-
+        
     } catch (err) {
        console.log(err);
        const status = 422;

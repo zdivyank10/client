@@ -89,7 +89,7 @@ const login = async(req,res) =>{
         if (passwordMatch ) {
             res.status(200)
             .json({
-                msg : "Login Succesful" ,
+                message : "Login Succesful" ,
                 token : await userExist.genrateToken(),
                 userId : userExist._id.toString()
                 })
@@ -97,7 +97,7 @@ const login = async(req,res) =>{
         else{
             res.status(401)
             .json({
-                msg : "Invalid Email Or Password" ,
+                message : "Invalid Email Or Password" ,
                 })
         }
 
@@ -106,11 +106,11 @@ const login = async(req,res) =>{
         // .json("Internal Error");
         // console.log(error);
         const status = 500;
-        const msg = "Internal Error";
+        const message = "Internal Error";
         const extraDetails =err.errors[0].message; 
         const err = {
          status,
-         msg,
+         message,
          extraDetails
         }
         next(err)

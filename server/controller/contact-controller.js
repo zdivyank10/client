@@ -11,4 +11,13 @@ const contactForm = async(req,res)=>{
     }
 }
 
-module.exports = contactForm;
+const getContact = async(req,res)=>{
+    try {
+        const contacts = await contact.find();
+        res.json(contacts)
+        
+    } catch (error) {
+        res.status(500).json({message : 'Message Not Found Successfully '})
+    }
+}
+module.exports = {contactForm,getContact};

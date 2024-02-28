@@ -29,6 +29,7 @@ import Approvedblogs from "./components/layouts/Approvedblogs";
 import NotApprovedblogs from "./components/layouts/NotApprovedblogs";
 import Pendingblogs from "./components/layouts/Pendingblogs";
 import FullBlog from "./components/blog/FullBlog";
+import Myblog from "./components/blog/Myblog";
 
 
 
@@ -55,12 +56,14 @@ function App() {
           <Route path="/addpost" element={<Addpost />} />
           <Route path="/eachpost" element={<Singlepost />} />
           <Route path="/blog/:blog_id" element={<FullBlog />} />
+          <Route path='/myblog/:_id' element={<Myblog />} />
+          {/* <Route path="/myblog" element={<Myblog />} /> */}
           <Route path="*" element={<Error />} />
 
 
           {/* admin */}
           <Route path='/admin' element={<Adminlayout />}>
-                <Route path ='dashboard'element={<AdminDashboard/>} />
+                <Route path ='' element={<AdminDashboard/>} />
                 <Route path ='users'element={<AdminUsers/>} />
                 <Route path ='contacts'element={<Admincontacts/>} />
                 <Route path ='blogs'element={<Adminblogs/>} />

@@ -15,10 +15,7 @@ const comment_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: { type: String, default: () => new Date().toISOString().split('T')[0] } 
 })
 
 const Comment = mongoose.model('comment',comment_schema);

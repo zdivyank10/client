@@ -9,6 +9,10 @@ import { IoMdSend } from "react-icons/io";
 import { useAuth } from '../../store/auth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import { distanceInWordsToNow } from 'date-fns';
+// import { formatDistanceToNow } from 'date-fns';
+// import { formatDistanceToNow } from 'date-fns-tz';
+
 
 function FullBlog() {
   const [blogPost, setBlogPost] = useState(null);
@@ -43,23 +47,26 @@ function FullBlog() {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to fetch comments');
+          // throw new Error('Failed to fetch comments');
+          console.log('no comments');
         }
 
         const data = await response.json();
         console.log('cmts', data.message);
-        setComment(data.message); // Update comment state with array of comments
+        setComment(data.message); 
+   
+        
       } catch (error) {
-        console.error('Error fetching comments:', error);
-        toast.error('Failed to fetch comments. Please try again later.', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        console.error('No Comments found:');
+        // toast.error('Failed to fetch comments. Please try again later.', {
+        //   position: 'top-center',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        // });
       }
     };
 
@@ -80,6 +87,7 @@ function FullBlog() {
   }
 
   const handlechange = (e) => {
+    // setComment(''); 
     setComment(e.target.value);
   }
 
@@ -126,7 +134,9 @@ function FullBlog() {
           draggable: true,
           progress: undefined,
         });
+        console.log('befor',comment);
         setComment('');
+        console.log('after',comment);
         // setComment(prevComments => [...prevComments, { content: comment }]);
         // setComment(prevComments => [...prevComments, { content: comment }]);
         // setComment(prevComments => [...prevComments, { userid: userId, content: comment }]);
@@ -142,7 +152,23 @@ function FullBlog() {
     }
   }
 
+
   const { author_id, title, cover_img, content, tags, createdAt, username } = blogPost;
+  //    const createdAtDate = new Date(createdAt); // Parse createdAt into a Date object
+  // const timeAgo = formatDistanceToNow(createdAtDate, { addSuffix: true });
+
+  // const createdAtDate = new Date(createdAt);
+
+  // // Calculate the time difference
+  // const timeAgo = formatDistanceToNow(createdAtDate);
+
+
+  //   const createdAtDate = new Date(createdAt);
+  // const timeAgo = formatDistanceToNow(createdAtDate, { timeZone: 'Asia/Kolkata' });
+
+  // const timeAgo = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
+
+
   const sanitizedContent = DOMPurify.sanitize(content);
 
   return (
@@ -185,20 +211,27 @@ function FullBlog() {
         </div>
         <hr />
 
-        <h1>Commnet Section</h1>
-        <div className="comments">
-          {Array.isArray(comment) && comment.map((commentItem, index) => (
-            <div key={index} className="comment">
-              <FaUserAlt  className='userpfp' size={25} />
-              <div className="comment-content">
-                <p className='cmt_user'>{commentItem.userid.username}</p>
-                <p className='cmt_user'>{commentItem.createdAt}</p>
-                <p className='cmt_content'>{commentItem.content}</p>
-              </div>
-            </div>
-          ))}
+        <h1>Comment Section</h1>
+        <div className="comments" id='comment'>
+          {Array.isArray(comment) && comment.length > 0 ? (
+            comment.map((commentItem, index) => (
+              <div key={index} className="comment">
+                <div className="comment-content">
+                  <FaUserAlt className='userpfp' size={25} />
+                  <p className='cmt_user'>{commentItem.userid.username}</p>
+                  <p className='cmt_time mt-1'>{commentItem.createdAt}</p>
+                </div>
 
+                <div className="cmt_container">
+                  <p className='cmt_content justify-content-center align-content-center'>{commentItem.content}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className='text-center'> No comments yet.</p>
+          )}
         </div>
+
       </div>
     </>
   );

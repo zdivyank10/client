@@ -2,7 +2,9 @@ import React from 'react'
 
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+    <div><h1 className='text-center'>
+      hello Dashboards
+      </h1></div>
   )
 }
 
