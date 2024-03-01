@@ -30,6 +30,7 @@ function Myblog() {
 
         getMyBlogs();
     }, [user._id]);
+    console.log('hello');
 
     const toggleLike = (postId) => {
         // Toggle like logic here
@@ -75,7 +76,8 @@ function Myblog() {
 
                                 </Link>
                                 <hr />
-                                <div className={`bg-${permission === 'true' ? 'success' : permission === 'false' ? 'danger' : 'warning'} text-light` }>
+                                <div className={`bg-${permission === 'true' ? 'success' : permission === 'false' ? 'danger' : 'warning'} text-light` } style={{ borderRadius: '5px' }}
+>
                                 <p >
                                     
                                     {permission == 'true'

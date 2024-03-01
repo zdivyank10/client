@@ -10,6 +10,7 @@ function MiniNavbar() {
   return (
     <div className="status col-md-6 ">
           
+    <NavLink to={`/myblog/${user._id}/profile`} className='staus_info'><p className='status_info'>My Profile</p></NavLink>
     <NavLink to={`/myblog/${user._id}`} className='staus_info'><p className='status_info'>All blogs</p></NavLink>
     <NavLink to= {`/myblog/${user._id}/approved`} className='staus_info'><p className='status_info'>Approved blogs</p></NavLink>
     <NavLink to= {`/myblog/${user._id}/notapproved`}  className='staus_info'><p className='status_info'>Not Approved blogs</p></NavLink>

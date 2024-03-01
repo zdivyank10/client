@@ -33,6 +33,7 @@ import Myblog from "./components/blog/Myblog";
 import MyApprovedblogs from "./components/blog/myblog/MyApprovedblogs";
 import MyNotapprovedblogs from "./components/blog/myblog/MyNotapprovedblogs";
 import MypPendingblogs from "./components/blog/myblog/MypPendingblogs";
+import Myprofile from "./components/blog/myblog/Myprofile";
 
 
 
@@ -63,6 +64,7 @@ function App() {
           <Route path='/myblog/:_id/approved' element={<MyApprovedblogs />} />
           <Route path='/myblog/:_id/notapproved' element={<MyNotapprovedblogs />} />
           <Route path='/myblog/:_id/pending' element={<MypPendingblogs />} />
+          <Route path='/myblog/:_id/profile' element={<Myprofile />} />
           {/* <Route path="/myblog" element={<Myblog />} /> */}
           <Route path="*" element={<Error />} />
 

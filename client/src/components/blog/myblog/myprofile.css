@@ -1,0 +1,28 @@
+.myprofile_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myprofile_right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    /* border: 1px solid; */
+}
+.myprofile_left {
+    
+    /* border: 1px solid; */
+    margin-right: 20%;
+
+}
+
+.profile_text {
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+}
+
+.form-control {
+    /* width: 550px;  */
+}
