@@ -138,5 +138,41 @@ const users = async(req,res) =>{
     }
 
 }
+const eachuser = async(req,res) =>{
 
-module.exports = {home,register,login,users}
+    const { id } = req.params;
+    console.log('userid',id);
+    try {
+        const eachuser = await user.find({_id:id });
+        console.log('each user data:', eachuser);
+
+        res.json(eachuser);
+    } catch (error) {
+        console.log(`error from ${error}`);
+    }
+}
+
+const updateUserPassword = async (req, res) => {
+    const { id } = req.params;
+    const { password } = req.body;
+
+    try {
+        if (!password) {
+            return res.status(400).json({ error: 'New password is required' });
+        }
+
+        // Hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Update the user's password in the database
+        await user.findByIdAndUpdate(id, { password: hashedPassword });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Error updating password:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = {home,register,login,users,eachuser,updateUserPassword}

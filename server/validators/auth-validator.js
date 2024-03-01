@@ -34,4 +34,12 @@ const signupSchema = loginSchema.extend({
 
 })
 
-module.exports = {signupSchema,loginSchema};
+const passwordschema = z.object({
+    
+    password :  z
+    .string({required_error:"Password is Required"})
+    .min(7,{message: "Password must be Upto 7 Letter"})
+    .max(1024,{message: "Password must not be more than 1024 Letter"}),
+})
+
+module.exports = {signupSchema,loginSchema,passwordschema};

@@ -75,7 +75,7 @@ function Login() {
        
           else {
 
-            toast.error(res_data.message || res_data.msg,{
+            toast.error(res_data.extraDetails || res_data.message,{
 
               style: {
                 background: '#212121',

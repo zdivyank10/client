@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) =>{
                 if (response.ok) {
                     const data = await response.json();
                     setUser(data.userData);
-                    console.log('hello',data.userData);
+                    console.log('hello',data);
                     setIsLoading(false);
                 }else
                 {
