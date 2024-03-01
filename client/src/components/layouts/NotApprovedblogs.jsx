@@ -44,7 +44,8 @@ function NotApprovedblogs() {
           // Display only non-approved blogs
           if (permission == 'false') {
             return (
-              <div data-aos="fade-up" className="postcontainer bg-danger col-md-5" key={index}>
+              <div className="maincontainer col-md-4" key={index}>
+            <div  className="postcontainer  text-center m-3">
                 <div className="postimg">
                   <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                 </div>
@@ -69,6 +70,7 @@ function NotApprovedblogs() {
                 <div className="actions text-center">
                   <button className="btn btn-success" onClick={() => handleApprove(_id)}>Approve</button>
                 </div>
+              </div>
               </div>
             );
           } else {

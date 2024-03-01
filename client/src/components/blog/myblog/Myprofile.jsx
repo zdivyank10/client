@@ -107,16 +107,17 @@ function Myprofile() {
         <>
             <MiniNavbar />
           
-            <h1 className='text-center m-3'>My Profile</h1>
             <div className="myprofile_container ">
-                <div className="myprofile_left ">
-                    <FaUserAlt className='m-3' size={250} style={{ border: "2px solid black", borderRadius: "50%", padding: "5px" }} />
+                <div className=" myprofile_left ">
+                   <img src="../../img/4133820.jpg" alt="profile image"  className='profile_img'/>
+                    {/* <FaUserAlt className='m-3' size={250} style={{ border: "2px solid black", borderRadius: "50%", padding: "5px" }} /> */}
                 </div>
-                <div className="myprofile_right ">
+                <div className="myprofile_right col-md-3 ">
+            <h1 className='text-center m-3'>My Profile</h1>
              
-                    <div className="profile_text">
+                    <div className="profile_text ">
                         <label htmlFor="username">Username:</label>
-                        <input type="text" id="username" className="form-control" defaultValue={userData.username} disabled />
+                        <input type="text" id="username" className="form-control " defaultValue={userData.username} disabled />
                     </div>
                     <div className="profile_text">
                         <label htmlFor="phone">Phone:</label>

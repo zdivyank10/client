@@ -47,7 +47,8 @@ function Myblog() {
 
 
                     return (
-                        <div key={index} className="postcontainer col-md-3 text-center">
+                        <div className="maincontainer col-md-3" key={index}>
+                        <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <Link to={`/blog/${_id}`} className="postimg">
                                     <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
@@ -89,6 +90,7 @@ function Myblog() {
                                 </p>
                                     </div>
                             </div>
+                        </div>
                         </div>
                     );
                 })}
