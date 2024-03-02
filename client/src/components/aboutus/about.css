@@ -20,6 +20,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 2px solid var(--third-color);
 }
 
 .about2 {
@@ -60,7 +61,7 @@
 }
 
 .vision {
-    border: 1px solid;
+    border: 2px solid var(--third-color);
     border-radius: 15px;
     width: 90%; /* Adjust width for smaller screens */
     max-width: 400px; /* Set maximum width for better readability on larger screens */

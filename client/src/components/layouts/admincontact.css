@@ -5,7 +5,7 @@
 .contactcontainer
 {
     height: 250px;
-    border: 1px solid black;
+    border: 2px solid var(--third-color);
     width: 350px;
     margin: 20px;
     padding: 20px;

@@ -17,4 +17,9 @@ router.route('/:id/user').get( authControllers.eachuser);
 
 router.route('/:id/upgpass').put(validate(passwordschema), authControllers.updateUserPassword);
 
+router.post('/sendmail', authControllers.registerUser);
+
+// router.post('/varify', authControllers.varify);
+router.post('/verify',authControllers.verify);
+
 module.exports = router;

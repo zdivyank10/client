@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './sidebar.css'
 import { RxDashboard } from "react-icons/rx";
 import { FaUsers } from "react-icons/fa";
@@ -10,7 +10,10 @@ import { ImBlog } from "react-icons/im";
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2>Admin Panel</h2>
+     <Link to="/admin">
+       <h2>Admin Panel</h2>
+      
+      </Link>
       <ul>
         <li>
           <Link to="/admin"><RxDashboard /> Dashboard</Link>
