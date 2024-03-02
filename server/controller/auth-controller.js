@@ -1,7 +1,8 @@
 const user = require('../models/user-model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const nodemailer = require("nodemailer");
+const Verification = require('../models/valid-model');
 
 
 const home = async (req,res)=>{
@@ -38,7 +39,7 @@ const register= async (req,res)=>{
         const userExist = await user.findOne({email})
         if(userExist)
         {
-            return res.status(400).json({msg :"Already Registerd.. :angry:"})
+            return res.status(400).json({msg :"Already Registerd.."})
         }
 
         //bycrpt password...
@@ -175,4 +176,108 @@ const updateUserPassword = async (req, res) => {
     }
 };
 
-module.exports = {home,register,login,users,eachuser,updateUserPassword}
+const transporter = nodemailer.createTransport({
+    host: 'smtp.sendgrid.net',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'apikey', // API key username
+        pass: process.env.SENDGRID_API_KEY // SendGrid API key
+    }
+});
+
+// Function to generate a random 6-digit OTP with expiration time
+function generateOTP() {
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const expirationTime = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes in milliseconds
+    return { otp, expirationTime };
+}
+
+// Controller function for user registration and sending verification email
+const registerUser = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Generate a random 6-digit OTP with expiration time
+        const { otp, expirationTime } = generateOTP();
+
+        // Check if there is an existing verification record for the email
+        let existingVerification = await Verification.findOne({ email });
+
+        if (existingVerification) {
+            // If there is an existing verification record, update the OTP and expiration time
+            existingVerification.otp_code = otp;
+            existingVerification.expires_at = expirationTime;
+            await existingVerification.save();
+        } else {
+            // If there is no existing verification record, create a new one
+            const newVerification = new Verification({
+                email: email,
+                otp_code: otp,
+                generated_at: new Date(),
+                expires_at: expirationTime
+            });
+            await newVerification.save();
+        }
+
+        // Send verification email with OTP
+        transporter.sendMail({
+            from: 'divyankzaveri10@gmail.com',
+            to: email,
+            subject: 'Email Verification',
+            text: `Your verification OTP is: ${otp}, This code will expire after 5 mins.`
+        }, (error, info) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({ message: 'Failed to send verification email.' });
+            } else {
+                console.log('Email sent: ' + info.response);
+                res.status(200).json({ message: 'Verification OTP sent to your email.', expirationTime });
+            }
+        });
+    } catch (error) {
+        console.error('Error handling registration:', error);
+        res.status(500).json({ message: 'Failed to handle registration.' });
+    }
+};
+
+
+const verify = async (req, res) => {
+    const { email, otp } = req.body;
+
+    try {
+        // Find the verification record for the provided email
+        const verificationRecord = await Verification.findOne({ email });
+
+        if (!verificationRecord) {
+            return res.status(400).json({ message: 'No verification record found for this email.' });
+        }
+
+        // Check if the provided OTP matches the one stored in the database
+        if (otp === verificationRecord.otp_code) {
+            // Check if the OTP has expired
+            const currentTime = new Date();
+            if (currentTime > verificationRecord.expires_at) {
+                return res.status(400).json({ message: 'OTP has expired. Please request a new OTP.' });
+            }
+
+            // return res.status(200).json({ message: 'OTP verification successful.' });
+            await user.findOneAndUpdate({ email }, { is_verified: true });
+
+            // Delete the verification record from the database
+            await Verification.findOneAndDelete({ email });
+
+            return res.status(200).json({ message: 'OTP verification successful. User is now verified.' });
+        } else {
+            return res.status(400).json({ message: 'Invalid OTP.' });
+        }
+    } catch (error) {
+        console.error('Error verifying OTP:', error);
+        res.status(500).json({ message: 'Failed to verify OTP.' });
+    }
+};
+
+
+
+
+module.exports = {home,register,login,users,eachuser,updateUserPassword,registerUser,verify}

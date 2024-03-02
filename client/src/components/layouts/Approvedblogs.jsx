@@ -39,7 +39,8 @@ function Approvedblogs() {
           const { title, author_id, cover_img, content, tags, createdAt, username,_id } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
           return (
-            <div data-aos="fade-up" className="postcontainer bg-success col-md-5" key={index}>
+            <div className="maincontainer col-md-4" key={index}>
+            <div  className="postcontainer  text-center m-3">
               <div className="postimg">
               <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
 
@@ -68,6 +69,7 @@ function Approvedblogs() {
               <div className="actions text-center">
                 <button className="btn btn-danger" onClick={() => handleDecline(_id)}>Decline</button>
               </div>
+            </div>
             </div>
           );
         })}

@@ -49,8 +49,8 @@ function Pendingblogs() {
 
           // Display only non-approved blogs
           if (permission === 'pending') {
-            return (
-              <div data-aos="fade-up" className="postcontainer col-md-5" key={index}>
+            return (  <div className="maincontainer col-md-4" key={index}>
+            <div  className="postcontainer  text-center m-3">
                 <div className="postimg">
                   <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                 </div>
@@ -76,6 +76,7 @@ function Pendingblogs() {
                   <button className="btn btn-success m-3" onClick={() => handleApprove(_id)}>Approve</button>
                   <button className="btn btn-danger" onClick={() => handleDecline(_id)}>Decline</button>
                 </div>
+              </div>
               </div>
             );
           } 

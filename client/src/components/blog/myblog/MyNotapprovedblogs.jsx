@@ -9,7 +9,7 @@ function MyNotapprovedblogs() {
     const { user } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
- 
+
 
     useEffect(() => {
         const getMyBlogs = async () => {
@@ -35,24 +35,24 @@ function MyNotapprovedblogs() {
     if (loading) {
         return (
             <>
-            <div className="text-center">
+                <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
-            </div>
+                    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+                </div>
             </>
         );
     }
     if (blogs.length === 0) {
         return (
             <>
-             <MiniNavbar />
-            <div className="text-center">
+                <MiniNavbar />
+                <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='m-3' />
+                    <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='m-3' />
 
-            <h3 className='m-3'>- Non approved blogs Not found-</h3>
-            <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 
-            </div>
+                    <h3 className='m-3'>- Non approved blogs Not found-</h3>
+                    <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link>
+                </div>
             </>
 
         )
@@ -68,7 +68,8 @@ function MyNotapprovedblogs() {
                     
 
                     return (
-                        <div key={index} className="postcontainer col-md-3 text-center">
+                        <div className="maincontainer col-md-3" key={index}>
+                        <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <Link to={`/blog/${_id}`} className="postimg">
                                     <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
@@ -98,12 +99,14 @@ function MyNotapprovedblogs() {
                                 </Link>
 
                             </div>
+                            </div>
                         </div>
                     );
                 })}
             </div>
         </div>
     );
+
 }
 
 export default MyNotapprovedblogs

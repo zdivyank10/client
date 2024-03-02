@@ -30,7 +30,10 @@ function Post() {
             const isLiked = likedPosts.includes(_id);
 
             return (
-              <div key={index} data-aos="fade-up" className="postcontainer col-md-3">
+              <div data-aos="fade-up" className="maincontainer col-md-3" key={index} >
+
+           
+              <div  className="postcontainer  m-3">
                 <Link to={`/blog/${_id}`} className="postimg">
                   <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                 </Link>
@@ -72,6 +75,7 @@ function Post() {
                       </Link>
                   </div>
                 </div>
+              </div>
               </div>
             );
           })}

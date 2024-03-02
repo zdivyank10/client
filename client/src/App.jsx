@@ -34,6 +34,7 @@ import MyApprovedblogs from "./components/blog/myblog/MyApprovedblogs";
 import MyNotapprovedblogs from "./components/blog/myblog/MyNotapprovedblogs";
 import MypPendingblogs from "./components/blog/myblog/MypPendingblogs";
 import Myprofile from "./components/blog/myblog/Myprofile";
+import About from "./components/aboutus/About";
 
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
 
           {/* <Route path="/about" element={<About/>} />  */}
           <Route path="/blog" element={<Blog />} />

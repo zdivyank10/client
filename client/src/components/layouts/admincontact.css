@@ -5,12 +5,21 @@
 .contactcontainer
 {
     height: 250px;
-    border: 1px solid black;
+    border: 2px solid var(--third-color);
     width: 350px;
     margin: 20px;
     padding: 20px;
-    
+    border-radius: 15px;
+    background-color: var(--forth-color);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
    
+}
+
+.contactcontainer:hover
+{
+    transform: scale(1.1);   
+    transition: 0.7s;
+     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
 }
 .userinformation
 {

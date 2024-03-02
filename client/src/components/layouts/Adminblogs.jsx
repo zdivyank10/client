@@ -66,7 +66,9 @@ function Adminblogs() {
           }
 
           return (
-            <div data-aos="fade-up" className={`postcontainer col-md-5 ${bgClass}`} key={index}>
+            <div className="maincontainer col-md-4" key={index}>
+            <div  className="postcontainer  text-center m-3">
+              {/* className={`postcontainer col-md-5 ${bgClass}` */}
               <div className="postimg">
                 <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
               </div>
@@ -99,7 +101,10 @@ function Adminblogs() {
                 {/* )} */}
               </div>
               <hr />
-                <span className="approval-status text-center">{approvalStatus}</span>
+              <span className={`approval-status text-center ${bgClass} text-light`} style={{ borderRadius: '5px' }}
+>{approvalStatus}</span>
+
+            </div>
             </div>
           );
         })}

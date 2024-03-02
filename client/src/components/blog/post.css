@@ -3,25 +3,35 @@
     text-decoration: none !important;
     color: inherit; /* Optional: ensure links inherit their parent's color */
 }
-
+.maincontainer
+{
+    /* margin: 20px; */
+    padding: 20px;
+    display: flex;
+    /* flex-direction: column; */
+}
 .postcontainer {
     text-decoration: none; 
     color: inherit;
     background: white;
-    width: auto;
+    /* width: 10%; */
     border: 2px solid var(--third-color);
     border-radius: 15px;
-    margin: 40px;
+    /* margin: 0px 40px; */
     padding: 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    transition: box-shadow 0.5s ease; 
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+    transition:  transform 0.7s ease; 
+    overflow: hidden;
+    max-width: 100%; 
 }
 
 .postcontainer:hover {
+
+    margin: 15px;
     box-shadow:var(--forth-color) 0px 20px 40px, rgba(0, 0, 0, 0.27) 0px 15px 15px;
-    /* transform: scale(1.5); */
+    transform: scale(1.07);
 }
 
 
@@ -51,11 +61,12 @@
     border-radius: 50%;
     border: 2px solid ;
     padding: 2px;
+    margin-top: 10px;
 }
 .info
 {
     display: flex;
-    margin-top: 7px;
+    margin-top: 10px;
 }
 
 .postuserinfo .blogdate {
@@ -105,24 +116,48 @@
     margin-left: 100%;
     margin: 44px;
 }
-/* Media Query for tablets */
-@media (max-width: 768px) {
+
+
+@media screen and (max-width: 768px) {
     .postcontainer {
-        margin:  15px;
-        
-        /* max-width: calc(33.33% - 40px); */
-        /* width: 600px; */
+        max-width: 100%; /* Ensure the post container occupies full width */
+        margin: 20px 0; /* Add margin for spacing between posts */
+        overflow: hidden; /* Hide overflowing content */
     }
-    
-}
 
-/* Media Query for mobile devices */
-@media (max-width: 576px) {
-    .postcontainer {
-        margin:  15px;
-        /* width: 100px; */
-        /* max-width: calc(50% - 20px);  */
+    .banner_img {
+        width: 100%; /* Make the banner image occupy full width */
+        margin: 0; /* Remove any margin for the banner image */
+    }
+
+    .postuserinfo p {
+        font-size: 16px; /* Reduce font size for user info */
+    }
+
+    .content {
+        font-size: 14px; /* Reduce font size for content */
+        margin: 10px 0; /* Add vertical margin for spacing */
+    }
+
+    .tags {
+        margin-top: 10px; /* Add margin above tags */
+    }
+
+    .tag {
+        margin-right: 5px; /* Add space between tags */
+        padding: 5px;
+        border-radius: 7px;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Align actions to the end */
+        margin-top: 10px; /* Add margin above actions */
+    }
+
+    .post_like,
+    .post_cmt {
+        margin-right: 10px; /* Add space between like and comment icons */
     }
 }
-
-
