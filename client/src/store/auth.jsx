@@ -107,8 +107,14 @@ export const AuthProvider = ({ children }) =>{
 
     useEffect(() => {
         getBlogs();
-        userAuthentication();
+        // userAuthentication();
         getApprovedBlogs();
+    }, [blog])
+
+    useEffect(() => {
+        
+        userAuthentication();
+        
     }, [])
     
 
