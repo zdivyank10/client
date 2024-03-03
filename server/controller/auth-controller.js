@@ -222,7 +222,7 @@ const registerUser = async (req, res) => {
 
         // Send verification email with OTP
         transporter.sendMail({
-            from: 'divyankzaveri10@gmail.com',
+            from: 'ink.garden10@gmail.com',
             to: email,
             subject: 'Email Verification',
             text: `Your verification OTP is: ${otp}, This code will expire after 5 mins.`

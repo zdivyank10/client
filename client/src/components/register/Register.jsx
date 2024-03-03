@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../store/auth";
+import { MdErrorOutline } from "react-icons/md";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -277,6 +279,7 @@ function Register() {
                   <div className="form_div">
                     <label htmlFor="otp">OTP:</label>
                     <input type="number" name="otp" id="otp" placeholder="Enter OTP" onChange={handleInput} value={user.otp} required />
+                    <p className="mt-3 text-center text-danger"><MdErrorOutline />  Check spam if You can't see mail in your inbox</p>
                   </div>
                   <div className="form_div text-center">
                     <button onClick={verifyOTP}>Verify OTP</button>
