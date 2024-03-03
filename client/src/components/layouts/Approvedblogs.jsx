@@ -5,11 +5,18 @@ import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Approvedblogs() {
     const { approvedblog, AuthorizationToken } = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [selectedBlogId, setSelectedBlogId] = useState(null);
+    const [reasons, setReasons] = useState({
+        inappropriateContent: false,
+        inaccurateInformation: false,
+        outdatedContent: false,
+        other: false
+    });
 
     const updatePermission = async (blogId, permission) => {
         try {
@@ -19,7 +26,7 @@ function Approvedblogs() {
                     'Content-Type': 'application/json',
                     Authorization: AuthorizationToken,
                 },
-                body: JSON.stringify({ permission })
+                body: JSON.stringify({ permission, reasons })
             });
 
             if (!response.ok) {
@@ -44,11 +51,19 @@ function Approvedblogs() {
         setShowModal(false);
     };
 
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        setReasons(prevState => ({
+            ...prevState,
+            [name]: checked
+        }));
+    };
+
     return (
         <>
             <div className="row blogrow">
-              <h1 className="text-center">Already Approved Blogs</h1>
-              <hr />
+                <h1 className="text-center">Already Approved Blogs</h1>
+                <hr />
                 {approvedblog && approvedblog.map((currEle, index) => {
                     const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
                     const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
@@ -91,7 +106,16 @@ function Approvedblogs() {
                     <Modal.Title>Confirm Decline</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are you sure you want to decline this blog?
+                <h4>
+                    Are You Sure You Want to decline?
+                  
+                  </h4>
+                  {/* Give Reason for the declining Blog: */}
+                  <Form.Group controlId="declineReason">
+                        <Form.Label>Enter Decline Reason:</Form.Label>
+                       <input type="text" className='form-control' required />
+                    </Form.Group>
+                   
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
