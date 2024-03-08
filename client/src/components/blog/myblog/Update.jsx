@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import MyQuillEditor from '../MyDraftEditor';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import { useAuth } from '../../../store/auth';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import Delta from 'quill-delta';
+import { toast } from 'react-toastify';
 
 function Update() {
     const { _id } = useParams();
     const { user, AuthorizationToken } = useAuth();
+    const navigate = useNavigate();
     const [tags, setTags] = useState([]);
     const [file, setFile] = useState(null);
     const [blog, setBlog] = useState({
@@ -27,9 +28,10 @@ function Update() {
                 const response = await fetch(`http://localhost:8000/api/blog/blog/${_id}`);
                 if (response.ok) {
                     const blogData = await response.json();
-                    console.log('geetting blog data',blogData);
+                    console.log('getting blog data', blogData);
                     setBlog(blogData);
-                    setTags(blogData.tags);
+                    // setTags(blogData.tags);
+                    setTags(blogData.tags || []);
                 } else {
                     console.error('Failed to fetch blog details:', response.statusText);
                 }
@@ -39,7 +41,7 @@ function Update() {
         };
 
         gettingDetails();
-    }, []);
+    }, [_id]);
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -49,6 +51,10 @@ function Update() {
         });
     };
 
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
     const handleEditorChange = (content) => {
         setBlog({
             ...blog,
@@ -56,9 +62,48 @@ function Update() {
         });
     };
 
-    const handleUpdateBlog = async (e) => {
-        e.preventDefault();
+    // Function to upload image
+    const uploadImage = async (file) => {
         try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const uploadResponse = await fetch(`http://localhost:8000/api/blog/upload`, {
+                method: 'POST',
+                body: formData,
+            });
+            const uploadData = await uploadResponse.json();
+
+            if (uploadResponse.ok) {
+                const fileURL = uploadData.fileURL;
+                console.log('Uploaded File', uploadData);
+                console.log('Image uploaded successfully:', uploadData);
+                return uploadData;
+            } else {
+                console.error('Failed to upload image:', uploadResponse.statusText);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            return null;
+        }
+    };
+
+    // Function to handle updating blog content
+    const handleUpdateBlog = async () => {
+        try {
+            let updatedCoverImg = blog.cover_img;
+
+            // Check if a new image is selected
+            if (file) {
+                updatedCoverImg = await uploadImage(file);
+                if (!updatedCoverImg) {
+                    // Handle error if image upload fails
+                    return;
+                }
+            }
+
+            // Update blog content with updatedCoverImg
             const response = await fetch(`http://localhost:8000/api/blog/${_id}/update`, {
                 method: 'PUT',
                 headers: {
@@ -66,8 +111,9 @@ function Update() {
                     Authorization: AuthorizationToken,
                 },
                 body: JSON.stringify({
+                    ...blog,
+                    cover_img: updatedCoverImg,
                     title: blog.title,
-                    cover_img: blog.cover_img,
                     content: blog.content,
                     tags: tags,
                 }),
@@ -75,12 +121,40 @@ function Update() {
             if (response.ok) {
                 const updatedBlog = await response.json();
                 console.log('Blog updated successfully:', updatedBlog);
+                setBlog({
+                    username: "",
+                    cover_img: "",
+                    title: "",
+                    tag: [],
+                    author_id: "",
+                });
+                setTags([]);
+                toast.success('Blog Updated successfully,Wait for Approval!', {
+                    style: {
+                        background: '#212121',
+                        color: 'white',
+                    },
+                    position: 'top-center',
+                    autoClose: 10000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                navigate(`/myblog/${user._id}`);
+              
             } else {
                 console.error('Failed to update blog:', response.statusText);
             }
         } catch (error) {
             console.error('Error updating blog:', error);
         }
+    };
+
+
+    const handleChange = (newTags) => {
+        setTags(newTags);
     };
 
     return (
@@ -96,7 +170,7 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Add Picture :</label>
-                            <input type="file" name="file" id="file" className='form-control' />
+                            <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Title :</label>
@@ -104,13 +178,12 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Tags :</label>
-                            <TagsInput value={tags} />
+                            <TagsInput value={tags} onChange={handleChange} />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Write Blog :</label>
                             <ReactQuill
                                 theme="snow"
-                                // value={new Delta(JSON.parse(blog.content))}
                                 value={blog.content}
                                 onChange={handleEditorChange}
                             />

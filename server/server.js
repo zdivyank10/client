@@ -53,6 +53,13 @@ app.post('/api/blog/upload', upload.single('file'), function (req, res, next) {
   // const imagePath = 'http://localhost:8000/' + req.file.path;
   res.json(req.file.filename);
 })
+app.put('/api/blog/:id/upload', upload.single('file'), function (req, res, next) {
+  // Assuming 'fileURL' is the URL where the uploaded file can be accessed
+  // const fileURL = `http://localhost:8000/uploads/${req.file.filename}`;
+
+  res.json(req.file.filename);
+  // res.json({ fileURL });
+});
 
 
 app.get('/api/blog/:blogid', async (req, res) => {
