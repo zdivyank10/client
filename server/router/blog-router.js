@@ -1,6 +1,6 @@
 const express = require('express');
-const {blogs,blogform,approvedBlogs,getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs,updateBlog} = require('../controller/blog-controller');
-// const authMiddleware = require('../middlewares/auth-middleware')
+const {blogs,blogform,approvedBlogs,getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs,updateBlog,deleteBlog} = require('../controller/blog-controller');
+const authMiddleware = require('../middlewares/auth-middleware')
 
 const router = express.Router();
 
@@ -21,4 +21,5 @@ router.route("/:id/approved").get(myapprovedblogs);
 router.route("/:id/notapproved").get(mynotapprovedblogs);
 router.route("/:id/pending").get(mypendingblogs);
 router.route("/:id/update").put(updateBlog);
+router.route("/:id/delete").delete(deleteBlog);
 module.exports = router;

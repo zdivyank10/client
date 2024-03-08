@@ -65,7 +65,7 @@ const Navbar = () => {
                     <FaUserAlt className="me-2"/>   {user.username}
                   </>} id="bg-nested-dropdown" variant="outline-light">
                     <Dropdown.Item eventKey="1">
-                      {/* <NavLink to="/myblog" className='text-dark' onClick={closeNav}>My Blogs</NavLink> */}
+                   
                       <NavLink to= {`/myblog/${user._id}/profile`} onClick={closeNav}>My Profile</NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item eventKey="2">
