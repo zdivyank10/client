@@ -42,7 +42,7 @@
 
 .aboutimg {
     max-width: 100%;
-    height: auto; /* Ensure images are responsive */
+    height: 510px; /* Ensure images are responsive */
     border-radius: 15px;
 }
 

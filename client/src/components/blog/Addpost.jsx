@@ -61,8 +61,8 @@ function Addpost() {
       const uploadData = await uploadResponse.json();
       if (uploadResponse.ok) {
         const fileURL = uploadData.fileURL;
-        console.log('file URL',uploadResponse.url);
-        console.log('file URL',uploadData);
+        console.log('file URL', uploadResponse.url);
+        console.log('file URL', uploadData);
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');
@@ -130,10 +130,10 @@ function Addpost() {
 
   return (
     <>
-        <div className="back text-center m-5">
+      <div className="back text-center m-5">
 
-<Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
-</div>
+        <Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+      </div>
       <div className="addpostcontainer justify-content-center">
         {/* <div className="addpostleft">
           <div className="leftpreview">

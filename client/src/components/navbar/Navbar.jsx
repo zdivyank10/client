@@ -62,13 +62,17 @@ const Navbar = () => {
                   {/* <FaUserAlt /> */}
 
                   <DropdownButton as={ButtonGroup} title={<>
-                    <FaUserAlt /> My Profile
+                    <FaUserAlt className="me-2"/>   {user.username}
                   </>} id="bg-nested-dropdown" variant="outline-light">
                     <Dropdown.Item eventKey="1">
                       {/* <NavLink to="/myblog" className='text-dark' onClick={closeNav}>My Blogs</NavLink> */}
-                      <NavLink to= {`/myblog/${user._id}/profile`} onClick={closeNav}>My Blogs</NavLink>
+                      <NavLink to= {`/myblog/${user._id}/profile`} onClick={closeNav}>My Profile</NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item eventKey="2">
+                      <NavLink to={`/myblog/${user._id}`}  className='text-dark' onClick={closeNav}>My Blogs</NavLink>
+                    
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="3">
                       <NavLink to="/logout"  className='text-dark' onClick={closeNav}>Logout</NavLink>
                     </Dropdown.Item>
                   </DropdownButton>

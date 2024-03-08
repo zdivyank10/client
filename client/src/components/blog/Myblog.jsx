@@ -90,6 +90,9 @@ function Myblog() {
                                 </p>
                                     </div>
                             </div>
+                        
+                                    <hr />
+                                  <Link to={`/myblog/${_id}/update`}>Update</Link>
                         </div>
                         </div>
                     );

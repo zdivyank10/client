@@ -32,6 +32,7 @@ function FullBlog() {
         }
         const data = await response.json();
         setBlogPost(data);
+        console.log('each blog:',data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching blog post:', error);
@@ -173,9 +174,12 @@ function FullBlog() {
 
   return (
     <>
-      <div className="back text-center mt-5">
+    <div className="fullblog_container">
+
+      <div className="back text-center">
         <Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
       </div>
+
       <div className="fullblogcontainer">
         <div className="authorinfo">
           <FaUserAlt className='userpfp' />
@@ -195,7 +199,7 @@ function FullBlog() {
           <div className="tags text-center">
             {Array.isArray(tags) && tags.map((tag, index) => (
               <span key={index} className="tag">{tag}</span>
-            ))}
+              ))}
             <hr />
           </div>
         </div>
@@ -227,12 +231,13 @@ function FullBlog() {
                 </div>
               </div>
             ))
-          ) : (
-            <p className='text-center'> No comments yet.</p>
-          )}
+            ) : (
+              <p className='text-center'> No comments yet.</p>
+              )}
         </div>
 
       </div>
+              </div>
     </>
   );
 }

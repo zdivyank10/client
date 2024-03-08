@@ -4,6 +4,7 @@ import MiniNavbar from './MiniNavbar';
 import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 function MyNotapprovedblogs() {
     const { user } = useAuth();
@@ -20,9 +21,12 @@ function MyNotapprovedblogs() {
                 if (!response.ok) {
                     throw new Error('Failed to fetch blogs');
                 }
+                
                 const data = await response.json();
                 setBlogs(data); // Assuming data is an array of blog objects
+                
                 setLoading(false);
+               
 
             } catch (error) {
                 console.error('Error fetching blogs:', error);
@@ -31,6 +35,7 @@ function MyNotapprovedblogs() {
 
         getMyBlogs();
     }, [user._id]);
+    
 
     if (loading) {
         return (

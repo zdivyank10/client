@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) =>{
             })
             if (blogdata.ok) {
                 const data = await blogdata.json();
-                console.log(data.message);
+                console.log('blog data:',data.message);
                 setBlog(data.message);
             }
             }
@@ -109,7 +109,8 @@ export const AuthProvider = ({ children }) =>{
         getBlogs();
         // userAuthentication();
         getApprovedBlogs();
-    }, [blog])
+    }, [])
+    // }, [blog])
 
     useEffect(() => {
         

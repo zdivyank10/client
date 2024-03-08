@@ -52,7 +52,8 @@ function AdminUsers() {
   return (
     <>
       <h1 className='text-center'>List of Ink Garden Users</h1>
-      <table className="table table-primary">
+      <hr />
+      <table className="table  table-hover ">
         <thead>
           <tr>
             <th scope="col">UserName</th>

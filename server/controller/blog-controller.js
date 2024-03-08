@@ -68,6 +68,7 @@ const approvedBlogs = async (req, res) => {
             return res.status(404).json({ message: 'Blog post not found' });
         }
         res.json(blogPost);
+        console.log('eachblog',blogPost);
     } catch (error) {
         console.error('Error fetching full blog post:', error);
         res.status(500).json({ message: 'Internal server error' });
@@ -135,8 +136,26 @@ const mypendingblogs = async(req,res)=>{
     }
 }
 
+const updateBlog = async (req, res) => {
+    const { id } = req.params;
+    const { title,cover_img,content,tags } = req.body;
+
+    try {
+        const updatedBlog = await blog.findByIdAndUpdate(id, { title, cover_img, content, tags, permission :'pending'}, { new: true });
+
+        if (!updatedBlog) {
+            return res.status(404).json({ error: 'Blog not found' });
+        }
+
+        res.status(200).json({ message: 'Blog updated successfully', updatedBlog });
+   
+    } catch (error) {
+        console.error('Error updating password:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 
   
 
-module.exports = {blogs,blogform,approvedBlogs,getfullblog,getblogbyuserid,myapprovedblogs,mynotapprovedblogs,mypendingblogs}
+module.exports = {blogs,blogform,approvedBlogs,getfullblog,getblogbyuserid,myapprovedblogs,mynotapprovedblogs,mypendingblogs,updateBlog}
