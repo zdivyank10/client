@@ -161,7 +161,7 @@ function Update() {
         <>
             <div className="addpostcontainer justify-content-center">
                 <div className="addpostright">
-                    <h1 className='text-center'>Write Blog</h1>
+                    <h1 className='text-center'>Edit Blog</h1>
                     <hr />
                     <form encType="multipart/form-data">
                         <div className="formcontrol">
@@ -169,19 +169,19 @@ function Update() {
                             <input type="text" name="username" id="username" className='form-control' value={user.username} disabled />
                         </div>
                         <div className="formcontrol">
-                            <label htmlFor="file">Add Picture :</label>
+                            <label htmlFor="file">Edit Picture :</label>
                             <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
                         </div>
                         <div className="formcontrol">
-                            <label htmlFor="title">Title :</label>
+                            <label htmlFor="title">Edit Title :</label>
                             <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} />
                         </div>
                         <div className="formcontrol">
-                            <label htmlFor="title">Tags :</label>
+                            <label htmlFor="title">Edit Tags :</label>
                             <TagsInput value={tags} onChange={handleChange} />
                         </div>
                         <div className="formcontrol">
-                            <label htmlFor="file">Write Blog :</label>
+                            <label htmlFor="file">Edit Blog :</label>
                             <ReactQuill
                                 theme="snow"
                                 value={blog.content}

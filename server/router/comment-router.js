@@ -7,4 +7,6 @@ router.route('/:blogid/comment').post(commentController.addcomment);
 
 router.route('/:blogid').get(commentController.getcomment);
 
+router.route('/:blogid/delete').delete(commentController.deleteComment);
+
 module.exports = router;

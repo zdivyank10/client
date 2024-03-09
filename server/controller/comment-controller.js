@@ -51,31 +51,18 @@ const getcomment = async (req, res) => {
     }
 };
 
-module.exports = {
-    getcomment
-};
+const deleteComment =async(req,res)=>{
+    try {
+        const { _id, userid } = req.body;
+        // if (req.user._id !== userid) {
+        //     return res.status(403).json({ error: "You are not authorized to delete this comment" });
+        // }
+        await Comment.findOneAndDelete({ _id, userid });
+        res.status(200).json({ message: "Comment deleted successfully" });
+    } catch (error) {
+        console.log('Error Deleting Comment',error);
+    }
+}
 
 
-
-
-// const getfullblog = async (req, res) => {
-//     try {
-//         const { id } = req.params; // Ensure that id is correctly received from the frontend
-//         console.log('Received id:', id); // Log received id
-//         // Fetch the blog post using the id parameter
-//         const blogPost = await blog.findById(id).populate('author_id','username');
-//         console.log('Full Blog Post:', blogPost); // Log the fetched blog post
-//         if (!blogPost) {
-//             console.log('Blog post not found for id:', id);
-//             return res.status(404).json({ message: 'Blog post not found' });
-//         }
-//         res.json(blogPost);
-//     } catch (error) {
-//         console.error('Error fetching full blog post:', error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
-
-
-
-module.exports = {addcomment,getcomment};
+module.exports = {addcomment,getcomment,deleteComment};
