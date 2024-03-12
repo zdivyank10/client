@@ -15,7 +15,7 @@ const Navbar = () => {
   const { isLoggedIn, user } = useAuth();
   const [showNav, setShowNav] = useState(false);
 
-  console.log('hello user info', user.isAdmin)
+  console.log('hello user admin', user.isAdmin)
   const toggleNav = () => {
     // console.log("hello");
     setShowNav(!showNav);

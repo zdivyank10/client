@@ -224,7 +224,7 @@ function FullBlog() {
                     <p className='cmt_time mt-1'>{commentItem.createdAt}</p>
                     {/* <p className='cmt_time mt-1 ms-4 text-danger'><MdDeleteOutline size={25}/></p> */}
                     {user && user._id === commentItem.userid._id && (
-                      <p className='cmt_time mt-1 ms-4 text-danger'>
+                      <p className='cmt_time mt-1 ms-5 text-danger'>
                       <MdDeleteOutline size={25} onClick={() => deleteComment(commentItem._id)} />
 
                       </p>

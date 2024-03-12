@@ -97,18 +97,21 @@ function About() {
                         community Gueidline Rules
                     </h1>
                     <ul className='about_ul'>
-                        <li className='about_li'>Outdated Content:</li><p>
-                            We regret to inform you that your blog has been declined due to outdated content. Please consider updating the content to ensure it meets our standards.
-                        </p>
-                        <li className='about_li'>Community Engagement:</li><p>
-                            Our community of writers and readers is actively engaged in providing feedback, support, and encouragement to one another.
-                        </p>
-                        <li className='about_li'>Opportunities for Growth:</li><p>
-                            Whether you're a seasoned writer or just starting out, we offer resources and support to help you grow as a writer and reach a wider audience.
-                        </p>
-                        <li className='about_li'>Quality Content: </li><p>
-                            We strive to maintain high standards of quality for the content published on our platform, ensuring that readers have access to valuable and engaging stories.
-                        </p>
+                        <li className='about_li'>Respectful Behavior:</li><p>
+                        Treat others with kindness and empathy, avoiding harassment or personal attacks.
+                          </p>
+                        <li className='about_li'>No Offensive Content:</li><p>
+                        Refrain from posting or sharing offensive, obscene, or inappropriate content that promotes violence or discrimination.
+                             </p>
+                        <li className='about_li'>Privacy and Safety:</li><p>
+                        Respect the privacy of others, refrain from sharing personal information without consent, and report abusive behavior.
+                            </p>
+                        <li className='about_li'>Use of Language: </li><p>
+                        Use appropriate language and tone, avoiding offensive or derogatory language and respecting cultural differences.
+                           </p>
+                        <li className='about_li'>Content Moderation: </li><p>
+                        Respect moderation decisions, refrain from circumventing measures, and report violations promptly.
+                           </p>
 
                     </ul>
                     </div>

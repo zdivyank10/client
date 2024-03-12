@@ -49,6 +49,9 @@
 .about_li {
     font-size: 26px;
 }
+.about_li> p {
+    font-size: 28px;
+}
 
 .about_ul {
     list-style-type: square;

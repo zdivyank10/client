@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) =>{
     // tackling logout funcionality
     const LogoutUser = ()=>{
         setToken("");
+        setUser("");
         return localStorage.removeItem("token");
     }
 
@@ -115,8 +116,8 @@ export const AuthProvider = ({ children }) =>{
     useEffect(() => {
         
         userAuthentication();
-        
-    }, [])
+        // LogoutUser();
+    }, [token])
     
 
     // token

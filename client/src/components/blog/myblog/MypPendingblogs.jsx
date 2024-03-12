@@ -71,20 +71,20 @@ function MypPendingblogs() {
                         <div className="maincontainer col-md-3" key={index}>
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
-                                <Link to={`/blog/${_id}`} className="postimg">
+                                <div className="postimg">
                                     <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
-                                </Link>
+                                </div>
 
-                                <Link to={`/blog/${_id}`} className="postuserinfo">
+                                <div className="postuserinfo">
                                     <FaUserAlt className="userpfp" />
                                     <div className="info">
                                         <p>{author_id.username}</p>
                                         <p className="blogdate">{createdAt}</p>
                                     </div>
-                                </Link>
+                                </div>
                                 <hr />
 
-                                <Link to={`/blog/${_id}`} className="blogcontent">
+                                <div className="blogcontent">
                                     <h2>{title}</h2>
                                     <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                                     <hr />
@@ -96,7 +96,7 @@ function MypPendingblogs() {
                                         ))}
                                     </div>
                                   
-                                </Link>
+                                </div>
 
                             </div>
                             </div>

@@ -85,48 +85,89 @@ function Myblog() {
                         <div className="maincontainer col-md-3" key={index}>
                             <div className="postcontainer text-center m-3">
                                 <div data-aos="fade-up" className="">
-                                    <Link to={`/blog/${_id}`} className="postimg">
-                                        <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
-                                    </Link>
+                                    {permission === 'true' && (
+                                        <>
 
-                                    <Link to={`/blog/${_id}`} className="postuserinfo">
-                                        <FaUserAlt className="userpfp" />
-                                        <div className="info">
-                                            <p>{author_id.username}</p>
-                                            <p className="blogdate">{createdAt}</p>
-                                        </div>
-                                    </Link>
-                                    <hr />
+                                            <Link to={`/blog/${_id}`} className="postimg">
+                                                <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                            </Link>
 
-                                    <Link to={`/blog/${_id}`} className="blogcontent">
-                                        <h2>{title}</h2>
-                                        <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                                        <hr />
-                                        <div className="tags">
-                                            {tags.map((tag, tagIndex) => (
-                                                <span key={tagIndex} className="tag">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
+                                            <Link to={`/blog/${_id}`} className="postuserinfo">
+                                                <FaUserAlt className="userpfp" />
+                                                <div className="info">
+                                                    <p>{author_id.username}</p>
+                                                    <p className="blogdate">{createdAt}</p>
+                                                </div>
+                                            </Link>
+                                            <hr />
 
-                                    </Link>
-                                    <hr />
+                                            <Link to={`/blog/${_id}`} className="blogcontent">
+                                                <h2>{title}</h2>
+                                                <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                                                <hr />
+                                                <div className="tags">
+                                                    {tags.map((tag, tagIndex) => (
+                                                        <span key={tagIndex} className="tag">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+
+                                            </Link>
+                                            <hr />
+                                        </>
+                                    )}
+
+                                    {permission !== 'true' && (
+                                        <>
+                                            <div data-aos="fade-up" className="">
+                                                <div className="postimg">
+                                                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                                </div>
+
+                                                <div className="postuserinfo">
+                                                    <FaUserAlt className="userpfp" />
+                                                    <div className="info">
+                                                        <p>{author_id.username}</p>
+                                                        <p className="blogdate">{createdAt}</p>
+                                                    </div>
+                                                </div>
+                                                <hr />
+
+                                                <div className="blogcontent">
+                                                    <h2>{title}</h2>
+                                                    <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                                                    <hr />
+                                                    <div className="tags">
+                                                        {tags.map((tag, tagIndex) => (
+                                                            <span key={tagIndex} className="tag">
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <hr />
+                                        </>
+                                    )}
+
                                     <div className={`bg-${permission === 'true' ? 'success' : permission === 'false' ? 'danger' : 'warning'} text-light`} style={{ borderRadius: '5px' }}>
                                         <p>
                                             {permission == 'true'
                                                 ? 'Approved'
                                                 : permission == 'false'
-                                                ? 'Not Approved'
-                                                : 'Pending'}
+                                                    ? 'Not Approved'
+                                                    : 'Pending'}
                                         </p>
                                     </div>
                                 </div>
 
                                 <hr />
                                 <div className="blog_function">
-                                    <Link to={`/myblog/${_id}/update`} className='me-3 primary-links'><FaRegEdit size={25}/> Edit</Link>
-                                    <Link className='text-danger primary-links' onClick={() => toggleModal(_id)}><MdDeleteOutline size={25}/> Delete</Link>
+                                    <Link to={`/myblog/${_id}/update`} className='me-3 primary-links'><FaRegEdit size={25} /> Edit</Link>
+                                    <Link className='text-danger primary-links' onClick={() => toggleModal(_id)}><MdDeleteOutline size={25} /> Delete</Link>
                                 </div>
                             </div>
                         </div>

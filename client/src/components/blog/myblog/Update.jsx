@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import MyQuillEditor from '../MyDraftEditor';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
@@ -7,6 +7,7 @@ import { useAuth } from '../../../store/auth';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
+import { IoReturnDownBackOutline } from 'react-icons/io5';
 
 function Update() {
     const { _id } = useParams();
@@ -159,6 +160,9 @@ function Update() {
 
     return (
         <>
+            <div className="back text-center">
+          <Link to={`/myblog/${user._id}`} className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+        </div>
             <div className="addpostcontainer justify-content-center">
                 <div className="addpostright">
                     <h1 className='text-center'>Edit Blog</h1>

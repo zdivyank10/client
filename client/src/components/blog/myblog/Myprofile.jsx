@@ -81,19 +81,25 @@ function Myprofile() {
             }
     
             // Password successfully updated
-            toast.success(res_data.message,{
-                style: {
-                  background: '#212121',
-                  color: 'white',
-                },
-                position: 'top-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+            if (response.ok) {
+                setNewPassword('');
+                setConfirmNewPassword('');
+                setShowPasswordFields(false);
+                toast.success(res_data.message,{
+                    style: {
+                      background: '#212121',
+                      color: 'white',
+                    },
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+            }
+          
             console.log('Password updated successfully');
         } catch (error) {
             console.error('Error updating password:', error);
