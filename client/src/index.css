@@ -9,11 +9,29 @@ body{
 }
 
 :root {
-    /* Define color variables */
-    --primary-color: #222831; /* Example primary color */
+
+    --primary-color: #222831; 
     --secondary-color: #393E46;
-    /* --third-color : #00ADB5; */
+
     --third-color : #59E4A8;
-    --forth-color:#EEEEEE;
+    /* --forth-color:#EEEEEE; */
+    --forth-color:#f0f0f0;
     --text-color : #000000;
+
+
+
+
+
+
+
+
+
+
+/* 
+    --primary-color: #1A3C40; 
+    --secondary-color: #1D5C63;
+
+    --third-color : #59E4A8;
+    --forth-color:#EDE6DB;
+    --text-color : #000000; */
   }

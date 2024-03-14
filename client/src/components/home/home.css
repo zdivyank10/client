@@ -80,6 +80,21 @@
     font-size: 40px;
 }
 
+.search_result
+{
+    /* border: 1px solid; */
+    display: flex;
+    /* margin: 15px; */
+    width: 80%;
+    padding: 15px;
+   align-items:center ;
+}
+
+.search_result_image
+{
+    border-radius: 15px;
+    margin: 15px;
+}
 @media screen and (max-width: 786px) {
     body {
         overflow-x: hidden; /* Hide horizontal scrollbar */

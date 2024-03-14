@@ -106,13 +106,23 @@ export const AuthProvider = ({ children }) =>{
     }
     
 
+  
+    // useEffect(() => {
+    //     getBlogs();
+    //     // userAuthentication();
+    //     getApprovedBlogs();
+    // }, [])
+    // // }, [blog])
     useEffect(() => {
         getBlogs();
-        // userAuthentication();
+      
+    }, []); // Run only once when the component mounts
+    
+    useEffect(() => {
+       
         getApprovedBlogs();
-    }, [])
-    // }, [blog])
-
+    }, [blog]);
+    
     useEffect(() => {
         
         userAuthentication();

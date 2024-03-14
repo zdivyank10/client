@@ -111,10 +111,10 @@ function Approvedblogs() {
                   
                   </h4>
                   {/* Give Reason for the declining Blog: */}
-                  <Form.Group controlId="declineReason">
+                  {/* <Form.Group controlId="declineReason">
                         <Form.Label>Enter Decline Reason:</Form.Label>
                        <input type="text" className='form-control' required />
-                    </Form.Group>
+                    </Form.Group> */}
                    
                 </Modal.Body>
                 <Modal.Footer>
