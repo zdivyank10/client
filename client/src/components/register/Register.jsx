@@ -10,7 +10,7 @@ import { MdErrorOutline } from "react-icons/md";
 
 function Register() {
   const navigate = useNavigate();
-  const { storeTokenInLS } = useAuth();
+  const { storeTokenInLS,API_BASE_URL } = useAuth();
 
   const [user, setUser] = useState({
     username: "",
@@ -70,7 +70,7 @@ function Register() {
 
     try {
       // Proceed with registration
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(`${API_BASE_URL}api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/sendmail', {
+      const response = await fetch(`${API_BASE_URL}api/auth/sendmail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +187,7 @@ function Register() {
 
     try {
       // Perform OTP verification
-      const otpResponse = await fetch('http://localhost:8000/api/auth/verify', {
+      const otpResponse = await fetch(`${API_BASE_URL}api/auth/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

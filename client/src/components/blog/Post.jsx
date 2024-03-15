@@ -7,7 +7,7 @@ import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 function Post() {
-  const { approvedblog } = useAuth();
+  const { approvedblog,API_BASE_URL } = useAuth();
   const [likedPosts, setLikedPosts] = useState([]);
 
   const toggleLike = (postId) => {
@@ -35,7 +35,7 @@ function Post() {
            
               <div  className="postcontainer  m-3">
                 <Link to={`/blog/${_id}`} className="postimg">
-                  <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                 </Link>
 
                 <Link to={`/blog/${_id}`} className="postuserinfo">

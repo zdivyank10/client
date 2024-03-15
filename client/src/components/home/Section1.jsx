@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdOutlineSearch } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import './home.css';
+import { useAuth } from '../../store/auth';
 
 function Section1() {
   const [query, setQuery] = useState('');
@@ -9,6 +10,7 @@ function Section1() {
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState(false); // State variable for search error
   const { searchQuery } = useParams();
+  const {API_BASE_URL} = useAuth();
 
   useEffect(() => {
     if (searchQuery) {
@@ -27,7 +29,7 @@ function Section1() {
         return;
       }
 
-      const response = await fetch(`http://localhost:8000/api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
+      const response = await fetch(`${API_BASE_URL}api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -82,7 +84,7 @@ function Section1() {
           {searchResults.filter(result => result.permission === 'true')
           .map(result => (
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
-              <img src={`http://localhost:8000/uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
+              <img src={`${API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
                 <h3 className='text-dark'>{result.author_id.username}</h3>
                 <h5 className='text-dark'>{result.title}</h5>

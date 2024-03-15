@@ -8,11 +8,11 @@ function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-  const { AuthorizationToken } = useAuth();
+  const { AuthorizationToken,API_BASE_URL } = useAuth();
 
   const handleDeleteUser = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/users/delete/${userIdToDelete}`, {
+      const response = await fetch(`${API_BASE_URL}api/admin/users/delete/${userIdToDelete}`, {
         method: 'DELETE',
         headers: {
           Authorization: AuthorizationToken,
@@ -35,7 +35,7 @@ function AdminUsers() {
 
   const getAllUsersData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/admin/users', {
+      const response = await fetch(`${API_BASE_URL}api/admin/users`, {
         method: 'GET',
         headers: {
           Authorization: AuthorizationToken,

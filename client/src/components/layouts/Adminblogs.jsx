@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function Adminblogs() {
-  const { blog, AuthorizationToken } = useAuth();
+  const { blog, AuthorizationToken,API_BASE_URL } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
   const [action, setAction] = useState(null);
@@ -19,7 +19,7 @@ function Adminblogs() {
 
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ function Adminblogs() {
             <div className="maincontainer col-md-4" key={index}>
               <div className="postcontainer text-center m-3">
                 <div className="postimg">
-                  <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                 </div>
 
                 <div className="postuserinfo">

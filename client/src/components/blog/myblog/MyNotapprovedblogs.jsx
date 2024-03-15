@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import './myprofile.css'
 
 function MyNotapprovedblogs() {
-    const { user } = useAuth();
+    const { user,API_BASE_URL } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ function MyNotapprovedblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/blog/${user._id}/notapproved`, {
+                const response = await fetch(`${API_BASE_URL}api/blog/${user._id}/notapproved`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -78,7 +78,7 @@ function MyNotapprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <div className="postimg">
-                                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                 </div>
 
                                 <div className="postuserinfo">

@@ -12,7 +12,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 function Myblog() {
-    const { user } = useAuth();
+    const { user,API_BASE_URL } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
@@ -20,7 +20,7 @@ function Myblog() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/blog/${user._id}`, {
+                const response = await fetch(`${API_BASE_URL}api/blog/${user._id}`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -38,7 +38,7 @@ function Myblog() {
 
     const handleDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/blog/${deleteId}/delete`, {
+            const response = await fetch(`${API_BASE_URL}api/blog/${deleteId}/delete`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -89,7 +89,7 @@ function Myblog() {
                                         <>
 
                                             <Link to={`/blog/${_id}`} className="postimg">
-                                                <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                                <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                             </Link>
 
                                             <Link to={`/blog/${_id}`} className="postuserinfo">
@@ -122,7 +122,7 @@ function Myblog() {
                                         <>
                                             <div data-aos="fade-up" className="">
                                                 <div className="postimg">
-                                                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                                 </div>
 
                                                 <div className="postuserinfo">

@@ -40,6 +40,7 @@ import Update from "./components/blog/myblog/Update";
 
 
 
+
 function App() {
   useEffect(() => {
     Aos.init({duration : 1500});

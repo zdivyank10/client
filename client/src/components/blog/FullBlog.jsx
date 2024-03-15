@@ -19,12 +19,12 @@ function FullBlog() {
   const [comment, setComment] = useState('');
   const [commentsList, setCommentsList] = useState([]);
   const { blog_id } = useParams();
-  const { user, AuthorizationToken } = useAuth();
+  const { user, AuthorizationToken,API_BASE_URL } = useAuth();
   const navigate = useNavigate();
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/comment/${blog_id}`, {
+      const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}`, {
         method: 'GET',
       });
 
@@ -42,7 +42,7 @@ function FullBlog() {
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/blog/blog/${blog_id}`);
+        const response = await fetch(`${API_BASE_URL}api/blog/blog/${blog_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog post');
         }
@@ -98,7 +98,7 @@ function FullBlog() {
         return;
       }
       const userId = user._id;
-      const response = await fetch(`http://localhost:8000/api/comment/${blog_id}/comment`, {
+      const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +135,7 @@ function FullBlog() {
       
       const userId = user._id;
   
-      const response = await fetch(`http://localhost:8000/api/comment/${blog_id}/delete`, {
+      const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}/delete`, {
         method: 'DELETE',
         headers: {
           "Authorization": AuthorizationToken,
@@ -191,7 +191,7 @@ function FullBlog() {
             <h1>{title}</h1>
           </div>
           <div className="fullblogimg text-center">
-            <img src={`http://localhost:8000/uploads/${cover_img}`} alt="" className='fullimg' />
+            <img src={`${API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
           </div>
           <div className="fullblogcontent">
             <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>

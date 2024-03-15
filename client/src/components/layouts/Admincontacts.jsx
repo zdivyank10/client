@@ -6,7 +6,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function Admincontacts() {
-  const { AuthorizationToken } = useAuth();
+  const { AuthorizationToken,API_BASE_URL } = useAuth();
   const [contact, setContact] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
@@ -17,7 +17,7 @@ function Admincontacts() {
 
   const getContact = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/form/contact", {
+      const response = await fetch(`${API_BASE_URL}api/form/contact`, {
         method: 'GET',
         headers: {
           Authorization: AuthorizationToken,

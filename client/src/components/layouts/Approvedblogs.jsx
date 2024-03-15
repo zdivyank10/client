@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../blog/post.css";
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+
 
 function Approvedblogs() {
-    const { approvedblog, AuthorizationToken } = useAuth();
+    const { approvedblog, AuthorizationToken ,API_BASE_URL} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [selectedBlogId, setSelectedBlogId] = useState(null);
-    const [reasons, setReasons] = useState({
-        inappropriateContent: false,
-        inaccurateInformation: false,
-        outdatedContent: false,
-        other: false
-    });
+    // const [reasons, setReasons] = useState({
+    //     inappropriateContent: false,
+    //     inaccurateInformation: false,
+    //     outdatedContent: false,
+    //     other: false
+    // });
+
+
+    
 
     const updatePermission = async (blogId, permission) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/admin/blog/${blogId}/permission`, {
+            const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: AuthorizationToken,
                 },
-                body: JSON.stringify({ permission, reasons })
+                body: JSON.stringify({ permission })
             });
 
             if (!response.ok) {
@@ -51,13 +54,13 @@ function Approvedblogs() {
         setShowModal(false);
     };
 
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
-        setReasons(prevState => ({
-            ...prevState,
-            [name]: checked
-        }));
-    };
+    // const handleCheckboxChange = (event) => {
+    //     const { name, checked } = event.target;
+    //     setReasons(prevState => ({
+    //         ...prevState,
+    //         [name]: checked
+    //     }));
+    // };
 
     return (
         <>
@@ -71,7 +74,7 @@ function Approvedblogs() {
                         <div className="maincontainer col-md-4" key={index}>
                             <div className="postcontainer text-center m-3">
                                 <div className="postimg">
-                                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                                 </div>
                                 <div className="postuserinfo ">
                                     <FaUserAlt className='userpfp' />

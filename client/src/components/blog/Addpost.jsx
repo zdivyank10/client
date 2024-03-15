@@ -12,7 +12,7 @@ import { IoReturnDownBackOutline } from "react-icons/io5";
 
 function Addpost() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user,API_BASE_URL } = useAuth();
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState(null);
 
@@ -72,7 +72,7 @@ function Addpost() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const uploadResponse = await fetch('http://localhost:8000/api/blog/upload', {
+      const uploadResponse = await fetch(`${API_BASE_URL}api/blog/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -84,7 +84,7 @@ function Addpost() {
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');
-        const response = await fetch('http://localhost:8000/api/blog/addblog', {
+        const response = await fetch(`${API_BASE_URL}api/blog/addblog`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

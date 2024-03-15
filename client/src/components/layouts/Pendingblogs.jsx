@@ -6,14 +6,14 @@ import { FaUserAlt } from "react-icons/fa";
 import { Modal } from 'react-bootstrap';
 
 function Pendingblogs() {
-  const { blog, AuthorizationToken } = useAuth();
+  const { blog, AuthorizationToken ,API_BASE_URL} = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [blogId, setBlogId] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'decline'
 
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ function Pendingblogs() {
               <div className="maincontainer col-md-4" key={index}>
                 <div className="postcontainer  text-center m-3">
                   <div className="postimg">
-                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                   </div>
                   <div className="postuserinfo">
                     <FaUserAlt className='userpfp' />
