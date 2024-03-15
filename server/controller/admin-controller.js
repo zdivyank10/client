@@ -1,7 +1,8 @@
 const Contact = require("../models/contact-model");
 const User = require("../models/user-model")
 const Blog = require("../models/blog-model")
-const declined = require("../models/declined-model")
+const declined = require("../models/declined-model");
+const user = require("../models/user-model");
 // ----------------------------------
 // ----------------------------------
 // ***********all Users ***********
@@ -102,38 +103,20 @@ const updateBlogPermission = async (req, res) => {
     }
     // console.log('hellp');
 };
-const declined_reason = async (req, res) => {
+
+const updateUser = async (req, res) => {
     try {
-        const { blogId } = req.params;
-        const { reason } = req.body;
+        const { id } = req.params;
+        const { username, email, phone } = req.body;
 
-        const blog = await Blog.findById(blogId);
+        // Find the user by id and update its properties
+        const updatedUser = await User.findByIdAndUpdate(id, { username, email, phone }, { new: true });
 
-        if (!blog) {
-            return res.status(404).json({ error: 'Blog not found' });
-        }
-
-        const newDeclinedBlog = new declined({
-            originalBlog: blog._id, // Reference to the original blog
-            reason
-        });
-
-        // Save the declined blog to the database
-        const savedDeclinedBlog = await newDeclinedBlog.save();
-
-        // Update the permission field of the original blog
-        blog.permission = 'declined';
-        await blog.save();
-
-        res.json({ message: 'Declined reason saved successfully', declinedBlog: savedDeclinedBlog });
-
+        res.json(updatedUser);
     } catch (error) {
-        console.error('Error updating blog permission:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        console.log('Error updating user:', error);
+        res.status(500).json({ error: 'Error updating user' });
     }
-    // console.log('hellp');
 };
 
-
-
-module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission, declined_reason }
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser }

@@ -30,7 +30,7 @@ const signupSchema = loginSchema.extend({
     .string({required_error:"Phone Number is Required"})
     .trim()
     .min(10,{message: "Phone Number must be 10 Digits"})
-    .max(20,{message: "Phone Number must not be more than 20 Letter"}),
+    .max(10,{message: "Phone Number must not be more than 10 Digits"}),
 
 })
 
@@ -42,4 +42,21 @@ const passwordschema = z.object({
     .max(1024,{message: "Password must not be more than 1024 Letter"}),
 })
 
-module.exports = {signupSchema,loginSchema,passwordschema};
+
+const updateUserSchema = z.object({
+    username: z.string()
+        .min(3, { message: "Name must be at least 3 characters long" })
+        .max(255, { message: "Name must not exceed 255 characters" })
+        .optional(), // Marking as optional since user may not update all fields
+    email: z.string()
+        .email({ message: "Invalid email address" })
+        .min(3, { message: "Email must be at least 3 characters long" })
+        .max(255, { message: "Email must not exceed 255 characters" })
+        .optional(), // Marking as optional since user may not update all fields
+    phone: z.string()
+        .min(10, { message: "Phone number must be at least 10 digits long" })
+        .max(10, { message: "Phone number must not exceed 10 Digits" })
+        .optional(), // Marking as optional since user may not update all fields
+});
+
+module.exports = {signupSchema,loginSchema,passwordschema,updateUserSchema};

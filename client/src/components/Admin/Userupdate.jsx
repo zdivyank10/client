@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../store/auth';
+import { toast } from 'react-toastify';
 
-function Userupdate({ id }) {
+function Userupdate({ _id }) {
   const [userData, setUserData] = useState({
     username: '',
     email: '',
     phone: '',
   });
+  const { id } = useParams();
+  const { AuthorizationToken } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchUserData() {
+    const fetchUserData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/admin/users/${id}`);
+        const response = await fetch(`http://localhost:8000/api/admin/users/${id}`, {
+          method: "GET",
+          headers: {
+            Authorization: AuthorizationToken,
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
         const userData = await response.json();
-        console.log('response:',response);
         setUserData(userData);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
-    }
+    };
 
     fetchUserData();
   }, [id]);
@@ -28,7 +41,59 @@ function Userupdate({ id }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
+    // console.log(userData);
+    try {
+      const response = await fetch(`http://localhost:8000/api/admin/users/${id}/update`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: AuthorizationToken,
+        },
+        body: JSON.stringify(userData)
+
+      });
+   
+
+      const data = await response.json();
+      setUserData(data);
+      if (response.ok) {
+        
+        // console.log('updated user:',userData);
+        toast.success('User Updated successfully!!!', {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate('/admin/users')
+        
+      }  else {
+        // throw new Error('Failed to Update');
+        toast.error(data.extraDetails, {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+    } catch (error) {
+      console.log('Error  updating user:', error);
+    }
 
     // Make your update request here
   };
@@ -77,7 +142,7 @@ function Userupdate({ id }) {
             </div>
 
             <div className="form_div text-center">
-              <button type="submit">Update</button>
+              <button type="submit" onSubmit={handleSubmit}>Update</button>
             </div>
           </form>
         </div>
