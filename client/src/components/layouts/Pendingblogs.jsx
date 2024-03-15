@@ -77,7 +77,8 @@ function Pendingblogs() {
                   <div className="postuserinfo">
                     <FaUserAlt className='userpfp' />
                     <div className="info">
-                      <p>{author_id.username}</p>
+                      {/* <p>{author_id.username}</p> */}
+                      <p>{author_id?.username}</p> 
                       <p className='blogdate'>{createdAt}</p>
                     </div>
                   </div>

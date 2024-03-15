@@ -59,4 +59,7 @@ const updateUserSchema = z.object({
         .optional(), // Marking as optional since user may not update all fields
 });
 
+
+
+
 module.exports = {signupSchema,loginSchema,passwordschema,updateUserSchema};

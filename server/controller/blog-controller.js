@@ -24,7 +24,7 @@ const blogform = async (req, res) => {
             title,
             author_id,
             content,
-            tags, // Include tags array
+            tags, 
             cover_img,
         });
 

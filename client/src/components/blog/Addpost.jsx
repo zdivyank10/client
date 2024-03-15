@@ -45,12 +45,30 @@ function Addpost() {
       ...blog,
       content: content,
     });
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!file || !blog.title || !blog.content || tags.length === 0) {
+      toast.error('Please fill in all required fields', {
+        style: {
+          background: '#212121',
+          color: 'white',
+        },
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
     try {
+
       const formData = new FormData();
       formData.append('file', file);
 
@@ -154,11 +172,11 @@ function Addpost() {
             </div>
             <div className="formcontrol">
               <label htmlFor="file">Add Picture :</label>
-              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
+              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} required  />
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Title :</label>
-              <input type="text" name="title" id="title" className='form-control ' value={blog.title} onChange={handleInput} />
+              <input type="text" name="title" id="title" className='form-control ' value={blog.title} onChange={handleInput} required/>
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Tags :</label>

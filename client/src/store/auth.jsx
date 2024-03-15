@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) =>{
         try {
             const blogdata = await fetch('http://localhost:8000/api/blog/blog',
             {
-                method: "GET"
+                method: "GET",
              
             })
             if (blogdata.ok) {
@@ -116,7 +116,7 @@ export const AuthProvider = ({ children }) =>{
     useEffect(() => {
         getBlogs();
       
-    }, []); // Run only once when the component mounts
+    }, []); 
     
     useEffect(() => {
        

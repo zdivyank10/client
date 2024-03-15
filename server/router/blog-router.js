@@ -1,6 +1,10 @@
 const express = require('express');
 const {blogs,blogform,approvedBlogs,getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs,updateBlog,deleteBlog,searchBlog} = require('../controller/blog-controller');
-const authMiddleware = require('../middlewares/auth-middleware')
+
+const authMiddleware = require('../middlewares/auth-middleware');
+// const validate = require('../middlewares/validate-middleware');
+
+// const {addBlogSchema} =require('../validators/auth-validator')
 
 const router = express.Router();
 

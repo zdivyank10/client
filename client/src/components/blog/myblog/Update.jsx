@@ -90,6 +90,8 @@ function Update() {
         }
     };
 
+    
+
     // Function to handle updating blog content
     const handleUpdateBlog = async () => {
         try {
@@ -119,6 +121,22 @@ function Update() {
                     tags: tags,
                 }),
             });
+            if ( !blog.title || !blog.content || tags.length === 0) {
+                toast.error('Please fill in all required fields', {
+                  style: {
+                    background: '#212121',
+                    color: 'white',
+                  },
+                  position: 'top-center',
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+                return;
+              }
             if (response.ok) {
                 const updatedBlog = await response.json();
                 console.log('Blog updated successfully:', updatedBlog);
@@ -174,11 +192,11 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Edit Picture :</label>
-                            <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
+                            <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange}  />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Title :</label>
-                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} />
+                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} required/>
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Tags :</label>
