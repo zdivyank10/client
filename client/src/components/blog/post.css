@@ -9,11 +9,13 @@
     padding: 20px;
     display: flex;
     /* flex-direction: column; */
+    /* background-color: var(--forth-color); */
 }
 .postcontainer {
     text-decoration: none; 
     color: inherit;
-    background: white;
+    background: var(--font-color);
+    /* color: var(--font-color); */
     /* width: 10%; */
     border: 2px solid var(--third-color);
     border-radius: 15px;

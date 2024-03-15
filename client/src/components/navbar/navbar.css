@@ -25,7 +25,7 @@ z-index: 1000;
 .logo-brand ul li a {
   list-style: none;
   text-decoration: none;
-  color: var(--forth-color);
+  color: var(--font-color);
   font-size: 20px;
 }
 
@@ -46,22 +46,30 @@ nav ul li {
 nav ul li a {
   width: 100%;
   text-decoration: none;
-  /* border: 2px white solid; */
   font-size: 20px;
-  color: var(--forth-color);
+  color: var(--font-color);
+  position: relative; /* Add relative positioning */
 }
 
-/* Add more styling as needed */
-
-nav ul li a:hover {
-  border-bottom: 2px solid;
-  border-bottom-color: hwb(242 64% 0%);
-  /* Change the color on focus */
-  transition: 0.6s ease-in-out;
+nav ul li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.5px;
+  background-color: transparent; /* Initially transparent */
+  transition: width 0.3s ease; /* Smooth transition */
 }
+
+nav ul li a:hover::before {
+  width: 100%; /* Expand to 100% on hover */
+  background-color: var(--font-color); /* Change color on hover */
+}
+
 
 nav ul li a.active {
-  border-bottom: 2px solid white;
+  border-bottom: 1px solid  var(--third-color);
 
 }
 

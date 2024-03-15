@@ -3,8 +3,8 @@ import './about.css'
 function About() {
     return (
         <>
-            <h1 className='about_head text-center'>Welcome to Ink Garden</h1>
             <div className="about_container">
+            <h1 className='about_head text-center'>Welcome to Ink Garden</h1>
 
                 <div className="ourmission text-center">
                     <h1>Our Mission</h1>
@@ -117,7 +117,7 @@ function About() {
                     </div>
 
                     <div className="">
-                    <img src="../img/7542093.jpg" alt="" className='' width={510} />
+                    <img src="../img/7542093.jpg" alt="" className='about_img2'  />
                     </div>
                 </div>
             </div>

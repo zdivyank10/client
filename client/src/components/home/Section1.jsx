@@ -7,6 +7,7 @@ function Section1() {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState(false); // State variable for search error
   const { searchQuery } = useParams();
 
   useEffect(() => {
@@ -14,24 +15,34 @@ function Section1() {
       setQuery(searchQuery);
       handleSearch(searchQuery);
     }
-  }, [searchQuery]);
+  }, [searchQuery,searchResults]);
 
   const handleSearch = async (searchQuery) => {
     try {
       setLoading(true);
+      setSearchError(false); // Reset search error state
+
+      if (!searchQuery.trim()) {
+        setSearchError(true); // Set search error if query is empty
+        return;
+      }
+
       const response = await fetch(`http://localhost:8000/api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
         method: 'POST'
       });
       if (response.ok) {
         const searchData = await response.json();
         setSearchResults(searchData);
-
+        if (searchData.length === 0) {
+          setSearchError(true); // Set search error if no results found
+        }
       } else {
         console.error('Failed to fetch search results:', response.statusText);
       }
       console.log('search data:', searchResults);
     } catch (error) {
       console.error('Error searching blogs:', error);
+      setSearchError(true); // Set search error if there's an error
     } finally {
       setLoading(false);
     }
@@ -58,35 +69,35 @@ function Section1() {
             placeholder='Search blog'
             value={query}
             onChange={handleInputChange}
+            required
           />
           <button onClick={() => handleSearch(query)} className="search_btn btn btn-dark">
             Search
           </button>
-
-          <div className=''>
-          {searchResults.map(result => (
-            <div key={result._id}>
-              <Link to={`/blog/${result._id}`} className="search_result">
-                <img src={`http://localhost:8000/uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={80} />
-                <div className="searchinfo m-3">
-                  <h3 className='text-dark'>{result.title}</h3>
-                  <div className="tags">
-                    {result.tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="text-dark tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
-              <hr />
-            </div>
-          ))}
-        </div>
         </div>
         {loading && <p>Loading...</p>}
-      
-
+        <div>
+          
+        {searchError && <p className='ms-5'>No blogs found related to '{query}'</p>} 
+          {searchResults.filter(result => result.permission === 'true')
+          .map(result => (
+            <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
+              <img src={`http://localhost:8000/uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
+              <div className="searchinfo m-3">
+                <h3 className='text-dark'>{result.author_id.username}</h3>
+                <h5 className='text-dark'>{result.title}</h5>
+                <div className="tags">
+                  {result.tags.map((tag, tagIndex) => (
+                    <span key={tagIndex} className="text-dark tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+        <hr />
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
       <div data-aos="fade-left" className="home_right">
         <img

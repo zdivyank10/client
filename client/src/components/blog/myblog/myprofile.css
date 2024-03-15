@@ -1,13 +1,17 @@
 .myprofile_container {
     display: flex;
-    justify-content: center; /* Centers the content horizontally */
-    align-items: center; /* Centers the content vertically */
+    justify-content: center;
+    /* Centers the content horizontally */
+    align-items: center;
+    /* Centers the content vertically */
 }
 
 .myprofile_right {
     display: flex;
-    flex-direction: column; /* Aligns child elements vertically */
-    gap: 20px; /* Adds space between child elements */
+    flex-direction: column;
+    /* Aligns child elements vertically */
+    gap: 20px;
+    /* Adds space between child elements */
 }
 
 .myprofile_left {
@@ -17,29 +21,40 @@
 
 .profile_text {
     display: flex;
-    flex-direction: column; /* Aligns child elements vertically */
-    width: 100%; 
+    flex-direction: column;
+    /* Aligns child elements vertically */
+    width: 100%;
 }
 
-.profile_img
-{
+.profile_img {
     height: 550px;
+}
+
+.error_img {
+    height: 40%;
+    width: 30%;
+    border-radius: 15px;
 }
 
 @media screen and (max-width: 768px) {
 
-    .myprofile_container
-    {
+    .myprofile_container {
         display: flex;
         flex-direction: column;
     }
+
     .myprofile_right {
-        max-width: none; 
+        max-width: none;
     }
 
     .profile_img {
-        max-height: 300px; 
+        max-height: 300px;
         /* padding:  auto; */
         margin-left: 10%;
+    }
+
+    .error_img {
+        height: 100%;
+        width: 80%;
     }
 }

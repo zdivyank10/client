@@ -4,7 +4,8 @@ import MiniNavbar from './MiniNavbar';
 import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
-
+import './myprofile.css';
+//css written in myprofile.css
 
 function MypPendingblogs() {
     const { user } = useAuth();
@@ -36,7 +37,7 @@ function MypPendingblogs() {
             <>
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" />
             </div>
             </>
         );
@@ -48,7 +49,7 @@ function MypPendingblogs() {
               <MiniNavbar />
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='mt-3 m-3' />
+            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt=""  className='error_img mt-3 m-3' />
 
             <h3 className='m-3'>- No Pending blogs found-</h3>
             <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 

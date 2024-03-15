@@ -176,6 +176,9 @@ const searchBlog = async (req, res) => {
             // Perform search using MongoDB's text search feature
             const searchResults = await blog.find({
                 $or: [
+                    // { 'author_id.username': { $regex: query, $options: 'i' } } ,
+                    { 'author_id.username': { $regex: query, $options: 'i' } },
+
                     { tags: { $regex: query, $options: 'i' } },
                     { title: { $regex: query, $options: 'i' } },
                     { content: { $regex: query, $options: 'i' } },

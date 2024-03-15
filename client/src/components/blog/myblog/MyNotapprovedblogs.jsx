@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import './myprofile.css'
 
 function MyNotapprovedblogs() {
     const { user } = useAuth();
@@ -42,7 +43,7 @@ function MyNotapprovedblogs() {
             <>
                 <div className="text-center">
 
-                    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+                    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt=""  style={{ width: '100%',height:'100%',padding:'15px',margin:"15px" }} />
                 </div>
             </>
         );
@@ -53,7 +54,7 @@ function MyNotapprovedblogs() {
                 <MiniNavbar />
                 <div className="text-center">
 
-                    <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='m-3' />
+                    <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt=""   className='error_img m-3' />
 
                     <h3 className='m-3'>- Non approved blogs Not found-</h3>
                     <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link>
