@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
@@ -6,11 +6,18 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function Adminblogs() {
-  const { blog, AuthorizationToken,API_BASE_URL } = useAuth();
+  const { blog, AuthorizationToken,API_BASE_URL,getBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
   const [action, setAction] = useState(null);
-
+  useEffect(() => {
+    // Fetch blogs only if they haven't been fetched before
+    if (!blog || blog.length === 0) {
+      getBlogs();
+    }
+  }, [blog]); // Refresh whenever `blog` data changes
+  
+  
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedBlogId(null);
@@ -34,6 +41,7 @@ function Adminblogs() {
 
       const updatedBlog = await response.json();
       console.log('Updated blog:', updatedBlog);
+      await getBlogs();
     } catch (error) {
       console.error('Error updating permission:', error);
       // Add UI feedback to inform the user about the error

@@ -163,15 +163,13 @@ export const AuthProvider = ({ children }) =>{
         }
     }
 
-  
-    // useEffect(() => {
-    //     getBlogs();
-    //     // userAuthentication();
-    //     getApprovedBlogs();
-    // }, [])
-    // // }, [blog])
     useEffect(() => {
         getBlogs();
+       
+    // }, [blog.id])
+    }, [blog.id])
+    useEffect(() => {
+        // getBlogs();
         getApprovedBlogs();
         getNotApprovedBlogs();
         getPendingBlogs();
@@ -186,7 +184,7 @@ export const AuthProvider = ({ children }) =>{
 
     // token
     return(
-     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading,API_BASE_URL,notapprovedblog,pendingblog}}>
+     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading,API_BASE_URL,notapprovedblog,pendingblog,getNotApprovedBlogs,getApprovedBlogs,getPendingBlogs,getBlogs}}>
     {children}
     </AuthContext.Provider>
     )

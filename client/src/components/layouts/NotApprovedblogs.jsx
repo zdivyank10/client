@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../blog/post.css";
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
@@ -7,9 +7,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function NotApprovedblogs() {
-  const { AuthorizationToken,API_BASE_URL,notapprovedblog } = useAuth();
+  const { AuthorizationToken,API_BASE_URL,notapprovedblog,getNotApprovedBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
+
+  useEffect(() => {
+    getNotApprovedBlogs();
+  }, []);
 
   const updatePermission = async (blogId, permission) => {
     try {
@@ -28,6 +32,7 @@ function NotApprovedblogs() {
 
       const updatedBlog = await response.json();
       console.log('Updated blog:', updatedBlog);
+      getNotApprovedBlogs();
     } catch (error) {
       console.error('Error updating permission:', error);
       // Add UI feedback to inform the user about the error

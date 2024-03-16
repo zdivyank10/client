@@ -41,7 +41,7 @@ function Post() {
                 <Link to={`/blog/${_id}`} className="postuserinfo">
                   <FaUserAlt className="userpfp" />
                   <div className="info">
-                    <p>{author_id.username}</p>
+                    <p>{author_id?.username}</p>
                     <p className="blogdate">{createdAt}</p>
                   </div>
                 </Link>

@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 
 
 function Approvedblogs() {
-    const { approvedblog, AuthorizationToken ,API_BASE_URL} = useAuth();
+    const { approvedblog, AuthorizationToken ,API_BASE_URL,getApprovedBlogs} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [selectedBlogId, setSelectedBlogId] = useState(null);
     // const [reasons, setReasons] = useState({
@@ -18,7 +18,9 @@ function Approvedblogs() {
     //     other: false
     // });
 
-
+    useEffect(() => {
+        getApprovedBlogs();
+      }, []);
     
 
     const updatePermission = async (blogId, permission) => {
@@ -38,6 +40,7 @@ function Approvedblogs() {
 
             const updatedBlog = await response.json();
             console.log('Updated blog:', updatedBlog);
+            getApprovedBlogs();
         } catch (error) {
             console.error('Error updating permission:', error);
             // Add UI feedback to inform the user about the error

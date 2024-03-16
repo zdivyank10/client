@@ -10,7 +10,7 @@ import { useAuth } from '../../store/auth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdDeleteOutline } from "react-icons/md";
-
+import { Modal, Button } from 'react-bootstrap';
 
 function FullBlog() {
   const [blogPost, setBlogPost] = useState(null);
@@ -18,10 +18,13 @@ function FullBlog() {
   const [error, setError] = useState(null);
   const [comment, setComment] = useState('');
   const [commentsList, setCommentsList] = useState([]);
+  const [showModal, setShowModal] = useState(false); // Modal state
+  const [commentToDelete, setCommentToDelete] = useState(null); // Comment to delete
   const { blog_id } = useParams();
-  const { user, AuthorizationToken,API_BASE_URL } = useAuth();
+  const { user, AuthorizationToken, API_BASE_URL } = useAuth();
   const navigate = useNavigate();
 
+  // Fetch comments function
   const fetchComments = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}`, {
@@ -39,10 +42,14 @@ function FullBlog() {
       console.error('No Comments found:', error);
     }
   };
+
+  // Fetch blog post function
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/blog/blog/${blog_id}`);
+        const response = await fetch(`${API_BASE_URL}api/blog/blog/${blog_id}`,{
+
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch blog post');
         }
@@ -56,28 +63,31 @@ function FullBlog() {
       }
     };
 
-
-
     fetchBlogPost();
     fetchComments();
   }, [blog_id]);
 
+  // Loading state
   if (loading) {
     return <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" />;
   }
 
+  // Error state
   if (error) {
     return <div>Error: {error}</div>;
   }
 
+  // Blog post not found
   if (!blogPost) {
     return <div>Blog post not found</div>;
   }
 
+  // Handle comment input change
   const handleChange = (e) => {
     setComment(e.target.value);
   }
 
+  // Handle comment submission
   const handleSubmit = async () => {
     try {
       if (!user) {
@@ -130,11 +140,10 @@ function FullBlog() {
     }
   }
 
+  // Delete comment function
   const deleteComment = async (commentId) => {
     try {
-      
       const userId = user._id;
-  
       const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}/delete`, {
         method: 'DELETE',
         headers: {
@@ -143,7 +152,7 @@ function FullBlog() {
         },
         body: JSON.stringify({ _id:commentId, userid:userId })
       });
-  
+
       if (response.ok) {
         // Handle successful deletion
         toast.success('Comment deleted successfully!', {
@@ -169,7 +178,18 @@ function FullBlog() {
       console.error('Error deleting comment:', error);
     }
   };
-  
+
+  // Handle opening the modal for deleting a comment
+  const handleShowModal = (commentId) => {
+    setCommentToDelete(commentId);
+    setShowModal(true);
+  };
+
+  // Handle closing the modal
+  const handleCloseModal = () => {
+    setCommentToDelete(null);
+    setShowModal(false);
+  };
 
   const { author_id, title, cover_img, content, tags, createdAt } = blogPost;
   const sanitizedContent = DOMPurify.sanitize(content);
@@ -209,7 +229,7 @@ function FullBlog() {
             <AiFillMessage size={25} className='fullpost_cmt' onClick={() => window.location.href = '#comment'} />
           </div>
           <div className="comment_section text-center">
-            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange} />
+            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange}  required/>
             <button className="btn btn-secondary m-3" type="button" onClick={handleSubmit}><IoMdSend /></button>
           </div>
           <hr />
@@ -222,11 +242,9 @@ function FullBlog() {
                     <FaUserAlt className='userpfp' size={25} />
                     <p className='cmt_user'>{commentItem.userid.username}</p>
                     <p className='cmt_time mt-1'>{commentItem.createdAt}</p>
-                    {/* <p className='cmt_time mt-1 ms-4 text-danger'><MdDeleteOutline size={25}/></p> */}
                     {user && user._id === commentItem.userid._id && (
                       <p className='cmt_time mt-1 ms-5 text-danger'>
-                      <MdDeleteOutline size={25} onClick={() => deleteComment(commentItem._id)} />
-
+                        <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
                       </p>
                     )}
                   </div>
@@ -241,6 +259,27 @@ function FullBlog() {
           </div>
         </div>
       </div>
+
+      {/* Bootstrap Modal */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Comment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this comment?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={() => {
+            deleteComment(commentToDelete);
+            handleCloseModal();
+          }}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../blog/post.css";
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
@@ -6,11 +6,15 @@ import { FaUserAlt } from "react-icons/fa";
 import { Modal } from 'react-bootstrap';
 
 function Pendingblogs() {
-  const {  AuthorizationToken, API_BASE_URL, pendingblog } = useAuth();
+  const {  AuthorizationToken, API_BASE_URL, pendingblog,getPendingBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [blogId, setBlogId] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'decline'
 
+  
+  useEffect(() => {
+    getPendingBlogs();
+  }, []);
   const updatePermission = async (blogId, permission) => {
     try {
       const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
@@ -28,6 +32,7 @@ function Pendingblogs() {
 
       const updatedBlog = await response.json();
       console.log('Updated blog:', updatedBlog);
+      getPendingBlogs();
     } catch (error) {
       console.error('Error updating permission:', error);
       // Add UI feedback to inform the user about the error
