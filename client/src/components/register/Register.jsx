@@ -10,7 +10,7 @@ import { MdErrorOutline } from "react-icons/md";
 
 function Register() {
   const navigate = useNavigate();
-  const { storeTokenInLS,API_BASE_URL } = useAuth();
+  const { storeTokenInLS, API_BASE_URL } = useAuth();
 
   const [user, setUser] = useState({
     username: "",
@@ -22,6 +22,7 @@ function Register() {
 
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isVerified, setVerified] = useState(false);
+  const [sendingOTP, setSendingOTP] = useState(false); // State to track OTP sending
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -31,7 +32,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // If email is not verified, return
     if (!isEmailVerified) {
       toast.error('Please verify your email first.', {
@@ -49,7 +50,7 @@ function Register() {
       });
       return;
     }
-    
+
     // If OTP is not verified, return
     if (!isVerified) {
       toast.error('Please verify your OTP first.', {
@@ -133,6 +134,9 @@ function Register() {
     e.preventDefault();
 
     try {
+      // Set sendingOTP to true to display spinner
+      setSendingOTP(true);
+
       const response = await fetch(`${API_BASE_URL}api/auth/sendmail`, {
         method: "POST",
         headers: {
@@ -179,6 +183,9 @@ function Register() {
 
     } catch (error) {
       console.log("Error from catch", error);
+    } finally {
+      // Set sendingOTP to false after OTP is sent or if there's an error
+      setSendingOTP(false);
     }
   }
 
@@ -271,7 +278,14 @@ function Register() {
               </div>
               {!isEmailVerified && (
                 <div className="form_div text-center">
-                  <button type="submit" onClick={verifyEmail}>Verify Email</button>
+                  {/* Conditionally render spinner while sending OTP */}
+                  {sendingOTP ? (
+                    <div className="spinner-border text-dark" role="status">
+                      {/* <span className="sr-only">Loading...</span> */}
+                    </div>
+                  ) : (
+                    <button type="submit" onClick={verifyEmail}>Verify Email</button>
+                  )}
                 </div>
               )}
               {isEmailVerified && !isVerified && (

@@ -82,7 +82,7 @@ function Adminblogs() {
       <div className="row blogrow">
       <h1 className="text-center">All Blogs</h1>
               <hr />
-        {blog.map((currEle, index) => {
+        {blog && blog.map((currEle, index) => {
           const { _id: blogId, title, author_id, cover_img, content, tags, createdAt, username, permission } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
           let bgClass = 'bg-light'; // Default background color

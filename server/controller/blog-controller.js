@@ -52,6 +52,32 @@ const approvedBlogs = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+const notApprovedBlogs = async (req, res) => {
+    try {
+
+        //   const approvedBlog = await blog.find({ permission: true });
+        const notapprovedBlog = await blog.find({ permission: false })
+            .populate('author_id', 'username');
+
+        res.json(notapprovedBlog);
+    } catch (error) {
+        console.error('Error getting blog permission:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+const pendingBlogs = async (req, res) => {
+    try {
+
+        //   const approvedBlog = await blog.find({ permission: true });
+        const pendingBlog = await blog.find({ permission: "pending" })
+            .populate('author_id', 'username');
+
+        res.json(pendingBlog);
+    } catch (error) {
+        console.error('Error getting blog permission:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 const getfullblog = async (req, res) => {
     try {
@@ -195,4 +221,4 @@ const searchBlog = async (req, res) => {
     
 
 
-module.exports = { blogs, blogform, approvedBlogs, getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs, updateBlog, deleteBlog, searchBlog }
+module.exports = { blogs, blogform, approvedBlogs,notApprovedBlogs,pendingBlogs, getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs, updateBlog, deleteBlog, searchBlog }

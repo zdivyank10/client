@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function NotApprovedblogs() {
-  const { blog, AuthorizationToken,API_BASE_URL } = useAuth();
+  const { AuthorizationToken,API_BASE_URL,notapprovedblog } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
 
@@ -42,6 +42,7 @@ function NotApprovedblogs() {
   const handleConfirmation = () => {
     updatePermission(selectedBlogId, 'true'); // Set permission to 'true'
     setShowModal(false);
+
   };
 
   return (
@@ -49,46 +50,42 @@ function NotApprovedblogs() {
       <div className="row blogrow">
       <h1 className="text-center">Already Declined Blogs</h1>
               <hr />
-        {blog.map((currEle, index) => {
-          const { title, author_id, cover_img, content, tags, createdAt, username, _id, permission } = currEle;
-          const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
+              {notapprovedblog && notapprovedblog.map((currEle, index) => {
+                    const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
+                    const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
+                    return (
+                        <div className="maincontainer col-md-4" key={index}>
+                            <div className="postcontainer text-center m-3">
+                                <div className="postimg">
+                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                                </div>
+                                <div className="postuserinfo ">
+                                    <FaUserAlt className='userpfp' />
+                                    <div className="info">
+                                    <p>{author_id?.username}</p>
 
-          // Display only non-approved blogs
-          if (permission == 'false') {
-            return (
-              <div className="maincontainer col-md-4" key={index}>
-                <div  className="postcontainer  text-center m-3">
-                  <div className="postimg">
-                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
-                  </div>
-                  <div className="postuserinfo">
-                    <FaUserAlt className='userpfp'/>
-                    <div className="info">
-                      <p>{author_id.username}</p>
-                      <p className='blogdate'>{createdAt}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="blogcontent text-center">
-                    <h2>{title}</h2>
-                    <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                    <div className="tags">
-                      {tags.map((tag, tagIndex) => (
-                        <span key={tagIndex} className="tag"> {tag} </span> 
-                      ))}
-                    </div>
-                    <hr />
-                  </div>
-                  <div className="actions text-center">
-                    <button className="btn btn-success" onClick={() => handleApprove(_id)}>Approve</button>
-                  </div>
-                </div>
-              </div>
-            );
-          } else {
-            return null; // Don't render if blog is approved
-          }
-        })}
+                                        {/* <p>{author_id.username}</p> */}
+                                        <p className='blogdate'>{createdAt}</p>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="blogcontent text-center">
+                                    <h2>{title}</h2>
+                                    <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                                    <div className="tags">
+                                        {tags.map((tag, tagIndex) => (
+                                            <span key={tagIndex} className="tag"> {tag} </span>
+                                        ))}
+                                    </div>
+                                    <hr />
+                                </div>
+                                <div className="actions text-center">
+                                    <button className="btn btn-success" onClick={() => handleApprove(_id)}>Approve</button>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
       </div>
 
       {/* Confirmation Modal */}

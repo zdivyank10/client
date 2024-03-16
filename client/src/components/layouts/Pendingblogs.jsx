@@ -6,7 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { Modal } from 'react-bootstrap';
 
 function Pendingblogs() {
-  const { blog, AuthorizationToken ,API_BASE_URL} = useAuth();
+  const {  AuthorizationToken, API_BASE_URL, pendingblog } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [blogId, setBlogId] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'decline'
@@ -55,56 +55,56 @@ function Pendingblogs() {
   };
 
   // Check if there are no pending blogs
-  const noPendingBlogs = blog.every(currEle => currEle.permission !== 'pending');
+  // const noPendingBlogs = blog.every(currEle => currEle.permission !== 'pending');
 
   return (
     <>
       <div className="row blogrow">
-      <h1 className="text-center">All Pending Blogs</h1>
-              <hr />
-        {blog.map((currEle, index) => {
-          const { title, author_id, cover_img, content, tags, createdAt, username, _id, permission } = currEle;
+        <h1 className="text-center">All Pending Blogs</h1>
+        <hr />
+        {pendingblog && pendingblog.map((currEle, index) => {
+          const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
+          return (
+            <div className="maincontainer col-md-4" key={index}>
+              <div className="postcontainer text-center m-3">
+                <div className="postimg">
+                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                </div>
+                <div className="postuserinfo ">
+                  <FaUserAlt className='userpfp' />
+                  <div className="info">
+                    <p>{author_id?.username}</p>
 
-          // Display only non-approved blogs
-          if (permission === 'pending') {
-            return (
-              <div className="maincontainer col-md-4" key={index}>
-                <div className="postcontainer  text-center m-3">
-                  <div className="postimg">
-                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                    {/* <p>{author_id.username}</p> */}
+                    <p className='blogdate'>{createdAt}</p>
                   </div>
-                  <div className="postuserinfo">
-                    <FaUserAlt className='userpfp' />
-                    <div className="info">
-                      {/* <p>{author_id.username}</p> */}
-                      <p>{author_id?.username}</p> 
-                      <p className='blogdate'>{createdAt}</p>
-                    </div>
+                </div>
+                <hr />
+                <div className="blogcontent text-center">
+                  <h2>{title}</h2>
+                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                  <div className="tags">
+                    {tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="tag"> {tag} </span>
+                    ))}
                   </div>
                   <hr />
-                  <div className="blogcontent text-center">
-                    <h2>{title}</h2>
-                    <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                    <div className="tags">
-                      {tags.map((tag, tagIndex) => (
-                        <span key={tagIndex} className="tag"> {tag} </span>
-                      ))}
-                    </div>
-                    <hr />
-                  </div>
-                  <div className="actions text-center">
+                </div>
+                {/* <div className="actions text-center">
+                  <button className="btn btn-success" onClick={() => handleApprove(_id)}>Approve</button>
+                </div> */}
+                <div className="actions text-center">
                     <button className="btn btn-success me-3" onClick={() => handleApprove(_id)}>Approve</button>
                     <button className="btn btn-danger" onClick={() => handleDecline(_id)}>Decline</button>
                   </div>
-                </div>
               </div>
-            );
-          }
-          return null; // Render nothing for non-pending blogs
+            </div>
+          );
         })}
+
       </div>
-      {noPendingBlogs && <h1 className='text-center text-danger'>No Pending Blogs</h1>}
+      {/* {noPendingBlogs && <h1 className='text-center text-danger'>No Pending Blogs</h1>} */}
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -126,3 +126,7 @@ function Pendingblogs() {
 }
 
 export default Pendingblogs;
+{/* <div className="actions text-center">
+                    <button className="btn btn-success me-3" onClick={() => handleApprove(_id)}>Approve</button>
+                    <button className="btn btn-danger" onClick={() => handleDecline(_id)}>Decline</button>
+                  </div> */}
