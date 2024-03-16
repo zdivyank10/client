@@ -1,45 +1,45 @@
-const {z} = require('zod');
+const { z } = require('zod');
 
 const loginSchema = z.object({
-    email :  z
-    .string({required_error:"Email is Required"})
-    .trim()
-    .email({message: "Invalid Email address"})
-    .min(3,{message: "Email must be Upto 3 Letter"})
-    .max(255,{message: "Email must not be more than 255 Letter"}),
+    email: z
+        .string({ required_error: "Email is Required" })
+        .trim()
+        .email({ message: "Invalid Email address" })
+        .min(3, { message: "Email must be Upto 3 Letter" })
+        .max(255, { message: "Email must not be more than 255 Letter" }),
 
-    
-    password :  z
-    .string({required_error:"Password is Required"})
-    .min(7,{message: "Password must be Upto 7 Letter"})
-    .max(1024,{message: "Password must not be more than 1024 Letter"}),
+
+    password: z
+        .string({ required_error: "Password is Required" })
+        .min(7, { message: "Password must be Upto 7 Letter" })
+        .max(1024, { message: "Password must not be more than 1024 Letter" }),
 })
 // create a object Schema
 
 const signupSchema = loginSchema.extend({
 
-    username :  z
-    .string({required_error:"Name is Required"})
-    .trim()
-    .min(3,{message: "Name must be Upto 3 Letter"})
-    .max(255,{message: "Name must not be more than 255 Letter"}),
+    username: z
+        .string({ required_error: "Name is Required" })
+        .trim()
+        .min(3, { message: "Name must be Upto 3 Letter" })
+        .max(255, { message: "Name must not be more than 255 Letter" }),
 
 
- 
-    phone :  z
-    .string({required_error:"Phone Number is Required"})
-    .trim()
-    .min(10,{message: "Phone Number must be 10 Digits"})
-    .max(10,{message: "Phone Number must not be more than 10 Digits"}),
+
+    phone: z
+        .string({ required_error: "Phone Number is Required" })
+        .trim()
+        .min(10, { message: "Phone Number must be 10 Digits" })
+        .max(10, { message: "Phone Number must not be more than 10 Digits" }),
 
 })
 
 const passwordschema = z.object({
-    
-    password :  z
-    .string({required_error:"Password is Required"})
-    .min(7,{message: "Password must be Upto 7 Letter"})
-    .max(1024,{message: "Password must not be more than 1024 Letter"}),
+
+    password: z
+        .string({ required_error: "Password is Required" })
+        .min(7, { message: "Password must be Upto 7 Letter" })
+        .max(1024, { message: "Password must not be more than 1024 Letter" }),
 })
 
 
@@ -59,7 +59,15 @@ const updateUserSchema = z.object({
         .optional(), // Marking as optional since user may not update all fields
 });
 
+const CommentSchema = z.object({
+    blogid: z.string().optional(),
+    userid: z.string().optional(),
+    content: z.string()
+        .min(3, { message: "Comment must be at least 3 characters long" })
+        .max(255, { message: "Comment must not exceed 255 characters" }),
+    createdAt: z.string().optional(), // Assuming createdAt is a string in ISO format
+});
 
 
 
-module.exports = {signupSchema,loginSchema,passwordschema,updateUserSchema};
+module.exports = { signupSchema, loginSchema, passwordschema, updateUserSchema,CommentSchema };

@@ -116,6 +116,9 @@ function FullBlog() {
         },
         body: JSON.stringify({ content: comment, userid: userId })
       });
+
+      const res_data = await response.json();
+      console.log("cmt from sever",res_data); 
       if (response.ok) {
         toast.success('Comment Posted successfully!', {
           style: {
@@ -133,10 +136,26 @@ function FullBlog() {
         setComment('');
         fetchComments();
       } else {
-        console.error('Failed to post comment');
+        toast.error(res_data.extraDetails, {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+  
+        // console.error('Failed to post comment');
       }
     } catch (error) {
+     
       console.log('error doing comment', error);
+      // return;
     }
   }
 

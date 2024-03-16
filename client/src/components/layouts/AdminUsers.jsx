@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../store/auth';
-import { Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Button, Pagination } from 'react-bootstrap'; // Import Pagination component
+import { Link } from 'react-router-dom';
 import DeleteConfirmationModal from '../Admin/DeleteConfirmationModal';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-  const { AuthorizationToken,API_BASE_URL } = useAuth();
+  const { AuthorizationToken, API_BASE_URL } = useAuth();
+  const [activePage, setActivePage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
 
   const handleDeleteUser = async () => {
     try {
@@ -32,6 +34,14 @@ function AdminUsers() {
   useEffect(() => {
     getAllUsersData();
   }, []);
+
+  const indexOfLastItem = activePage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem); // Change 'contact' to 'users'
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
 
   const getAllUsersData = async () => {
     try {
@@ -64,7 +74,7 @@ function AdminUsers() {
           </tr>
         </thead>
         <tbody>
-          {users.map((curEle, index) => (
+          {currentItems.map((curEle, index) => ( // Use 'currentItems' instead of 'users'
             <tr key={index}>
               <td>{curEle.username}</td>
               <td>{curEle.email}</td>
@@ -91,6 +101,30 @@ function AdminUsers() {
         onHide={() => setShowConfirmationModal(false)}
         onConfirmDelete={handleDeleteUser}
       />
+
+      <Pagination>
+        {users.length > itemsPerPage && (
+          <Pagination.Prev
+            onClick={() => handlePageChange(activePage - 1)}
+            disabled={activePage === 1}
+          />
+        )}
+        {Array.from({ length: Math.ceil(users.length / itemsPerPage) }).map((_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === activePage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+        {users.length > itemsPerPage && (
+          <Pagination.Next
+            onClick={() => handlePageChange(activePage + 1)}
+            disabled={activePage === Math.ceil(users.length / itemsPerPage)}
+          />
+        )}
+      </Pagination>
     </>
   );
 }
