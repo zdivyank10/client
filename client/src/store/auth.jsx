@@ -163,6 +163,8 @@ export const AuthProvider = ({ children }) =>{
         }
     }
 
+
+  
     useEffect(() => {
         getBlogs();
        

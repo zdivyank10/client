@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './post.css';
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
@@ -7,8 +7,31 @@ import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 function Post() {
-  const { approvedblog,API_BASE_URL } = useAuth();
+  const { approvedblog, API_BASE_URL } = useAuth();
   const [likedPosts, setLikedPosts] = useState([]);
+  const [totalComments, setTotalComments] = useState({});
+
+  const totalcmts = async (blogId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}api/comment/${blogId}/count`, {
+        method: "GET"
+      });
+      const responseData = await response.json();
+      setTotalComments((prevTotalComments) => ({
+        ...prevTotalComments,
+        [blogId]: responseData.count // Store count in an object with blogId as key
+      }));
+    } catch (error) {
+      console.log('Error getting total comments:', error);
+    }
+  };
+
+  useEffect(() => {
+    // Iterate through each approved blog post and fetch total comments
+    approvedblog.forEach((post) => {
+      totalcmts(post._id);
+    });
+  }, [approvedblog]); // Fetch comments whenever approvedblog changes
 
   const toggleLike = (postId) => {
     setLikedPosts((prevLikedPosts) => {
@@ -28,54 +51,56 @@ function Post() {
             const { _id, title, author_id, cover_img, content, tags, createdAt, username } = post;
             const sanitizedContent = DOMPurify.sanitize(content);
             const isLiked = likedPosts.includes(_id);
+            const totalcmt = totalComments[_id] || 0; // Get total comments count from totalComments object
 
             return (
-              <div data-aos="fade-up" className="maincontainer col-md-3" key={index} >
+              <div data-aos="fade-up" className="maincontainer col-md-3" key={index}>
+                <div className="postcontainer  m-3">
+                  <Link to={`/blog/${_id}`} className="postimg">
+                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                  </Link>
 
-           
-              <div  className="postcontainer  m-3">
-                <Link to={`/blog/${_id}`} className="postimg">
-                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
-                </Link>
-
-                <Link to={`/blog/${_id}`} className="postuserinfo">
-                  <FaUserAlt className="userpfp" />
-                  <div className="info">
-                    <p>{author_id?.username}</p>
-                    <p className="blogdate">{createdAt}</p>
-                  </div>
-                </Link>
-                <hr />
-
-                <Link to={`/blog/${_id}`} className="blogcontent">
-                  <h2>{title}</h2>
-                  <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                  <div className="tags">
-                    {tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <Link to={`/blog/${_id}`} className="postuserinfo">
+                    <FaUserAlt className="userpfp" />
+                    <div className="info">
+                      <p>{author_id?.username}</p>
+                      <p className="blogdate">{createdAt}</p>
+                    </div>
+                  </Link>
                   <hr />
-                </Link>
 
-                <div>
-                  <div onClick={() => toggleLike(_id)}>
-                    {isLiked ? (
-                      <AiFillHeart size={25} className="post_like" color="red" />
-                    ) : (
-                      <AiFillHeart size={25} color="blue" className="post_like" />
-                    )}
-                    <span>{isLiked ? 'Liked' : 'Like'}</span>
-                    {/* <AiFillMessage size={25} className="post_cmt" /> */}
-                    <Link to={`/blog/${_id}`}>
-                      
-                        <AiFillMessage size={25} className='post_cmt' />
+                  <Link to={`/blog/${_id}`} className="blogcontent">
+                    <h2>{title}</h2>
+                    <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                    <div className="tags">
+                      {tags.map((tag, tagIndex) => (
+                        <span key={tagIndex} className="tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <hr />
+                  </Link>
+
+                  <div>
+                    <div className="like_cmt text-center" onClick={() => toggleLike(_id)}>
+                      {isLiked ? (
+                        <AiFillHeart size={25} className="post_like" color="red" />
+                      ) : (
+                        <AiFillHeart size={25} className="post_like text-dark" />
+                      )}
+                      <span>{isLiked ? 'Liked' : 'Like'}</span>
+                      <Link to={`/blog/${_id}`}>
+                        <div className='post_cmt'>
+                          <p>
+                            {totalcmt}<AiFillMessage size={25} />
+                          </p>
+                        </div>
+
                       </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
             );
           })}

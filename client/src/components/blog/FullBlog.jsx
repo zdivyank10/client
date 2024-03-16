@@ -20,11 +20,34 @@ function FullBlog() {
   const [commentsList, setCommentsList] = useState([]);
   const [showModal, setShowModal] = useState(false); // Modal state
   const [commentToDelete, setCommentToDelete] = useState(null); // Comment to delete
+  const [totalComments, setTotalComments] = useState({});
+
   const { blog_id } = useParams();
   const { user, AuthorizationToken, API_BASE_URL } = useAuth();
   const navigate = useNavigate();
 
   // Fetch comments function
+
+  const totalcmts = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}/count`, {
+        method: "GET"
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      setTotalComments(responseData)
+    } catch (error) {
+      console.log('Error getting total comments:', error);
+    }
+  };
+
+  useEffect(() => {
+    totalcmts();
+  }, [blog_id])
+  
+
+
+
   const fetchComments = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}api/comment/${blog_id}`, {
@@ -62,7 +85,7 @@ function FullBlog() {
         setLoading(false);
       }
     };
-
+   
     fetchBlogPost();
     fetchComments();
   }, [blog_id]);
@@ -245,7 +268,12 @@ function FullBlog() {
           <div className="actions">
             <AiFillHeart size={25} className='fullblog_like' />
             <p className='fullblog_likeinfo'>10 likes</p>
-            <AiFillMessage size={25} className='fullpost_cmt' onClick={() => window.location.href = '#comment'} />
+            <p className='blog_cmt'>
+            <AiFillMessage size={25} className='ms-3' onClick={() => window.location.href = '#comment'} /><p className='ms-3'>
+              {totalComments.count}
+              
+              </p>
+            </p>
           </div>
           <div className="comment_section text-center">
             <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange}  required/>

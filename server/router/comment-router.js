@@ -11,6 +11,8 @@ router.route('/:blogid/comment').post(validate(CommentSchema), commentController
 
 router.route('/:blogid').get(commentController.getcomment);
 
+router.route('/:blogid/count').get(commentController.countComment);
+
 router.route('/:blogid/delete').delete(commentController.deleteComment);
 
 module.exports = router;
