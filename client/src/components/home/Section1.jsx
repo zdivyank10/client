@@ -86,7 +86,7 @@ function Section1() {
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
               <img src={`${API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
-                <h3 className='text-dark'>{result.author_id.username}</h3>
+                <h3 className='text-dark'>{result.author_id?.username}</h3>
                 <h5 className='text-dark'>{result.title}</h5>
                 <div className="tags">
                   {result.tags.map((tag, tagIndex) => (

@@ -27,14 +27,28 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
  
-var corsOptions = {
-    origin:"http://localhost:5173",
-    methods: "GET,POST,DELETE,PUT,PATCH,HEAD",
-    credentials: true
-    // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  var corsOptions = {
+      origin:"http://localhost:5173",
+      methods: "GET,POST,DELETE,PUT,PATCH,HEAD",
+      credentials: true
+      // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    }
 
-app.use(cors(corsOptions));    
+  app.use(cors(corsOptions));    
+
+  // const allowedOrigins = ['https://6b66-2402-a00-172-b05b-a922-e714-b569-6c7d.ngrok-free.app'];
+  // const corsOptions = {
+  //   origin: function (origin, callback) {
+  //     if (allowedOrigins.includes(origin)) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   }
+  // };
+  
+  // app.use(cors(corsOptions));
+
 app.use(express.json());    
 app.use("/api/auth", authRouter);
 app.use("/api/form",contactRouter);
@@ -84,5 +98,8 @@ connectDb().then(()=>{
     app.listen(8000,()=>{
         console.log(`server running on port 8000`);
     })
+    // app.listen(8000,()=>{
+    //     console.log(`server running on port 8000`);
+    // })
 })
 

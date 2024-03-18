@@ -245,7 +245,7 @@ function FullBlog() {
         <div className="fullblogcontainer">
           <div className="authorinfo">
             <FaUserAlt className='userpfp' />
-            <p className='authorname'>{author_id.username}</p>
+            <p className='authorname'>{author_id?.username}</p>
             <p className='authorname'>{createdAt}</p>
           </div>
           <div className="fullblogtitle">

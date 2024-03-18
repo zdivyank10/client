@@ -12,9 +12,10 @@ function Adminblogs() {
   const [action, setAction] = useState(null);
   useEffect(() => {
     // Fetch blogs only if they haven't been fetched before
-    if (!blog || blog.length === 0) {
-      getBlogs();
-    }
+    // if (!blog || blog.length === 0) {
+    //   getBlogs();
+    // }
+    getBlogs();
   }, [blog]); // Refresh whenever `blog` data changes
   
   
