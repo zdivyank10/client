@@ -44,7 +44,7 @@ function FullBlog() {
   useEffect(() => {
     totalcmts();
   }, [blog_id])
-  
+
 
 
 
@@ -70,7 +70,7 @@ function FullBlog() {
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/blog/blog/${blog_id}`,{
+        const response = await fetch(`${API_BASE_URL}api/blog/blog/${blog_id}`, {
 
         });
         if (!response.ok) {
@@ -85,7 +85,7 @@ function FullBlog() {
         setLoading(false);
       }
     };
-   
+
     fetchBlogPost();
     fetchComments();
   }, [blog_id]);
@@ -141,7 +141,7 @@ function FullBlog() {
       });
 
       const res_data = await response.json();
-      console.log("cmt from sever",res_data); 
+      console.log("cmt from sever", res_data);
       if (response.ok) {
         toast.success('Comment Posted successfully!', {
           style: {
@@ -172,11 +172,11 @@ function FullBlog() {
           draggable: true,
           progress: undefined,
         });
-  
+
         // console.error('Failed to post comment');
       }
     } catch (error) {
-     
+
       console.log('error doing comment', error);
       // return;
     }
@@ -192,7 +192,7 @@ function FullBlog() {
           "Authorization": AuthorizationToken,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ _id:commentId, userid:userId })
+        body: JSON.stringify({ _id: commentId, userid: userId })
       });
 
       if (response.ok) {
@@ -240,7 +240,9 @@ function FullBlog() {
     <>
       <div className="fullblog_container">
         <div className="back text-center">
-          <Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+          <button className='btn btn-dark' onClick={() => navigate(-1)}>
+            <IoReturnDownBackOutline size={25} /> Back
+          </button>
         </div>
         <div className="fullblogcontainer">
           <div className="authorinfo">
@@ -269,14 +271,14 @@ function FullBlog() {
             <AiFillHeart size={25} className='fullblog_like' />
             <p className='fullblog_likeinfo'>10 likes</p>
             <p className='blog_cmt'>
-            <AiFillMessage size={25} className='ms-3' onClick={() => window.location.href = '#comment'} /><p className='ms-3'>
-              {totalComments.count}
-              
+              <AiFillMessage size={25} className='ms-3' onClick={() => window.location.href = '#comment'} /><p className='ms-3'>
+                {totalComments.count}
+
               </p>
             </p>
           </div>
           <div className="comment_section text-center">
-            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange}  required/>
+            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange} required />
             <button className="btn btn-secondary m-3" type="button" onClick={handleSubmit}><IoMdSend /></button>
           </div>
           <hr />
@@ -287,13 +289,18 @@ function FullBlog() {
                 <div key={index} className="comment">
                   <div className="comment-content">
                     <FaUserAlt className='userpfp' size={25} />
-                    <p className='cmt_user'>{commentItem.userid.username}</p>
-                    <p className='cmt_time mt-1'>{commentItem.createdAt}</p>
-                    {user && user._id === commentItem.userid._id && (
-                      <p className='cmt_time mt-1 ms-5 text-danger'>
-                        <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
-                      </p>
+                    <p className='cmt_user'>{commentItem.userid?.username}</p>
+                    <div className='cmt_time mt-1'>{commentItem.createdAt}</div>
+                    {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
+                      <div className='cmt_time mt-1 ms-5 text-danger'>
+                     <p>
+
+                      <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
+                     </p>
+                    </div>
+                    
                     )}
+
                   </div>
                   <div className="cmt_container">
                     <p className='cmt_content justify-content-center align-content-center'>{commentItem.content}</p>

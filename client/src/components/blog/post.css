@@ -137,9 +137,15 @@
 
 
 @media screen and (max-width: 768px) {
+   
+    .maincontainer {
+        overflow-x: hidden; /* Prevent overflow on x-axis */
+        margin: 20px;
+    }
     .postcontainer {
+        overflow-x: hidden;
         max-width: 100%; /* Ensure the post container occupies full width */
-        margin: 20px 0; /* Add margin for spacing between posts */
+        margin: 20px 0; 
         overflow: hidden; /* Hide overflowing content */
     }
 

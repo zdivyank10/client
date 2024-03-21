@@ -5,37 +5,43 @@ import DOMPurify from 'dompurify';
 import { FaThumbsDown, FaThumbsUp, FaUserAlt } from 'react-icons/fa';
 import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import CardCover from '@mui/joy/CardCover';
+import CardContent from '@mui/joy/CardContent';
+import Typography from '@mui/joy/Typography';
+
+
 
 function EditorsChoice() {
   const { approvedblog, AuthorizationToken, API_BASE_URL, getApprovedBlogs } = useAuth();
   const [choice, setChoice] = useState([]);
- 
 
   useEffect(() => {
-      getApprovedBlogs();
-      getChoice(); // Fetch editor's choice blogs
+    getApprovedBlogs();
+    getChoice(); // Fetch editor's choice blogs
   }, []);
 
   useEffect(() => {
-      console.log('choice blog:', choice); // Log choice when it changes
+    console.log('choice blog:', choice); // Log choice when it changes
   }, [choice]); // Run this effect whenever choice changes
 
   const getChoice = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}api/admin/alreadychoice`, {
-            method: "GET",
-            headers: {
-                Authorization: AuthorizationToken
-            }
-        });
-        const edtrchoice = await response.json();
-        setChoice(edtrchoice);
-        console.log('choice blog:', edtrchoice);
-        console.log('choice blog:', choice);
+      const response = await fetch(`${API_BASE_URL}api/admin/alreadychoice`, {
+        method: "GET",
+        headers: {
+          Authorization: AuthorizationToken
+        }
+      });
+      const edtrchoice = await response.json();
+      setChoice(edtrchoice);
+      console.log('choice blog:', edtrchoice);
+      console.log('choice blog:', choice);
     } catch (error) {
-        console.log('Error getting Choice', error);
+      console.log('Error getting Choice', error);
     }
-}
+  };
 
   const [likedPosts, setLikedPosts] = useState([]);
   const [totalComments, setTotalComments] = useState({});
@@ -74,66 +80,120 @@ function EditorsChoice() {
 
   return (
     <>
-      <div className="row blogrow">
+      <div className="blogcontainer">
+
+
+        <div className="row blogrow">
+
+
           <h1 className='text-center'>Editor's Choice</h1>
-        {choice &&
-          choice.map((post, index) => {
-            const { _id, title, author_id, cover_img, content, tags, createdAt, username } = post;
-            const sanitizedContent = DOMPurify.sanitize(content);
-            const isLiked = likedPosts.includes(_id);
-            const totalcmt = totalComments[_id] || 0; // Get total comments count from totalComments object
+          <hr />
+          {choice &&
+            choice.map((post, index) => {
+              const { _id, title, author_id, cover_img, content, tags, createdAt, username } = post;
+              const sanitizedContent = DOMPurify.sanitize(content);
+              const isLiked = likedPosts.includes(_id);
+              const totalcmt = totalComments[_id] || 0; // Get total comments count from totalComments object
 
-            return (
-                <div data-aos="fade-up" className="maincontainer col-md-3" key={index}>
-                <div className="postcontainer text-center m-3">
-                  <Link to={`/blog/${_id}`} className="postimg">
-                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
-                  </Link>
+              return (
+                // <div data-aos="fade-up" className="maincontainer col-md-3  m-3" key={index}>
+                <div className="maincontainer col-lg-3 col-md-5 col-sm-6  m-3 " key={index}>
+              
+                  <Link to={`/blog/${_id}`} className="">
+                     <Box
+                    sx={{
+                      perspective: '1000px',
+                      transition: 'transform 0.4s',
+                      '& > div, & > div > div': {
+                        transition: 'inherit',
+                        // overflowX:'hidden'
+                      },
+                      '&:hover': {
+                        '& > div': {
+                          transform: 'rotateY(30deg)',
+                          boxShadow: '0px 0px 20px 2px #59E4A8',
+                          // boxShadow: '0px 0px 20px 5px #000000',
+                          '& > div:nth-child(2)': {
+                            transform: 'scaleY(0.9) translate3d(20px, 30px, 40px)',
+                        
+                          },
+                          '& > div:nth-child(3)': {
+                            transform: 'translate3d(45px, 50px, 40px)',
+                            boxShadow: '0px 0px 20px 5px #FFFFFF',
+                            
+                          },
+                        },
+                      // Add glow effect on hover
+                      },
+                    }}
+                  >
 
-                  <Link to={`/blog/${_id}`} className="postuserinfo">
-                    <FaUserAlt className="userpfp" />
-                    <div className="info">
-                      <p>{author_id?.username}</p>
-                      <p className="blogdate">{createdAt}</p>
-                    </div>
-                  </Link>
-                  <hr />
+                    <Card
+                      variant="outlined"
+                      sx={{
+                        minHeight: '200px',
+                        boxShadow: '0px 4px 10px rgba(0, 10, 0, 0.7)',
+                        width: 300,
+                        backgroundColor: '#fff',
+                        borderColor: '#59E4A8',
+                        borderRadius: '15px',
 
-                  <Link to={`/blog/${_id}`} className="blogcontent">
-                    <h2>{title}</h2>
-                    <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                    <div className="tags">
-                      {tags.map((tag, tagIndex) => (
-                        <span key={tagIndex} className="tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <hr />
-                  </Link>
+                      }}
+                    >
+                      <Typography  fontSize="xl" textColor="#000">
+                      <p className='' style={{ marginTop: "-10px" }}>{title}</p>
 
-                  <div>
-                    <div className="like_cmt text-center" onClick={() => toggleLike(_id)}>
-                      {isLiked ? (
-                        <AiFillHeart size={25} className="post_like" color="red" />
-                      ) : (
-                        <AiFillHeart size={25} className="post_like text-dark" />
-                      )}
-                      <span>{isLiked ? 'Liked' : 'Like'}</span>
-                      <Link to={`/blog/${_id}`}>
-                        <div className='post_cmt'>
+                      </Typography>
+                      <CardCover
+                        sx={{
+                          background:
+                            'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
+                          border: '1px solid',
+                          borderRadius: '15px',
+                          borderColor: '#59E4A8',
+                          backdropFilter: 'blur(1px)',
+                        }}
+                      >
+                        <Typography level="h2" fontSize="lg" textColor="#fff"
+
+                          sx={{
+
+                            backdropFilter: 'blur(1px)',
+                          }}
+                        >
+
+                          <img src={`${API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
+                        </Typography>
+                      </CardCover>
+                      <CardContent
+                        sx={{
+                          alignItems: 'self-end',
+                          justifyContent: 'flex-end',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.3), rgba(0,0,0,0.3))',
+                          border: '1px solid white',
+                          borderRadius: '15px',
+                          // borderColor: '#000',
+                          backdropFilter: 'blur(2px)',
+                        }}
+                      >
+                        <Typography  fontSize="xl" textColor="#fff" m={2}>
+
+                          {/* {tags.map((tag, index) => (
+                          <span key={index} className='m-3'>{tag}</span>
+                        ))} */}
                           <p>
-                            {totalcmt}<AiFillMessage size={25} />
-                          </p>
-                        </div>
-
-                      </Link>
-                    </div>
-                  </div>
+                            
+                            <FaUserAlt className='userpfp' /> {author_id?.username}
+                            </p>
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Box>
+                  </Link> 
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </>
   );
