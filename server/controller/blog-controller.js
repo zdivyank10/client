@@ -24,7 +24,7 @@ const blogform = async (req, res) => {
             title,
             author_id,
             content,
-            tags, 
+            tags,
             cover_img,
         });
 
@@ -196,29 +196,30 @@ const deleteBlog = async (req, res) => {
 };
 
 const searchBlog = async (req, res) => {
-        try {
-            const { query } = req.query;
-        
-            // Perform search using MongoDB's text search feature
-            const searchResults = await blog.find({
-                $or: [
-                    // { 'author_id.username': { $regex: query, $options: 'i' } } ,
-                    { 'author_id.username': { $regex: query, $options: 'i' } },
+    try {
+        const { query } = req.query;
 
-                    { tags: { $regex: query, $options: 'i' } },
-                    { title: { $regex: query, $options: 'i' } },
-                    { content: { $regex: query, $options: 'i' } },
-                   
-                ]
-            }).populate('author_id', 'username');
-    
-            res.json(searchResults);
-        } catch (error) {
-            console.log('Error getting searched blogs', error);
-            res.status(500).json({ message: 'Internal server error' });
-        }
+        // Perform search using MongoDB's text search feature
+        const searchResults = await blog.find({
+            $or: [
+                // { 'author_id.username': { $regex: query, $options: 'i' } } ,
+                { 'author_id.username': { $regex: query, $options: 'i' } },
+
+                { tags: { $regex: query, $options: 'i' } },
+                { title: { $regex: query, $options: 'i' } },
+                { content: { $regex: query, $options: 'i' } },
+
+            ]
+        }).populate('author_id', 'username');
+
+        res.json(searchResults);
+    } catch (error) {
+        console.log('Error getting searched blogs', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-    
+}
 
 
-module.exports = { blogs, blogform, approvedBlogs,notApprovedBlogs,pendingBlogs, getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs, updateBlog, deleteBlog, searchBlog }
+
+
+module.exports = { blogs, blogform, approvedBlogs, notApprovedBlogs, pendingBlogs, getfullblog, getblogbyuserid, myapprovedblogs, mynotapprovedblogs, mypendingblogs, updateBlog, deleteBlog, searchBlog }

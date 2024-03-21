@@ -1,6 +1,6 @@
 const Contact = require("../models/contact-model");
 const User = require("../models/user-model")
-const Blog = require("../models/blog-model")
+const blog = require("../models/blog-model")
 const declined = require("../models/declined-model");
 const user = require("../models/user-model");
 // ----------------------------------
@@ -94,7 +94,7 @@ const updateBlogPermission = async (req, res) => {
         }
 
         // Find the blog document by ID and update the permission field
-        const updatedBlog = await Blog.findByIdAndUpdate(blogId, { permission }, { new: true });
+        const updatedBlog = await blog.findByIdAndUpdate(blogId, { permission }, { new: true });
 
         res.json(updatedBlog);
     } catch (error) {
@@ -119,4 +119,52 @@ const updateUser = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser }
+const editorsChoice = async (req, res) => {
+    try {
+        const { blogid, choice } = req.body;
+
+        // Check if permission is true
+        const blog_res = await blog.findById(blogid);
+        if (!blog_res) {
+            return res.status(404).json({ message: 'blog not found' });
+        }
+        
+        // Assuming 'permission' is a field in your blog document
+        if (blog_res.permission === "false") {
+            return res.status(403).json({ message: 'Permission denied' });
+        }
+
+        // Update the document
+        const edtrchoice = await blog.findByIdAndUpdate(blogid, { choice: choice }, { new: true }).populate('author_id', 'username');
+        if (!edtrchoice) {
+            return res.status(404).json({ message: 'blog not found' });
+        }
+
+        res.status(200).json({ message: 'Editor choice successfully added', edtrchoice });
+
+    } catch (error) {
+        console.log('Error getting Editors choice blogs', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+const alreadyeditorsChoice = async (req, res) => {
+    try {
+    
+        const alreadyedtrchoice = await blog.find( { choice: "true" }).populate('author_id', 'username');
+        if (!alreadyedtrchoice) {
+            return res.status(404).json({ message: 'blog not found' });
+        }
+
+        res.status(200).json(alreadyedtrchoice );
+
+    } catch (error) {
+        console.log('Error getting Editors choice blogs', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+
+
+
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice }

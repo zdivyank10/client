@@ -30,4 +30,7 @@ router.route("/:id/update").put(updateBlog);
 router.route("/:id/delete").delete(deleteBlog);
 
 router.route("/search").post(searchBlog);
+
+
+
 module.exports = router;

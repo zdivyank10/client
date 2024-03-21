@@ -36,6 +36,8 @@ import MypPendingblogs from "./components/blog/myblog/MypPendingblogs";
 import Myprofile from "./components/blog/myblog/Myprofile";
 import About from "./components/aboutus/About";
 import Update from "./components/blog/myblog/Update";
+import AdminEditor from "./components/layouts/AdminEditor";
+import AlreadyChoice from "./components/layouts/AlreadyChoice";
 
 
 
@@ -84,6 +86,8 @@ function App() {
                 <Route path ='approvedblogs' element={<Approvedblogs/>} />
                 <Route path ='notapprovedblogs' element={<NotApprovedblogs/>} />
                 <Route path ='pendingblogs' element={<Pendingblogs/>} />
+                <Route path ='editor' element={<AdminEditor/>} />
+                <Route path ='alreadyeditor' element={<AlreadyChoice/>} />
           </Route>
         </Routes>
       </BrowserRouter>

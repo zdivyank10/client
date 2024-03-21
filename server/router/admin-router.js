@@ -18,4 +18,8 @@ router.route("/blog/:blogId/permission").put(authMiddleware,adminController.upda
 
 router.route("/users/:id/update").put(authMiddleware,validate(updateUserSchema),adminController.updateUser);
 
+
+router.route("/choice").put(authMiddleware,adminController.editorsChoice);
+router.route("/alreadychoice").get(adminController.alreadyeditorsChoice);
+
 module.exports = router;
