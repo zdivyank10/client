@@ -38,6 +38,7 @@ import About from "./components/aboutus/About";
 import Update from "./components/blog/myblog/Update";
 import AdminEditor from "./components/layouts/AdminEditor";
 import AlreadyChoice from "./components/layouts/AlreadyChoice";
+import EditorsChoice from "./components/blog/EditorsChoice";
 
 
 
@@ -57,6 +58,7 @@ function App() {
 
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
+          <Route path="/editorschoice" element={<EditorsChoice />} />
 
           {/* <Route path="/about" element={<About/>} />  */}
           <Route path="/blog" element={<Blog />} />

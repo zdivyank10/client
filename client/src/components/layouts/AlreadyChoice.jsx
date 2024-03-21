@@ -6,6 +6,9 @@ import { Pagination, Dropdown, DropdownButton } from 'react-bootstrap';
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { GiImperialCrown } from "react-icons/gi";
 import { Link } from 'react-router-dom';
+import { IoReturnDownBack } from "react-icons/io5";
+
+
 
 function AlreadyChoice() {
     const { approvedblog, AuthorizationToken, API_BASE_URL, getApprovedBlogs } = useAuth();
@@ -69,7 +72,7 @@ function AlreadyChoice() {
 
     return (
         <>
-            <Link to={`/admin/editor`} className='btn btn-dark'>Already Editor's Choice</Link>
+            <Link to={`/admin/editor`} className='btn btn-dark'><IoReturnDownBack /> BACK</Link>
             <h1 className='text-center'><GiImperialCrown size={80} />List of Editor's Choice Blogs</h1>
             <div className="pagination-container align-items-center justify-content-center">
                 <hr />
