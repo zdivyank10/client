@@ -4,53 +4,58 @@ const blog = require('../models/blog-model'); // Import the Blog model
 const Like = require('../models/like-model'); // Import the Blog model
 
 // Controller function for liking a blog post
-const toggleLike = async (req, res) => {
-  const { blogId } = req.params;
-  const { userId } = req.body;
+const like = async (req, res) => {
+  const {blog,user} = req.body
 
   try {
-    // Check if the user has already liked the blog post
-    const existingLike = await Like.findOne({ blog_id: blogId, user_id: userId });
+    const newLike = await Like.create({
+      blog,
+      user,
+  });
+  console.log('Blog Liked successfully:', newLike);
+  res.status(200).json({ message: 'Blog Liked successfully',newLike });
+  } catch (error) {
+    console.log('Error DOing Like',error);
+  }
+};
+const unlike = async (req, res) => {
+  const { blog, user } = req.body;
 
-    if (existingLike) {
-      // If the like exists, remove it (unlike)
-      await existingLike.remove();
-      res.json({ success: true, message: 'Unliked successfully' });
+  try {
+    const newunLike = await Like.findOneAndDelete({ user: user, blog: blog });
+    if (newunLike) {
+      console.log('Blog Unliked successfully:', newunLike);
+      res.status(200).json({ message: 'Blog Unliked successfully', newunLike });
     } else {
-      // If the like does not exist, create a new one (like)
-      const newLike = new Like({ blog_id: blogId, user_id: userId });
-      await newLike.save();
-      res.json({ success: true, message: 'Liked successfully' });
+      console.log('Blog not found or already unliked');
+      res.status(404).json({ message: 'Blog not found or already unliked' });
     }
   } catch (error) {
-    console.error('Error toggling like status:', error);
-    res.status(500).json({ success: false, error: 'Server error' });
+    console.log('Error doing unlike:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
 
-// // Controller function for disliking a blog post
-// const dislikePost = async (req, res) => {
-//   const { blogid } = req.params; // Extract blog ID from request parameters
+const likeOfblog = async (req, res) => {
+  const { blog } = req.body;
 
-//   try {
-//     // Find the blog post by ID
-//     const blog = await blog.findById(blogid);
+  try {
+    // Find and delete the like based on blogid and userid
+    const totallike = await Like.find({ blog: blog }).countDocuments();
 
-//     // Toggle the like status (set to false to indicate dislike)
-//     blog.liked = false;
+    if (!totallike) {
+      // No likes found for the given blog
+      return res.status(200).json({ totalLikes: 0 });
+    }
 
-//     // Save the updated blog post
-//     await blog.save();
-
-//     res.json({ success: true, liked: blog.liked });
-//   } catch (error) {
-//     console.error('Error toggling like status:', error);
-//     res.status(500).json({ success: false, error: 'Server error' });
-//   }
-// };
+    res.json(totallike);
+  } catch (error) {
+    console.log('Error removing like:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 module.exports = {
-  toggleLike,
-  // dislikePost
+  like,unlike,likeOfblog
 };
