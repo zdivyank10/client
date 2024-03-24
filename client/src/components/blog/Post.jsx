@@ -30,6 +30,7 @@ function Post() {
       try {
         const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
         const data = await response.json();
+        console.log('user liked data:',data);
         const likedPostIds = data.map(like => like.blog);
         setLikedPosts(likedPostIds);
       } catch (error) {
@@ -38,9 +39,28 @@ function Post() {
     };
 
     fetchLikedPosts();
-  }, [user._id, API_BASE_URL]);
+  }, [user._id]);
 
-
+  // useEffect(() => {
+  //   const fetchLikedPosts = async () => {
+  //     try {
+  //       const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
+  //       const data = await response.json();
+  
+  //       if (Array.isArray(data)) {
+  //         const likedPostIds = data.map(like => like.blog);
+  //         setLikedPosts(likedPostIds);
+  //       } else {
+  //         console.error('Data received is not an array:', data);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching liked posts:', error);
+  //     }
+  //   };
+  
+  //   fetchLikedPosts();
+  // }, [user._id]);
+  
 
   const like = async (blogId, liked) => {
     try {

@@ -21,6 +21,10 @@ function FullBlog() {
   const [showModal, setShowModal] = useState(false); // Modal state
   const [commentToDelete, setCommentToDelete] = useState(null); // Comment to delete
   const [totalComments, setTotalComments] = useState({});
+  const [isLikedByUser, setIsLikedByUser] = useState(false);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [totalLikes, setTotalLikes] = useState({});
+
 
   const { blog_id } = useParams();
   const { user, AuthorizationToken, API_BASE_URL } = useAuth();
@@ -46,7 +50,51 @@ function FullBlog() {
   }, [blog_id])
 
 
+  useEffect(() => {
+    const fetchLikedPosts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}api/like/${blog_id}/${user._id}/liked`);
+        if (response.ok) {
+          const likedPosts = await response.json();
+          // console.log(likedPosts.isLiked);
+          setIsLikedByUser(likedPosts.isLiked);
+        } else {
+          console.error('Failed to fetch liked posts');
+        }
+      } catch (error) {
+        console.error('Error fetching liked posts:', error);
+      }
+    };
 
+    if (user) {
+      fetchLikedPosts();
+    }
+  },  [user, blog_id,likedPosts]);
+
+  const like = async (blogId, liked) => {
+    try {
+      await fetch(`${API_BASE_URL}api/like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ blog: blogId, user: user._id, liked }),
+      });
+      // Refresh liked posts after like/dislike
+      const updatedLikedPosts = liked ? [...likedPosts, blogId] : likedPosts.filter(id => id !== blogId);
+      setLikedPosts(updatedLikedPosts);
+      // Update isLikedByUser state
+      setIsLikedByUser(liked);
+      // Update total likes
+      setTotalLikes((prevTotalLikes) => ({
+        ...prevTotalLikes,
+        [blogId]: liked ? prevTotalLikes[blogId] + 1 : prevTotalLikes[blogId] - 1
+      }));
+    } catch (error) {
+      console.log('Error liking post:', error);
+    }
+  };
+  
 
   const fetchComments = async () => {
     try {
@@ -89,6 +137,35 @@ function FullBlog() {
     fetchBlogPost();
     fetchComments();
   }, [blog_id]);
+
+
+  useEffect(() => {
+   
+      const fetchTotalLikes = async () => {
+        try {
+          const response = await fetch(`${API_BASE_URL}api/like/totallike`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ blog: blog_id }),
+          });
+          const responseData = await response.json();
+          setTotalLikes((prevTotalLikes) => ({
+            ...prevTotalLikes,
+            [blog_id]: responseData.totalLikes
+          }));
+          // Check if the user liked the post and add to likedPosts array if liked
+          if (responseData.userLiked) {
+            setLikedPosts(prevLikedPosts => [...prevLikedPosts, blog_id]);
+          }
+        } catch (error) {
+          console.log('Error fetching total likes:', error);
+        }
+      };
+      fetchTotalLikes();
+    
+  }, [totalLikes,likedPosts]);
 
   // Loading state
   if (loading) {
@@ -233,8 +310,9 @@ function FullBlog() {
     setShowModal(false);
   };
 
-  const { author_id, title, cover_img, content, tags, createdAt } = blogPost;
+  const { _id,author_id, title, cover_img, content, tags, createdAt } = blogPost;
   const sanitizedContent = DOMPurify.sanitize(content);
+  const isLiked = likedPosts.includes(_id);
 
   return (
     <>
@@ -268,8 +346,26 @@ function FullBlog() {
             </div>
           </div>
           <div className="actions">
-            <AiFillHeart size={25} className='fullblog_like' />
-            <p className='fullblog_likeinfo'>10 likes</p>
+          {/* {isLikedByUser && isLiked ? ( */}
+          <div className="like_cmt">
+
+             {!isLikedByUser===true  ? (
+               <>
+               {/* <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id,false)} /> */}
+               <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id,true)} />
+               <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
+               </>
+               ) : (
+                 <>
+                 {/* <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id,true)} /> */}
+                 <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id,false)} />
+                 <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
+                </>
+                 )}
+                 {/* <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p> */}
+                 </div>
+            {/* <AiFillHeart size={25} className='fullblog_like' />
+            <p className='fullblog_likeinfo'>10 likes</p> */}
             <p className='blog_cmt'>
               <AiFillMessage size={25} className='ms-3' onClick={() => window.location.href = '#comment'} /><p className='ms-3'>
                 {totalComments.count}
