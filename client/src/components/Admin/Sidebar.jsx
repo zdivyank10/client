@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
      <Link to="/admin">
-       <h2>Admin Panel</h2>
+       <h2 className='admin_panel'>Admin Panel</h2>
       
       </Link>
       <ul>

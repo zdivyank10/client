@@ -132,7 +132,7 @@ function EditorsChoice() {
                       variant="outlined"
                       sx={{
                         minHeight: '200px',
-                        boxShadow: '0px 4px 10px rgba(0, 10, 0, 0.7)',
+                        boxShadow: '0px 4px 10px rgba(0, 10, 9, 1)',
                         width: 300,
                         backgroundColor: '#fff',
                         borderColor: '#59E4A8',
@@ -181,7 +181,7 @@ function EditorsChoice() {
                           {/* {tags.map((tag, index) => (
                           <span key={index} className='m-3'>{tag}</span>
                         ))} */}
-                          <p>
+                          <p className=''>
                             
                             <FaUserAlt className='userpfp' /> {author_id?.username}
                             </p>

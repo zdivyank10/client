@@ -15,8 +15,13 @@
     margin:15px;
     margin-bottom: 20px;
   }
-  a{
+  /* a{
     
+    text-decoration: none;
+  } */
+  .admin_panel
+  {
+    color: var(--font-color);
     text-decoration: none;
   }
   .sidebar ul {
