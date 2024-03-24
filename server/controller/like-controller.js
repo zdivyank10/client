@@ -5,57 +5,53 @@ const Like = require('../models/like-model'); // Import the Blog model
 
 // Controller function for liking a blog post
 const like = async (req, res) => {
-  const {blog,user} = req.body
+  const { user, blog } = req.body;
 
   try {
-    const newLike = await Like.create({
-      blog,
-      user,
-  });
-  console.log('Blog Liked successfully:', newLike);
-  res.status(200).json({ message: 'Blog Liked successfully',newLike });
-  } catch (error) {
-    console.log('Error DOing Like',error);
-  }
-};
-const unlike = async (req, res) => {
-  const { blog, user } = req.body;
-
-  try {
-    const newunLike = await Like.findOneAndDelete({ user: user, blog: blog });
-    if (newunLike) {
-      console.log('Blog Unliked successfully:', newunLike);
-      res.status(200).json({ message: 'Blog Unliked successfully', newunLike });
+    const existingLike = await Like.findOne({ user, blog });
+    if (existingLike) {
+      // User already liked the blog, so unlike it
+      await Like.deleteOne({ _id: existingLike._id });
+      res.json({ success: true, message: 'Blog unliked successfully' });
     } else {
-      console.log('Blog not found or already unliked');
-      res.status(404).json({ message: 'Blog not found or already unliked' });
+      // User hasn't liked the blog, so like it
+      const newLike = new Like({ user, blog });
+      await newLike.save();
+      res.json({ success: true, message: 'Blog liked successfully' });
     }
   } catch (error) {
-    console.log('Error doing unlike:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error('Error doing like', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
+  const user_likedBlogs =async(req,res)=>{
 
-
+  const user = req.params.user;
+  try {
+    // Find all likes where user is the specified userId
+    const likedPosts = await Like.find({ user: user }).select('blog');
+    res.json(likedPosts);
+  } catch (error) {
+    console.error('Error fetching liked posts:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 const likeOfblog = async (req, res) => {
   const { blog } = req.body;
 
   try {
-    // Find and delete the like based on blogid and userid
-    const totallike = await Like.find({ blog: blog }).countDocuments();
+    // Find the total number of likes for the given blog
+    // const totalLikes = await Like.find({ blog: blog }).countDocuments();
+    const totalLikes = await Like.countDocuments({ blog });
 
-    if (!totallike) {
-      // No likes found for the given blog
-      return res.status(200).json({ totalLikes: 0 });
-    }
-
-    res.json(totallike);
+    res.status(200).json({ totalLikes });
   } catch (error) {
-    console.log('Error removing like:', error);
+    console.log('Error fetching total likes:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
+
 module.exports = {
-  like,unlike,likeOfblog
+  like,likeOfblog,user_likedBlogs
 };
