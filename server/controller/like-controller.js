@@ -89,7 +89,39 @@ const user_likedblog = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+const popularBlogs = async (req, res) => {
+  try {
+    // Aggregate likes to count the number of likes for each blog
+    const popularLikes = await Like.aggregate([
+      {
+        $group: {
+          _id: '$blog',
+          totalLikes: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { totalLikes: 1 } // Sort by the total number of likes in ascending order
+      },
+      {
+        $limit: 10 // Limit the result to 10 records
+      }
+    ]);
+
+    // Extract the blog IDs from the aggregated data
+    const blogIds = popularLikes.map(like => like._id);
+
+    // Fetch the blog data using the extracted blog IDs
+    const blogs = await blog.find({ _id: { $in: blogIds } }).populate('author_id', 'username');
+
+    res.json(blogs);
+  } catch (error) {
+    console.error('Error fetching popular blogs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 
 module.exports = {
-  like,likeOfblog,user_likedBlogs,bloglike,user_likedblog
+  like,likeOfblog,user_likedBlogs,bloglike,user_likedblog,popularBlogs
 };

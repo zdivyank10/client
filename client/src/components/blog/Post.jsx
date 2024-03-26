@@ -25,6 +25,43 @@ function Post() {
     }
   };
 
+  // useEffect(() => {
+  //   const fetchLikedPosts = async () => {
+  //     try {
+  //       const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
+  //       const data = await response.json();
+  //       console.log('user liked data:',data);
+  //       const likedPostIds = data.map(like => like.blog);
+  //       console.log(likedPostIds);
+  //       setLikedPosts(likedPostIds);
+  //     } catch (error) {
+  //       console.error('Error fetching liked posts:', error);
+  //     }
+  //   };
+
+  //   fetchLikedPosts();
+  // }, [user._id]);
+
+  useEffect(() => {
+    const fetchLikedPosts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
+        const data = await response.json();
+        console.log('user liked data:', data);
+  
+        // Ensure data is an array
+        const dataArray = Array.isArray(data) ? data : [data];
+  
+        const likedPostIds = dataArray.map(like => like.blog);
+        console.log(likedPostIds);
+        setLikedPosts(likedPostIds);
+      } catch (error) {
+        console.error('Error fetching liked posts:', error);
+      }
+    };
+  
+    fetchLikedPosts();
+  }, [user._id]);
   
   
 
@@ -44,26 +81,6 @@ function Post() {
       console.log('Error liking post:', error);
     }
   };
-
-  
-  useEffect(() => {
-    const fetchLikedPosts = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
-        const data = await response.json();
-        console.log('user liked data:',data);
-        const likedPostIds = data.map(like => like.blog);
-        console.log(likedPostIds);
-        setLikedPosts(likedPostIds);
-      } catch (error) {
-        console.error('Error fetching liked posts:', error);
-      }
-    };
-
-    fetchLikedPosts();
-  }, [user._id]);
-
- 
 
   useEffect(() => {
     approvedblog.forEach((post) => {

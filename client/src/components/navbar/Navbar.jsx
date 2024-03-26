@@ -46,6 +46,7 @@ const Navbar = () => {
               <li className="nav_li"><NavLink to="/about" onClick={closeNav}>About</NavLink></li>
               <li className="nav_li"><NavLink to="/contact" onClick={closeNav}>Contact</NavLink></li>
               <li className="nav_li"><NavLink to="/editorschoice" onClick={closeNav}>Editor's Choice</NavLink></li>
+              <li className="nav_li"><NavLink to="/popular" onClick={closeNav}>Top Blogs</NavLink></li>
 
               {user.isAdmin ? <li className="nav_li">
                 <NavLink to="/admin" onClick={closeNav}>Admin Dashboard</NavLink>
