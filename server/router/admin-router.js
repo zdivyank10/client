@@ -22,4 +22,7 @@ router.route("/users/:id/update").put(authMiddleware,validate(updateUserSchema),
 router.route("/choice").put(authMiddleware,adminController.editorsChoice);
 router.route("/alreadychoice").get(adminController.alreadyeditorsChoice);
 
+router.route("/monthlyuser").get(adminController.monthlyUser);
+router.route("/blogstat").get(adminController.blogstat);
+
 module.exports = router;

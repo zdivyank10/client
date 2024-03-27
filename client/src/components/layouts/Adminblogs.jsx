@@ -16,7 +16,7 @@ function Adminblogs() {
     //   getBlogs();
     // }
     getBlogs();
-  }, [blog]); // Refresh whenever `blog` data changes
+  }, []); // Refresh whenever `blog` data changes
   
   
   const handleCloseModal = () => {

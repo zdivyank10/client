@@ -163,8 +163,62 @@ const alreadyeditorsChoice = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+const monthlyUser = async (req, res) => {
+    try {
+        const results = await user.aggregate([
+            {
+                $project: {
+                    month: { $month: '$createdAt' },
+                    year: { $year: '$createdAt' }
+                }
+            },
+            {
+                $group: {
+                    _id: { month: '$month', year: '$year' },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { '_id.year': 1, '_id.month': 1 }
+            }
+        ]);
 
+        // Send the results back to the client
+        res.status(200).json(results);
+    } catch (error) {
+        console.log('Error getting monthly users:', error);
+        // Send an error response to the client
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
 
+const blogstat = async (req,res)=>{
+    try {
+        // Count approved blogs
+        const approvedCount = await blog.countDocuments({ permission: 'true' });
+    
+        // Count pending blogs
+        const pendingCount = await blog.countDocuments({ permission: 'pending' });
+    
+        // Count declined blogs
+        const declinedCount = await blog.countDocuments({ permission: 'false' });
+    
+        // Total number of blogs
+        const totalCount = approvedCount + pendingCount + declinedCount;
+    
+        // Send the blog statistics as JSON response
+        res.status(200).json({
+          approved: approvedCount,
+          pending: pendingCount,
+          declined: declinedCount,
+          total: totalCount
+        });
+      } catch (error) {
+        console.error('Error fetching blog statistics:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    
+    
+}
 
-
-module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice }
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice,monthlyUser,blogstat }
