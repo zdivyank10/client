@@ -24,5 +24,9 @@ router.route("/alreadychoice").get(adminController.alreadyeditorsChoice);
 
 router.route("/monthlyuser").get(adminController.monthlyUser);
 router.route("/blogstat").get(adminController.blogstat);
+router.route("/totallike").get(adminController.totalLike);
+router.route("/totalcomment").get(adminController.totalComment);
+router.route("/totalcontact").get(adminController.totalContact);
+router.route("/totaladmin").get(adminController.totalAdmin);
 
 module.exports = router;

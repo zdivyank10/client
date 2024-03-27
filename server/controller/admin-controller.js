@@ -3,6 +3,9 @@ const User = require("../models/user-model")
 const blog = require("../models/blog-model")
 const declined = require("../models/declined-model");
 const user = require("../models/user-model");
+const like= require("../models/like-model");
+const comment = require("../models/comment-model");
+const contact = require("../models/contact-model");
 // ----------------------------------
 // ----------------------------------
 // ***********all Users ***********
@@ -220,5 +223,55 @@ const blogstat = async (req,res)=>{
     
     
 }
+const totalLike = async (req,res)=>{
+    try {
+        // Count approved blogs
+        const totLike = await like.countDocuments({});
+    
+       
+        res.status(200).json({
+            TotalLike:totLike
+        });
+      } catch (error) {
+        console.error('Error fetching Total Like:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    
+    
+}
+const totalComment = async (req,res)=>{
+    try {
+        // Count approved blogs
+        const totcmt = await comment.countDocuments({});
+    
+       
+        res.status(200).json({
+        totalCmt:totcmt
+        });
+      } catch (error) {
+        console.error('Error fetching Total Like:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }  
+}
+const totalContact = async (req,res)=>{
+    try {
+        // Count approved blogs
+        const totcontact = await contact.countDocuments({});
+        res.status(200).json(totcontact);
+      } catch (error) {
+        console.error('Error fetching Total Like:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }  
+}
 
-module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice,monthlyUser,blogstat }
+const totalAdmin = async (req,res)=>{
+    try {
+        // Count approved blogs
+        const totadmin = await user.find({isAdmin:"true"}).countDocuments({});
+        res.status(200).json(totadmin);
+      } catch (error) {
+        console.error('Error fetching Total admin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }  
+}
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice,monthlyUser,blogstat,totalLike,totalComment,totalContact ,totalAdmin}
