@@ -9,11 +9,11 @@ function AdminDashboard() {
   const { API_BASE_URL, user } = useAuth();
   const [chartInstance, setChartInstance] = useState(null);
   const [piechartInstance, setPieChartInstance] = useState(null);
-  const [countblogs,setCountblogs]=useState({});
-  const [countlike,setCountlike]=useState({});
-  const [countcmt,setCountcmt]=useState({});
-  const [countcontact,setCountcontact]=useState();
-  const [countAdmin,setcountAdmin]=useState();
+  const [countblogs, setCountblogs] = useState({});
+  const [countlike, setCountlike] = useState({});
+  const [countcmt, setCountcmt] = useState({});
+  const [countcontact, setCountcontact] = useState();
+  const [countAdmin, setcountAdmin] = useState();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -52,7 +52,7 @@ function AdminDashboard() {
         const blogData = await response.json();
         console.log(blogData);
         setCountblogs(blogData);
-        
+
 
         const labels = ['Approved', 'Pending', 'Declined'];
         const backgroundColors = ['#36a2eb', '#ffce56', '#ff6384'];
@@ -82,7 +82,7 @@ function AdminDashboard() {
         const blogData = await response.json();
         console.log(blogData);
         setCountlike(blogData);
-        
+
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
@@ -96,12 +96,12 @@ function AdminDashboard() {
         const blogData = await response.json();
         console.log(blogData);
         setCountcmt(blogData);
-        
+
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
     };
-   
+
     const totalContact = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}api/admin/totalcontact`);
@@ -111,7 +111,7 @@ function AdminDashboard() {
         const blogData = await response.json();
         console.log(blogData);
         setCountcontact(blogData);
-        
+
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
@@ -125,7 +125,7 @@ function AdminDashboard() {
         const blogData = await response.json();
         console.log(blogData);
         setcountAdmin(blogData);
-        
+
       } catch (error) {
         console.error('Error fetching blog data:', error);
       }
@@ -247,19 +247,19 @@ function AdminDashboard() {
           <canvas id="userRegistrationChart" width="800" height="500"></canvas>
         </div>
         <div className="adminblog_info">
-        <div className="top_dashboard">
-          <h3>Total User: </h3>
-          <p>10</p>
+          <div className="top_dashboard">
+            <h3>Total User: </h3>
+            <p>10</p>
+          </div>
+          <div className="top_dashboard">
+            <h3>Total Admin : </h3>
+            <p>{countAdmin}</p>
+          </div>
+          <div className="top_dashboard">
+            <h3>Total Contect Us : </h3>
+            <p>{countcontact}</p>
+          </div>
         </div>
-        <div className="top_dashboard">
-          <h3>Total Admin : </h3>
-          <p>{countAdmin}</p>
-        </div>
-        <div className="top_dashboard">
-          <h3>Total Contect Us : </h3>
-          <p>{countcontact}</p>
-        </div>
-</div>
 
       </div>
 
@@ -273,6 +273,23 @@ function AdminDashboard() {
           <canvas id="blogPieChart" width="500" height="500"></canvas>
         </div>
 
+        <div className="adminblog_info">
+
+          <div className="top_dashboard" style={{backgroundColor:'#36a2eb',color:'#fff'}}>
+            <h3>Total Approved blogs:</h3>
+            <p>{countblogs.approved}</p>
+          </div>
+
+          <div className="top_dashboard" style={{backgroundColor:'#ffce56',color:'#fff'}}>
+            <h3>Total Declined Blogs:</h3>
+            <p>{countblogs.declined}</p>
+          </div>
+
+          <div className="top_dashboard" style={{backgroundColor:'#ff6384',color:'#fff'}}>
+            <h3>Total Pending blogs:</h3>
+            <p>{countblogs.pending}</p>
+          </div>
+        </div>
         <div className="adminblog_info">
 
           <div className="top_dashboard">
@@ -290,23 +307,7 @@ function AdminDashboard() {
             <p>{countcmt.totalCmt}</p>
           </div>
         </div>
-        <div className="adminblog_info">
 
-          <div className="top_dashboard">
-            <h3>Total Approved blogs:</h3>
-            <p>{countblogs.approved}</p>
-          </div>
-
-          <div className="top_dashboard">
-            <h3>Total Declined Blogs:</h3>
-            <p>{countblogs.declined}</p>
-          </div>
-
-          <div className="top_dashboard">
-            <h3>Total Pending blogs:</h3>
-            <p>{countblogs.pending}</p>
-          </div>
-        </div>
 
 
 

@@ -72,7 +72,27 @@ function FullBlog() {
   },  [user, blog_id,likedPosts]);
 
   const like = async (blogId, liked) => {
+
+    if (!user) {
+      // If user is not logged in, prompt them to log in or redirect to login page
+      toast.error('Login First to do Like', {
+        style: {
+          background: '#212121',
+          color: 'white',
+        },
+        position: 'top-center',
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate('/login');
+      return;
+    }
     try {
+      
       await fetch(`${API_BASE_URL}api/like`, {
         method: "POST",
         headers: {

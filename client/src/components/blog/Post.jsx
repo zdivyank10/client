@@ -4,13 +4,15 @@ import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Post() {
   const { user, approvedblog, API_BASE_URL } = useAuth();
   const [likedPosts, setLikedPosts] = useState([]);
   const [totalComments, setTotalComments] = useState({});
   const [totalLikes, setTotalLikes] = useState({});
+  const navigate = useNavigate();
 
   const totalcmts = async (blogId) => {
     try {
@@ -66,6 +68,24 @@ function Post() {
   
 
   const like = async (blogId, liked) => {
+    if (!user) {
+      // If user is not logged in, prompt them to log in or redirect to login page
+      toast.error('Login First to do Like', {
+        style: {
+          background: '#212121',
+          color: 'white',
+        },
+        position: 'top-center',
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate('/login');
+      return;
+    }
     try {
       await fetch(`${API_BASE_URL}api/like`, {
         method: "POST",

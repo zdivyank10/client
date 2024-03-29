@@ -69,7 +69,7 @@ function Update() {
             const formData = new FormData();
             formData.append('file', file);
 
-            const uploadResponse = await fetch(`${API_BASE_URL}/api/blog/upload`, {
+            const uploadResponse = await fetch(`${API_BASE_URL}api/blog/upload`, {
                 method: 'POST',
                 body: formData,
             });
