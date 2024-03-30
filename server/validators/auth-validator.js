@@ -68,6 +68,10 @@ const CommentSchema = z.object({
     createdAt: z.string().optional(), // Assuming createdAt is a string in ISO format
 });
 
+const contactSchema = z.object({
+    username: z.string().min(3, 'Username must be at least 3 characters long').max(50, 'Username must be less than 50 characters'),
+    email: z.string().email('Invalid email format'),
+    message: z.string().min(3, 'Message must be at least 3 characters long').max(500, 'Message must be less than 500 characters'),
+  });
 
-
-module.exports = { signupSchema, loginSchema, passwordschema, updateUserSchema,CommentSchema };
+module.exports = { signupSchema, loginSchema, passwordschema, updateUserSchema,CommentSchema ,contactSchema};

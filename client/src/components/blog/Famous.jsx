@@ -45,8 +45,8 @@ function Famous() {
                   src={`${API_BASE_URL}uploads/${blog.cover_img}`} />
               </div>
               <Carousel.Caption className=' d-block'>
-                <h5 className='text-light'>{blog.title}</h5>
-                <p className="pop_content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} />
+                <h1 className='text-light'>{blog.title}</h1>
+                {/* <p className="pop_content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} /> */}
                 {blog.tags.map((tag, tagIndex) => (
                         <span key={tagIndex} className="tag text-dark">
                           {tag}

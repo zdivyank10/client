@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 function NotApprovedblogs() {
   const { AuthorizationToken,API_BASE_URL,notapprovedblog,getNotApprovedBlogs } = useAuth();
@@ -50,6 +51,20 @@ function NotApprovedblogs() {
 
   };
 
+  
+  { if (notapprovedblog.length === 0) {
+    return (
+        <>
+        <div className="text-center">
+
+        <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='mt-3 m-3' />
+
+        <h3 className='m-3'>- No Declined blogs Left-</h3>
+        <Link to={`/admin`} className='btn btn-dark'> Go back</Link> 
+        </div>
+        </>
+    )
+}}
   return (
     <>
       <div className="row blogrow">

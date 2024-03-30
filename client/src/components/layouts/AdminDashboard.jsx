@@ -280,12 +280,12 @@ function AdminDashboard() {
             <p>{countblogs.approved}</p>
           </div>
 
-          <div className="top_dashboard" style={{backgroundColor:'#ffce56',color:'#fff'}}>
+          <div className="top_dashboard" style={{backgroundColor:'#ff6384',color:'#fff'}}>
             <h3>Total Declined Blogs:</h3>
             <p>{countblogs.declined}</p>
           </div>
 
-          <div className="top_dashboard" style={{backgroundColor:'#ff6384',color:'#fff'}}>
+          <div className="top_dashboard" style={{backgroundColor:'#ffce56',color:'#fff'}}>
             <h3>Total Pending blogs:</h3>
             <p>{countblogs.pending}</p>
           </div>
