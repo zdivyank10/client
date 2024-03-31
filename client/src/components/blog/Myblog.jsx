@@ -72,6 +72,21 @@ function Myblog() {
         setShowModal(!showModal);
     };
 
+    if (blogs.length === 0) {
+        return (
+            <>
+             <MiniNavbar />
+            <div className="text-center">
+
+            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt=""  className='error_img mt-3 m-3' />
+
+            <h3 className='m-3'>- No blogs found-</h3>
+            <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 
+            </div>
+            </>
+        )
+    }
+
     return (
         <div className="myblogcontainer">
             <MiniNavbar />

@@ -38,7 +38,7 @@ function MyApprovedblogs() {
             <>
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" className= 'error_img m-3' />
             </div>
             </>
         );
@@ -50,9 +50,9 @@ function MyApprovedblogs() {
              <MiniNavbar />
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='mt-3 m-3' />
+            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt=""  className='error_img mt-3 m-3' />
 
-            <h3 className='m-3'>- No Pending blogs found-</h3>
+            <h3 className='m-3'>- No Approved blogs found-</h3>
             <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 
             </div>
             </>

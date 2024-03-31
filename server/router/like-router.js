@@ -10,5 +10,6 @@ router.post('/totallike', likeController.likeOfblog);
 router.get('/:user/liked', likeController.user_likedBlogs);
 router.get('/:blog_id/:user/liked', likeController.user_likedblog);
 router.get('/popular', likeController.popularBlogs);
-
+// .
 module.exports = router;
+ 

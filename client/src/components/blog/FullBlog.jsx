@@ -337,13 +337,15 @@ function FullBlog() {
   return (
     <>
       <div className="fullblog_container">
-        <div className="back text-center">
-          <button className='btn btn-dark' onClick={() => navigate(-1)}>
-            <IoReturnDownBackOutline size={25} /> Back
-          </button>
-        </div>
+        {/* <div className="back text-center">
+        
+        </div> */}
         <div className="fullblogcontainer">
           <div className="authorinfo">
+          <button className='btn btn-dark back_btn' onClick={() => navigate(-1)}>
+            <IoReturnDownBackOutline size={25} /> Back
+          </button>
+            <hr />
             <FaUserAlt className='userpfp' />
             <p className='authorname'>{author_id?.username}</p>
             <p className='authorname'>{createdAt}</p>
