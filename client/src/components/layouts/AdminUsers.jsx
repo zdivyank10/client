@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../store/auth';
 import { Button, Dropdown, DropdownButton, Pagination } from 'react-bootstrap'; // Import Pagination component
 import { RiAdminLine } from "react-icons/ri";
-
 import { Link } from 'react-router-dom';
 import DeleteConfirmationModal from '../Admin/DeleteConfirmationModal';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
@@ -119,7 +118,10 @@ function AdminUsers() {
         <tbody>
           {currentItems.map((curEle, index) => (
             <tr key={index}>
-              <td>{curEle.username}</td>
+                <td>
+        {curEle.isAdmin && <GiImperialCrown className="admin-logo" />} {/* Display admin logo if user is admin */}
+        {curEle.username} {/* Display username */}
+      </td>
               <td>{curEle.email}</td>
               <td>{curEle.phone}</td>
               <td><Link to={`/admin/users/${curEle._id}/edit`} className='btn btn-warning'>Update</Link></td>
@@ -135,22 +137,19 @@ function AdminUsers() {
                 </Button>
               </td>
               <td>
-                {user.isAdmin === curEle.isAdmin ? (
+                {(user.isAdmin && user._id !== curEle._id) ? (
                   <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
-                    <Dropdown.Item ><RiAdminLine size={20} /> Cant Remove urself</Dropdown.Item>
+                    {curEle.isAdmin ? (
+                      <Dropdown.Item onClick={() => removeAdmin(curEle._id)}><RiAdminLine size={20} /> Remove Admin</Dropdown.Item>
+                    ) : (
+                      <Dropdown.Item onClick={() => makeAdmin(curEle._id)}><RiAdminLine size={20} /> Make Admin</Dropdown.Item>
+                    )}
                   </DropdownButton>
                 ) : (
-                  curEle.isAdmin === true ? (
-                    <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
-                      <Dropdown.Item onClick={() => removeAdmin(curEle._id)}><RiAdminLine size={20} /> Remove Admin</Dropdown.Item>
-                    </DropdownButton>
-                  ) : (
-                    <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
-                      <Dropdown.Item onClick={() => makeAdmin(curEle._id)}><RiAdminLine size={20} /> Make Admin</Dropdown.Item>
-                    </DropdownButton>
-                  )
+                  <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' disabled>
+                    <Dropdown.Item ><RiAdminLine size={20} /> Can't Remove Yourself</Dropdown.Item>
+                  </DropdownButton>
                 )}
-
               </td>
             </tr>
           ))}
