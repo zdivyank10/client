@@ -8,7 +8,6 @@ import Table from 'react-bootstrap/Table';
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
 
-
 function Adminblogs() {
   const { blog, AuthorizationToken, API_BASE_URL, getBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
@@ -18,13 +17,13 @@ function Adminblogs() {
   const [showModal1, setShowModal1] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-
   useEffect(() => {
     getBlogs();
   }, []);
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowModal1(false);
     setSelectedBlogId(null);
     setAction(null);
   };
@@ -88,33 +87,17 @@ function Adminblogs() {
       }
     }
   };
-  const handleDelete = async() => {
+
+  const handleDelete = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}api/blog/${deleteId}/delete`, {
-          method: 'DELETE',
+        method: 'DELETE',
       });
       if (response.ok) {
-          toast.success('Blog Deleted successfully', {
-              style: {
-                  background: '#212121',
-                  color: 'white',
-              },
-              position: 'top-center',
-              autoClose: 10000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-          });
-          // Handle success, e.g., remove the blog post from the list
-          setBlogs(blogs.filter(blog => blog._id !== deleteId));
-          getBlogs();
-      } else {
-        toast.error('Error Deleting Blog  ', {
+        toast.success('Blog Deleted successfully', {
           style: {
-              background: '#212121',
-              color: 'white',
+            background: '#212121',
+            color: 'white',
           },
           position: 'top-center',
           autoClose: 10000,
@@ -123,21 +106,38 @@ function Adminblogs() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-      });
-          
+        });
+        // Handle success, e.g., remove the blog post from the list
+        setBlogs(blogs.filter(blog => blog._id !== deleteId));
+        getBlogs();
+      } else {
+        toast.error('Error Deleting Blog  ', {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
       }
       setShowModal1(false);
-  } catch (error) {
+    } catch (error) {
       // Handle error, e.g., display an error message
       console.error('Error deleting blog:', error);
-  }
+    }
   };
 
   const toggleModal1 = (id) => {
     setDeleteId(id);
     setShowModal1(!showModal1);
-};
-  
+  };
+
 
   return (
     <>
@@ -148,8 +148,6 @@ function Adminblogs() {
             <th>Cover_Image</th>
             <th>Title</th>
             <th>Author</th>
-            {/* <th>Created At</th> */}
-            {/* <th>Tags</th> */}
             <th>Actions</th>
             <th>Approval Status</th>
             <th>Delete</th>
@@ -157,7 +155,7 @@ function Adminblogs() {
         </thead>
         <tbody>
           {blog && blog.map((currEle, index) => {
-            const { _id, blogId, title, author_id, content, tags, createdAt, permission, cover_img } = currEle;
+            const { _id, title, author_id, permission, cover_img } = currEle;
             let bgClass = ''; // Default background color
             let approvalStatus = 'Pending'; // Default approval status
 
@@ -182,24 +180,17 @@ function Adminblogs() {
             return (
               <tr key={index}>
                 <td>
-                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={100}  alt="" />
+                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
                 </td>
                 <td>{title}</td>
                 <td>{author_id?.username}</td>
-            
-                {/* <td>{createdAt}</td> */}
-                {/* <td className='p-3'>
-                  {tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="tag  p-2"> {tag} </span>
-                  ))}
-                </td> */}
                 <td>
-                  <Button variant="outline-dark me-2" onClick={() => handleApprove(blogId)}>Approve</Button>
-                  <Button variant="outline-dark me-2" onClick={() => handleDecline(blogId)}>Decline</Button>
-                  <Button variant="outline-dark" onClick={() => handlePending(blogId)}>Pending</Button>
+                  <Button variant="outline-dark me-2" onClick={() => handleApprove(_id)}>Approve</Button>
+                  <Button variant="outline-dark me-2" onClick={() => handleDecline(_id)}>Decline</Button>
+                  <Button variant="outline-dark" onClick={() => handlePending(_id)}>Pending</Button>
                 </td>
-                <td><span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px',padding:'5px',margin:'5px' }}>{approvalStatus}</span></td>
-                <td><MdDelete className='text-danger text-center m-3' onClick={() => toggleModal1(_id)}/></td>
+                <td><span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span></td>
+                <td><MdDelete className='text-danger text-center m-3' onClick={() => toggleModal1(_id)} /></td>
               </tr>
             );
           })}
