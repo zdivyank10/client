@@ -274,4 +274,26 @@ const totalAdmin = async (req,res)=>{
         res.status(500).json({ message: 'Internal server error' });
       }  
 }
-module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice,monthlyUser,blogstat,totalLike,totalComment,totalContact ,totalAdmin}
+const makeAdmin = async (req,res)=>{
+    try {
+        const {userid } =  req.params;
+        // Count approved blogs
+        const admin = await user.findByIdAndUpdate(userid, { isAdmin :true }, { new: true });
+        res.status(200).json(admin);
+      } catch (error) {
+        console.error('Error fetching Total admin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }  
+}
+const removeAdmin = async (req,res)=>{
+    try {
+        const {userid } =  req.params;
+        // Count approved blogs
+        const admin = await user.findByIdAndUpdate(userid, { isAdmin :false }, { new: true });
+        res.status(200).json(admin);
+      } catch (error) {
+        console.error('Error fetching Total admin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }  
+}
+module.exports = { getAllUsers, getAllContacts, deleteUserById, getUserById, updateBlogPermission,updateUser,editorsChoice,alreadyeditorsChoice,monthlyUser,blogstat,totalLike,totalComment,totalContact ,totalAdmin,makeAdmin,removeAdmin}

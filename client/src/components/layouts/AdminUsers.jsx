@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../store/auth';
-import { Button, Pagination } from 'react-bootstrap'; // Import Pagination component
+import { Button, Dropdown, DropdownButton, Pagination } from 'react-bootstrap'; // Import Pagination component
+import { RiAdminLine } from "react-icons/ri";
+
 import { Link } from 'react-router-dom';
 import DeleteConfirmationModal from '../Admin/DeleteConfirmationModal';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
+import { GiImperialCrown } from 'react-icons/gi';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-  const { AuthorizationToken, API_BASE_URL } = useAuth();
+  const { AuthorizationToken, API_BASE_URL, user } = useAuth();
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
 
@@ -52,10 +56,48 @@ function AdminUsers() {
         },
       });
       const data = await response.json();
-      console.log(`users ${data}`);
+      // console.log(`users ${data}`);
       setUsers(data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const removeAdmin = async (userId) => {
+    console.log("Removing admin role for user with ID:", userId);
+    try {
+      const response = await fetch(`${API_BASE_URL}api/admin/remove/${userId}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isAdmin: false })
+      });
+      const removedAdmin = await response.json();
+      console.log('Removed admin role:', removedAdmin);
+      // After removing admin role, you might want to refresh the list of users
+      getAllUsersData();
+    } catch (error) {
+      console.log('Error removing admin role:', error);
+    }
+  };
+
+  const makeAdmin = async (userId) => {
+    console.log("Making user with ID:", userId, "an admin...");
+    try {
+      const response = await fetch(`${API_BASE_URL}api/admin/${userId}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ isAdmin: true })
+      });
+      const newAdmin = await response.json();
+      console.log('Made user admin:', newAdmin);
+      // After making the user an admin, you might want to refresh the list of users
+      getAllUsersData();
+    } catch (error) {
+      console.log('Error making user admin:', error);
     }
   };
 
@@ -71,10 +113,11 @@ function AdminUsers() {
             <th scope="col">Contact No</th>
             <th scope="col">Update</th>
             <th scope="col">Delete</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((curEle, index) => ( // Use 'currentItems' instead of 'users'
+          {currentItems.map((curEle, index) => (
             <tr key={index}>
               <td>{curEle.username}</td>
               <td>{curEle.email}</td>
@@ -90,6 +133,24 @@ function AdminUsers() {
                 >
                   Delete
                 </Button>
+              </td>
+              <td>
+                {user.isAdmin === curEle.isAdmin ? (
+                  <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
+                    <Dropdown.Item ><RiAdminLine size={20} /> Cant Remove urself</Dropdown.Item>
+                  </DropdownButton>
+                ) : (
+                  curEle.isAdmin === true ? (
+                    <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
+                      <Dropdown.Item onClick={() => removeAdmin(curEle._id)}><RiAdminLine size={20} /> Remove Admin</Dropdown.Item>
+                    </DropdownButton>
+                  ) : (
+                    <DropdownButton id={`dropdown-button-${index}`} title={<HiOutlineDotsVertical className='' />} className='text-dark' >
+                      <Dropdown.Item onClick={() => makeAdmin(curEle._id)}><RiAdminLine size={20} /> Make Admin</Dropdown.Item>
+                    </DropdownButton>
+                  )
+                )}
+
               </td>
             </tr>
           ))}

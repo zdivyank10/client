@@ -29,4 +29,6 @@ router.route("/totalcomment").get(adminController.totalComment);
 router.route("/totalcontact").get(adminController.totalContact);
 router.route("/totaladmin").get(adminController.totalAdmin);
 
+router.route("/:userid").put(adminController.makeAdmin);
+router.route("/remove/:userid").put(adminController.removeAdmin);
 module.exports = router;
