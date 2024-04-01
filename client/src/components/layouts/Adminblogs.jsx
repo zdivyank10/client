@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
+import { Pagination } from 'react-bootstrap'; 
+import { Link } from 'react-router-dom';
 
 function Adminblogs() {
   const { blog, AuthorizationToken, API_BASE_URL, getBlogs } = useAuth();
@@ -16,6 +18,8 @@ function Adminblogs() {
   const [blogs, setBlogs] = useState([]);
   const [showModal1, setShowModal1] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [activePage, setActivePage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
 
   useEffect(() => {
     getBlogs();
@@ -138,9 +142,17 @@ function Adminblogs() {
     setShowModal1(!showModal1);
   };
 
+  const indexOfLastItem = activePage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = blog.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+
 
   return (
-    <>
+    <div className="container">
       <h1 className="text-center">All Blogs</h1>
       <Table striped bordered hover>
         <thead>
@@ -154,7 +166,7 @@ function Adminblogs() {
           </tr>
         </thead>
         <tbody>
-          {blog && blog.map((currEle, index) => {
+          {currentItems.map((currEle, index) => {
             const { _id, title, author_id, permission, cover_img } = currEle;
             let bgClass = ''; // Default background color
             let approvalStatus = 'Pending'; // Default approval status
@@ -180,22 +192,54 @@ function Adminblogs() {
             return (
               <tr key={index}>
                 <td>
-                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
+                  <Link to={`/blog/${_id}`} className="postimg">
+                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
+                  </Link>
                 </td>
-                <td>{title}</td>
+                <td>
+                  <Link to={`/blog/${_id}`} className="post-title text-dark">
+                    {title}
+                  </Link>
+                </td>
                 <td>{author_id?.username}</td>
                 <td>
                   <Button variant="outline-dark me-2" onClick={() => handleApprove(_id)}>Approve</Button>
                   <Button variant="outline-dark me-2" onClick={() => handleDecline(_id)}>Decline</Button>
                   <Button variant="outline-dark" onClick={() => handlePending(_id)}>Pending</Button>
                 </td>
-                <td><span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span></td>
+                <td>
+                  <span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span>
+                </td>
                 <td><MdDelete className='text-danger text-center m-3' onClick={() => toggleModal1(_id)} /></td>
               </tr>
             );
           })}
         </tbody>
       </Table>
+
+      <Pagination>
+        {blog.length > itemsPerPage && (
+          <Pagination.Prev
+            onClick={() => handlePageChange(activePage - 1)}
+            disabled={activePage === 1}
+          />
+        )}
+        {Array.from({ length: Math.ceil(blog.length / itemsPerPage) }).map((_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === activePage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+        {blog.length > itemsPerPage && (
+          <Pagination.Next
+            onClick={() => handlePageChange(activePage + 1)}
+            disabled={activePage === Math.ceil(blog.length / itemsPerPage)}
+          />
+        )}
+      </Pagination>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -221,7 +265,7 @@ function Adminblogs() {
           <Button variant="primary" onClick={handleDelete}>Confirm</Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 

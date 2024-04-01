@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pagination } from 'react-bootstrap'; // Import Pagination component
+import { Pagination } from 'react-bootstrap'; 
 import './admincontact.css';
 import { useAuth } from '../../store/auth';
 import { FaUserAlt } from 'react-icons/fa';
