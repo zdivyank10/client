@@ -1,5 +1,4 @@
 import React,{ useState} from "react";
-// import {Link} from "react-router-dom";
 import "./contact.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -10,7 +9,7 @@ function Contact() {
 //   const navigate = useNavigate();
   
   const [userData,setuserData] = useState(true);
-  const {user} = useAuth();
+  const {user,API_BASE_URL} = useAuth();
  
   const defaultContactForm = {
     username: "",
@@ -47,25 +46,23 @@ function Contact() {
     })
     }
 
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(contact);  
-
+      console.log(contact);
+    
       try {
-        const response = await fetch('http://localhost:8000/api/form/contact',{
-            method:'POST',
-            headers : {
-                "Content-Type" : "application/json",
-            },
-            body: JSON.stringify(contact),
-            
+        const response = await fetch(`${API_BASE_URL}api/form/contact`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(contact),
         });
-        console.log("response: ", response);
-
-        if(response.ok) {
-            setData(defaultContactForm);
+    
+        if (response.ok) {
+          setData(defaultContactForm);
           const userData = await response.json();
-          toast.success('Message Sent successfully!',{
+          toast.success('Message Sent successfully!', {
             style: {
               background: '#212121',
               color: 'white',
@@ -78,20 +75,47 @@ function Contact() {
             draggable: true,
             progress: undefined,
           });
-     
-          console.log("contact msg",userData);
-        }else {
-            // Handle API error here
-            console.error("API Error:", response.status, response.statusText);
-          }
+    
+          console.log("contact msg", userData);
+        } else {
+          const errorData = await response.json();
+          toast.error(errorData.extraDetails || errorData.message, {
+            style: {
+              background: '#212121',
+              color: 'white',
+            },
+            position: 'top-center',
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          console.log('contactus failed');
+        }
+      } catch (error) {
+        console.error('Error from submitting data', error);
+        toast.error('Failed to send message. Please try again later.', {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }}
+    
         
-      }
       
       
-      catch (error) {
-        console.error('Error from submitting data',error)
-      }
-    }
+    
+    
     return (
     <>
       

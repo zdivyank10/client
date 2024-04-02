@@ -12,7 +12,7 @@ import { IoReturnDownBackOutline } from "react-icons/io5";
 
 function Addpost() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user,API_BASE_URL } = useAuth();
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState(null);
 
@@ -45,28 +45,46 @@ function Addpost() {
       ...blog,
       content: content,
     });
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!file || !blog.title || !blog.content || tags.length === 0) {
+      toast.error('Please fill in all required fields', {
+        style: {
+          background: '#212121',
+          color: 'white',
+        },
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
     try {
+
       const formData = new FormData();
       formData.append('file', file);
 
-      const uploadResponse = await fetch('http://localhost:8000/api/blog/upload', {
+      const uploadResponse = await fetch(`${API_BASE_URL}api/blog/upload`, {
         method: 'POST',
         body: formData,
       });
       const uploadData = await uploadResponse.json();
       if (uploadResponse.ok) {
         const fileURL = uploadData.fileURL;
-        console.log('file URL',uploadResponse.url);
-        console.log('file URL',uploadData);
+        console.log('file URL', uploadResponse.url);
+        console.log('file URL', uploadData);
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');
-        const response = await fetch('http://localhost:8000/api/blog/addblog', {
+        const response = await fetch(`${API_BASE_URL}api/blog/addblog`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -130,10 +148,10 @@ function Addpost() {
 
   return (
     <>
-        <div className="back text-center m-5">
+      <div className="back text-center m-5">
 
-<Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
-</div>
+        <Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+      </div>
       <div className="addpostcontainer justify-content-center">
         {/* <div className="addpostleft">
           <div className="leftpreview">
@@ -154,11 +172,11 @@ function Addpost() {
             </div>
             <div className="formcontrol">
               <label htmlFor="file">Add Picture :</label>
-              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
+              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} required  />
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Title :</label>
-              <input type="text" name="title" id="title" className='form-control ' value={blog.title} onChange={handleInput} />
+              <input type="text" name="title" id="title" className='form-control ' value={blog.title} onChange={handleInput} required/>
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Tags :</label>

@@ -9,8 +9,13 @@ export const AuthProvider = ({ children }) =>{
     const [blog,setBlog] = useState([]);
     const [isLoading,setIsLoading] = useState(true);
     const [approvedblog,setApprovedblog] = useState([]);
+    const [notapprovedblog,setNotApprovedblog] = useState([]);
+    const [pendingblog,setPendingblog] = useState([]);
     const AuthorizationToken = `Bearer ${token}`;
 
+ 
+    // const API_BASE_URL = 'https://5922-2402-a00-172-b05b-a922-e714-b569-6c7d.ngrok-free.app/';
+    const API_BASE_URL = 'http://localhost:8000/';
 
     const storeTokenInLS = (serverToken)=>{
         setToken(serverToken);
@@ -23,6 +28,7 @@ export const AuthProvider = ({ children }) =>{
     // tackling logout funcionality
     const LogoutUser = ()=>{
         setToken("");
+        setUser("");
         return localStorage.removeItem("token");
     }
 
@@ -31,7 +37,7 @@ export const AuthProvider = ({ children }) =>{
     const userAuthentication = async() =>{
         try {
             setIsLoading(true);
-                const response = await fetch('http://localhost:8000/api/auth/user',
+                const response = await fetch(`${API_BASE_URL}api/auth/user`,
                 {
                     method : "GET",
                     headers:{
@@ -60,14 +66,14 @@ export const AuthProvider = ({ children }) =>{
     const  getBlogs= async(req,res)=>{
 
         try {
-            const blogdata = await fetch('http://localhost:8000/api/blog/blog',
+            const blogdata = await fetch(`${API_BASE_URL}api/blog/blog`,
             {
-                method: "GET"
+                method: "GET",
              
             })
             if (blogdata.ok) {
                 const data = await blogdata.json();
-                console.log(data.message);
+                console.log('blog data:',data.message);
                 setBlog(data.message);
             }
             }
@@ -79,7 +85,7 @@ export const AuthProvider = ({ children }) =>{
     }
     const getApprovedBlogs = async (req, res) => {
         try {
-            const approvedblogdata = await fetch('http://localhost:8000/api/blog/approvedblog', {
+            const approvedblogdata = await fetch(`${API_BASE_URL}api/blog/approvedblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -103,24 +109,85 @@ export const AuthProvider = ({ children }) =>{
             console.error("Error Fetching Blog data");
         }
     }
-    
+   
 
+     const getNotApprovedBlogs = async(req, res) => {
+        try {
+            const notapprovedblogdata = await fetch(`${API_BASE_URL}api/blog/notapprovedblog`, {
+                method: "GET",
+                headers: {
+                    'Authorization': AuthorizationToken
+                }
+            });
+    
+            if (notapprovedblogdata.ok) {
+                const Notapproved_data = await notapprovedblogdata.json();
+                console.log('all approved', Notapproved_data); 
+                if (Array.isArray(Notapproved_data)) {
+                    console.log('Approved blogs:', Notapproved_data);
+                    setNotApprovedblog(Notapproved_data); 
+                } else {
+                    console.error('Invalid response: data is not an array');
+                }
+            } else {
+                console.error('Failed to fetch approved blogs:', notapprovedblogdata.status);
+            }
+            
+        } catch (error) {
+            console.error("Error Fetching Blog data");
+        }
+    }
+     const getPendingBlogs = async(req, res) => {
+        try {
+            const pendingblogdata = await fetch(`${API_BASE_URL}api/blog/pendingblog`, {
+                method: "GET",
+                headers: {
+                    'Authorization': AuthorizationToken
+                }
+            });
+    
+            if (pendingblogdata.ok) {
+                const pending_data = await pendingblogdata.json();
+                console.log('all approved', pending_data); 
+                if (Array.isArray(pending_data)) {
+                    console.log('Approved blogs:', pending_data);
+                    setPendingblog(pending_data); 
+                } else {
+                    console.error('Invalid response: data is not an array');
+                }
+            } else {
+                console.error('Failed to fetch approved blogs:', pendingblogdata.status);
+            }
+            
+        } catch (error) {
+            console.error("Error Fetching Blog data");
+        }
+    }
+
+
+  
     useEffect(() => {
         getBlogs();
-        // userAuthentication();
+       
+    // }, [blog.id])
+    }, [blog.id])
+    useEffect(() => {
+        // getBlogs();
         getApprovedBlogs();
-    }, [blog])
-
+        getNotApprovedBlogs();
+        getPendingBlogs();
+    }, []); 
+    
     useEffect(() => {
         
         userAuthentication();
-        
-    }, [])
+        // LogoutUser();
+    }, [token])
     
 
     // token
     return(
-     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading}}>
+     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading,API_BASE_URL,notapprovedblog,pendingblog,getNotApprovedBlogs,getApprovedBlogs,getPendingBlogs,getBlogs}}>
     {children}
     </AuthContext.Provider>
     )

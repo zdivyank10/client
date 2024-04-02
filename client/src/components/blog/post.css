@@ -1,7 +1,7 @@
 /* Global CSS rule to remove underline from all Link components */
 .blogcontent,.postuserinfo{
     text-decoration: none !important;
-    color: inherit; /* Optional: ensure links inherit their parent's color */
+    color: inherit;
 }
 .maincontainer
 {
@@ -9,11 +9,13 @@
     padding: 20px;
     display: flex;
     /* flex-direction: column; */
+    /* background-color: var(--forth-color); */
 }
 .postcontainer {
     text-decoration: none; 
     color: inherit;
-    background: white;
+    background: var(--font-color);
+    /* color: var(--font-color); */
     /* width: 10%; */
     border: 2px solid var(--third-color);
     border-radius: 15px;
@@ -103,9 +105,11 @@
 
 .post_like
 {
-    margin-right: 100%;
-    margin: 5px;
-    /* display: flex; */
+    /* margin-right: 100%; */
+    /* margin: 5px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .post_likeinfo
 {
@@ -113,15 +117,35 @@
 }
 .post_cmt
 {
-    margin-left: 100%;
-    margin: 44px;
+    /* margin-left: 100%; */
+    /* margin: 0px 42px;  */
+    text-decoration: none;
+    margin: 15px;
+    color: var(--primary-color);
+    /* margin-right: 10%; */
+    /* padding: 15px; */
+}
+.like_cmt
+{
+    display: flex;
+    /* margin: 15px; */
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 
 @media screen and (max-width: 768px) {
+   
+    .maincontainer {
+        overflow-x: hidden; /* Prevent overflow on x-axis */
+        margin: 20px;
+    }
     .postcontainer {
+        overflow-x: hidden;
         max-width: 100%; /* Ensure the post container occupies full width */
-        margin: 20px 0; /* Add margin for spacing between posts */
+        margin: 20px 0; 
         overflow: hidden; /* Hide overflowing content */
     }
 

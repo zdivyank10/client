@@ -1,25 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../store/auth';
 import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import { MdDelete } from "react-icons/md";
+import { toast } from 'react-toastify';
+import { Pagination } from 'react-bootstrap'; 
+import { Link } from 'react-router-dom';
 
 function Adminblogs() {
-  const { blog, AuthorizationToken } = useAuth();
+  const { blog, AuthorizationToken, API_BASE_URL, getBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
   const [action, setAction] = useState(null);
+  const [blogs, setBlogs] = useState([]);
+  const [showModal1, setShowModal1] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [activePage, setActivePage] = useState(1);
+  const itemsPerPage = 10; // Number of items per page
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowModal1(false);
     setSelectedBlogId(null);
     setAction(null);
   };
 
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -34,9 +49,9 @@ function Adminblogs() {
 
       const updatedBlog = await response.json();
       console.log('Updated blog:', updatedBlog);
+      await getBlogs();
     } catch (error) {
       console.error('Error updating permission:', error);
-      // Add UI feedback to inform the user about the error
     }
     handleCloseModal();
   };
@@ -77,79 +92,155 @@ function Adminblogs() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}api/blog/${deleteId}/delete`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        toast.success('Blog Deleted successfully', {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        // Handle success, e.g., remove the blog post from the list
+        setBlogs(blogs.filter(blog => blog._id !== deleteId));
+        getBlogs();
+      } else {
+        toast.error('Error Deleting Blog  ', {
+          style: {
+            background: '#212121',
+            color: 'white',
+          },
+          position: 'top-center',
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+      }
+      setShowModal1(false);
+    } catch (error) {
+      // Handle error, e.g., display an error message
+      console.error('Error deleting blog:', error);
+    }
+  };
+
+  const toggleModal1 = (id) => {
+    setDeleteId(id);
+    setShowModal1(!showModal1);
+  };
+
+  const indexOfLastItem = activePage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = blog.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+
+
   return (
-    <>
-      <div className="row blogrow">
+    <div className="container">
       <h1 className="text-center">All Blogs</h1>
-              <hr />
-        {blog.map((currEle, index) => {
-          const { _id: blogId, title, author_id, cover_img, content, tags, createdAt, username, permission } = currEle;
-          const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
-          let bgClass = 'bg-light'; // Default background color
-          let approvalStatus = 'pending'; // Default approval status
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Cover_Image</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Actions</th>
+            <th>Approval Status</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((currEle, index) => {
+            const { _id, title, author_id, permission, cover_img } = currEle;
+            let bgClass = ''; // Default background color
+            let approvalStatus = 'Pending'; // Default approval status
 
-          // Set background color and approval status based on permission
-          switch (permission) {
-            case 'true':
-              bgClass = 'bg-success';
-              approvalStatus = 'approved';
-              break;
-            case 'false':
-              bgClass = 'bg-danger';
-              approvalStatus = 'declined';
-              break;
-            case 'pending':
-              bgClass = 'bg-warning';
-              approvalStatus = 'pending';
-              break;
-            default:
-              bgClass = 'bg-warning';
-              approvalStatus = 'pending';
-          }
+            switch (permission) {
+              case 'true':
+                bgClass = 'bg-success';
+                approvalStatus = 'Approved';
+                break;
+              case 'false':
+                bgClass = 'bg-danger';
+                approvalStatus = 'Declined';
+                break;
+              case 'pending':
+                bgClass = 'bg-warning';
+                approvalStatus = 'Pending';
+                break;
+              default:
+                bgClass = 'bg-warning';
+                approvalStatus = 'Pending';
+            }
 
-          return (
-                
-            <div className="maincontainer col-md-4" key={index}>
-              <div className="postcontainer text-center m-3">
-                <div className="postimg">
-                  <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
-                </div>
+            return (
+              <tr key={index}>
+                <td>
+                  <Link to={`/blog/${_id}`} className="postimg">
+                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/blog/${_id}`} className="post-title text-dark">
+                    {title}
+                  </Link>
+                </td>
+                <td>{author_id?.username}</td>
+                <td>
+                  <Button variant="outline-dark me-2" onClick={() => handleApprove(_id)}>Approve</Button>
+                  <Button variant="outline-dark me-2" onClick={() => handleDecline(_id)}>Decline</Button>
+                  <Button variant="outline-dark" onClick={() => handlePending(_id)}>Pending</Button>
+                </td>
+                <td>
+                  <span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span>
+                </td>
+                <td><MdDelete className='text-danger text-center m-3' onClick={() => toggleModal1(_id)} /></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
 
-                <div className="postuserinfo">
-                  <FaUserAlt className='userpfp'/>
-                  <div className="info">
-                    <p>{author_id.username}</p>
-                    <p className='blogdate'>{createdAt}</p>
-                  </div>
-                </div>
-                <hr />
+      <Pagination>
+        {blog.length > itemsPerPage && (
+          <Pagination.Prev
+            onClick={() => handlePageChange(activePage - 1)}
+            disabled={activePage === 1}
+          />
+        )}
+        {Array.from({ length: Math.ceil(blog.length / itemsPerPage) }).map((_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === activePage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+        {blog.length > itemsPerPage && (
+          <Pagination.Next
+            onClick={() => handlePageChange(activePage + 1)}
+            disabled={activePage === Math.ceil(blog.length / itemsPerPage)}
+          />
+        )}
+      </Pagination>
 
-                <div className="blogcontent text-center">
-                  <h2>{title}</h2>
-                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                  <div className="tags">
-                    {tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="tag"> {tag} </span>
-                    ))}
-                  </div>
-                  <hr />
-                </div>
-
-                <div className="actions text-center">
-                  <button className="btn btn-outline-dark me-3" onClick={() => handleApprove(blogId)}>Approve</button>
-                  <button className="btn btn-outline-dark me-3" onClick={() => handleDecline(blogId)}>Decline</button>
-                  <button className="btn btn-outline-dark " onClick={() => handlePending(blogId)}>Pending</button>
-                </div>
-
-                <hr />
-                <span className={`approval-status text-center ${bgClass} text-light`} style={{ borderRadius: '5px' }}>{approvalStatus}</span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Confirmation Modal */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm {action === 'approve' ? 'Approval' : action === 'decline' ? 'Decline' : 'Pending'}</Modal.Title>
@@ -162,7 +253,19 @@ function Adminblogs() {
           <Button variant="primary" onClick={handleConfirmation}>Confirm</Button>
         </Modal.Footer>
       </Modal>
-    </>
+      <Modal show={showModal1} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to Delete this blog?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>Cancel</Button>
+          <Button variant="primary" onClick={handleDelete}>Confirm</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 

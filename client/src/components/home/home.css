@@ -2,8 +2,11 @@
     background: var(--forth-color);
     height: 100%;
     display: flex;
-    max-width: 100%; /* Ensure container doesn't exceed viewport width */
-    overflow-x: hidden; /* Hide horizontal overflow */
+    max-width: 100%;
+    /* Ensure container doesn't exceed viewport width */
+    overflow-x: hidden;
+    padding: 0 20px;
+    /* Adjust padding for smaller screens */
 }
 
 .home_left {
@@ -37,16 +40,21 @@
 }
 
 .home_card {
-    background: var(--forth-color);
+    background: var(--font-color);
     height: 175px;
     width: 400px;
     border: 2px solid var(--primary-color);
     border-radius: 15px;
-    margin: 5px;
-   
+    margin: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
+.home_card:hover {
+    
+    background: var(--forth-color);
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    transition: 0.7s;
+}
 
 .home_h3 {
     margin-top: 25px;
@@ -61,6 +69,7 @@
 .home_card>p {
     font-family: 'Kalam', cursive;
     font-size: 16px;
+    margin: 15px;
 }
 
 .left_search {
@@ -71,6 +80,7 @@
     width: 250px;
     background: transparent;
 }
+
 .left_search input:focus {
     border-bottom: 2px solid var(--third-color) !important;
     transition: border-bottom 0.5s ease !important;
@@ -80,44 +90,163 @@
     font-size: 40px;
 }
 
-@media screen and (max-width: 786px) {
-    body {
-        overflow-x: hidden; /* Hide horizontal scrollbar */
-      }
-    .home_left {
-        margin-left: 20px;
-        /* width: 100%; */
-    }
+.search_result {
+    border: 1px solid var(--primary-color);
+    display: flex;
+    margin: 15px;
+    width: 80%;
+    /* padding: 15px; */
+    border-radius: 15px;
+    align-items: center;
+}
 
-    .home_left_h1 {
-        font-size: 102px;
-    }
+.search_result:hover {
+    background-color: rgba(256, 256, 256, 1);
+    transition: 0.7S;
+}
 
-    .home_left_p {
-        font-size: 16px;
-    }
 
+
+.search_result_image {
+    border-radius: 15px;
+    margin: 15px;
+}
+
+/* Media Queries for responsiveness */
+
+/* Adjustments for tablets */
+@media (max-width: 768px) {
     .home_container {
+
         flex-direction: column;
     }
 
     .home_img {
-        height: 200px;
-        /* width: 295px; */
+
+        margin: auto;
+        margin-bottom: 35px;
+        border-radius: 15px;
+
     }
 
     .steps {
-        /* margin-left: 135px; */
-        /* margin-top: 50px; */
-        display: flex;
+
         flex-direction: column;
-        margin: 20px;
-        padding: 0px;
+    }
+
+    .search_btn {
+        margin-left: 35px;
+    }
+
+    .home_left {
+        margin-left: 25px;
+        /* Adjust margin for smaller screens */
+    }
+
+    .home_left_h1 {
+        font-size: 60px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .home_left_p {
+        font-size: 18px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .home_img {
+        height: auto;
+        /* Let the image adjust its height */
+        max-width: 100%;
+        /* Ensure image doesn't exceed its container */
     }
 
     .home_card {
-        height: 200px;
-        width: 295px;
-        margin-left: 20px;
+        width: 100%;
+        margin: 20px auto;
+        
+        /* Occupy full width on smaller screens */
+        /* max-width: none; */
+        /* Remove max-width on smaller screens */
+    }
+
+    .home_h3 {
+        font-size: 32px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .home_h1 {
+        font-size: 48px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .home_card>p {
+        font-size: 14px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .left_search {
+        max-width: 100%;
+        /* Occupy full width */
+    }
+}
+
+/* Adjustments for mobile phones */
+@media (max-width: 480px) {
+
+    .home_container {
+
+        flex-direction: column;
+    }
+
+    .home_img {
+
+        margin: auto;
+        margin-bottom: 35px;
+        border-radius: 15px;
+
+    }
+
+    .steps {
+
+        flex-direction: column;
+    }
+
+    .search_btn {
+        margin-left: auto;
+    }
+
+    .home_left {
+        margin-left: 10px;
+        /* Further adjust margin for smaller screens */
+    }
+
+    .home_left_h1 {
+        font-size: 82px;
+        /* Further adjust font size for smaller screens */
+    }
+
+    .home_left_p {
+        font-size: 16px;
+        /* Further adjust font size for smaller screens */
+    }
+
+    .home_h3 {
+        font-size: 24px;
+        /* Further adjust font size for smaller screens */
+    }
+
+    .home_h1 {
+        font-size: 62px;
+        /* Further adjust font size for smaller screens */
+    }
+
+    .home_card>p {
+        font-size: 12px;
+        /* Further adjust font size for smaller screens */
+    }
+
+    .searchicon {
+        font-size: 30px;
+        /* Adjust size of search icon for smaller screens */
     }
 }

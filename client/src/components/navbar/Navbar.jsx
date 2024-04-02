@@ -15,7 +15,7 @@ const Navbar = () => {
   const { isLoggedIn, user } = useAuth();
   const [showNav, setShowNav] = useState(false);
 
-  console.log('hello user info', user.isAdmin)
+  console.log('hello user admin', user.isAdmin)
   const toggleNav = () => {
     // console.log("hello");
     setShowNav(!showNav);
@@ -45,6 +45,8 @@ const Navbar = () => {
               <li className="nav_li"><NavLink to="/blog" onClick={closeNav}>Blog</NavLink></li>
               <li className="nav_li"><NavLink to="/about" onClick={closeNav}>About</NavLink></li>
               <li className="nav_li"><NavLink to="/contact" onClick={closeNav}>Contact</NavLink></li>
+              <li className="nav_li"><NavLink to="/editorschoice" onClick={closeNav}>Editor's Choice</NavLink></li>
+              <li className="nav_li"><NavLink to="/popular" onClick={closeNav}>Top Blogs</NavLink></li>
 
               {user.isAdmin ? <li className="nav_li">
                 <NavLink to="/admin" onClick={closeNav}>Admin Dashboard</NavLink>
@@ -62,13 +64,17 @@ const Navbar = () => {
                   {/* <FaUserAlt /> */}
 
                   <DropdownButton as={ButtonGroup} title={<>
-                    <FaUserAlt /> My Profile
+                    <FaUserAlt className="me-2"/>   {user.username}
                   </>} id="bg-nested-dropdown" variant="outline-light">
                     <Dropdown.Item eventKey="1">
-                      {/* <NavLink to="/myblog" className='text-dark' onClick={closeNav}>My Blogs</NavLink> */}
-                      <NavLink to= {`/myblog/${user._id}/profile`} onClick={closeNav}>My Blogs</NavLink>
+                   
+                      <NavLink to= {`/myblog/${user._id}/profile`} onClick={closeNav}>My Profile</NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item eventKey="2">
+                      <NavLink to={`/myblog/${user._id}`}  className='text-dark' onClick={closeNav}>My Blogs</NavLink>
+                    
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="3">
                       <NavLink to="/logout"  className='text-dark' onClick={closeNav}>Logout</NavLink>
                     </Dropdown.Item>
                   </DropdownButton>

@@ -10,13 +10,18 @@
   }
   
   .sidebar h2 {
-    color: #fff;
+    color: var(--font-color);
     text-align: center;
     margin:15px;
     margin-bottom: 20px;
   }
-  a{
+  /* a{
     
+    text-decoration: none;
+  } */
+  .admin_panel
+  {
+    color: var(--font-color);
     text-decoration: none;
   }
   .sidebar ul {
@@ -29,7 +34,7 @@
   }
   
   .sidebar ul li a {
-    color: #fff;
+    color: var(--font-color);
     text-decoration: none;
     display: block;
     font-size: 20px;
@@ -37,6 +42,12 @@
     padding: 5px;
   }
   
+  .sidebar ul li a:hover {
+    /* background-color: var(--third-color); */
+    color: var(--forth-color);
+    border-radius: 15px;
+   transition: 0.7s;
+  }
   /* Main content area */
   .main-content {
     margin-left: 250px; /* Adjust based on sidebar width */

@@ -4,10 +4,11 @@ import MiniNavbar from './MiniNavbar';
 import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
-
+import './myprofile.css';
+//css written in myprofile.css
 
 function MypPendingblogs() {
-    const { user } = useAuth();
+    const { user,API_BASE_URL } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -15,7 +16,7 @@ function MypPendingblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/blog/${user._id}/pending`, {
+                const response = await fetch(`${API_BASE_URL}api/blog/${user._id}/pending`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -36,7 +37,7 @@ function MypPendingblogs() {
             <>
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={450} />
+            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" className='error_img mt-3 m-3' />
             </div>
             </>
         );
@@ -48,7 +49,7 @@ function MypPendingblogs() {
               <MiniNavbar />
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt="" height={450} className='mt-3 m-3' />
+            <img src="https://cdn.dribbble.com/users/3008811/screenshots/7090670/media/5a61f4778d6a527572a773c1f69001b8.gif" alt=""  className='error_img mt-3 m-3' />
 
             <h3 className='m-3'>- No Pending blogs found-</h3>
             <Link to={`/myblog/${user._id}`} className='btn btn-dark'> Go back</Link> 
@@ -71,20 +72,20 @@ function MypPendingblogs() {
                         <div className="maincontainer col-md-3" key={index}>
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
-                                <Link to={`/blog/${_id}`} className="postimg">
-                                    <img src={`http://localhost:8000/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
-                                </Link>
+                                <div className="postimg">
+                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                </div>
 
-                                <Link to={`/blog/${_id}`} className="postuserinfo">
+                                <div className="postuserinfo">
                                     <FaUserAlt className="userpfp" />
                                     <div className="info">
                                         <p>{author_id.username}</p>
                                         <p className="blogdate">{createdAt}</p>
                                     </div>
-                                </Link>
+                                </div>
                                 <hr />
 
-                                <Link to={`/blog/${_id}`} className="blogcontent">
+                                <div className="blogcontent">
                                     <h2>{title}</h2>
                                     <div className="content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                                     <hr />
@@ -96,7 +97,7 @@ function MypPendingblogs() {
                                         ))}
                                     </div>
                                   
-                                </Link>
+                                </div>
 
                             </div>
                             </div>

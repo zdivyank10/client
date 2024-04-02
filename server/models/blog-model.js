@@ -1,6 +1,6 @@
 const { ObjectId } = require('bson');
 const  mongoose = require('mongoose');
-const { string } = require('zod');
+const { string, boolean } = require('zod');
 
 const blogSchema = new mongoose.Schema(
     {
@@ -11,6 +11,7 @@ const blogSchema = new mongoose.Schema(
         content: { type: String, required: true },
         tags: { type: [String], required: true },
         permission: {type: String,required: true,default: 'pending' },
+        choice: {type: Boolean,required: true,default: 'false' },
         // permission: { type: Boolean, default:false ,required: true },
         // createdAt:{type: [String], required: true,default:()=> new Date(),}
         createdAt: { type: String, default: () => new Date().toISOString().split('T')[0] } 
@@ -18,7 +19,7 @@ const blogSchema = new mongoose.Schema(
 
     }
 )
-
+blogSchema.index({ title: 'text', content: 'text', tags: 'text' });
 const blog = mongoose.model('blog', blogSchema );
 
 module.exports =  blog

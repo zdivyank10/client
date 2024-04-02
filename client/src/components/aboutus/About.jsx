@@ -3,8 +3,8 @@ import './about.css'
 function About() {
     return (
         <>
-            <h1 className='about_head text-center'>Welcome to Ink Garden</h1>
             <div className="about_container">
+            <h1 className='about_head text-center'>Welcome to Ink Garden</h1>
 
                 <div className="ourmission text-center">
                     <h1>Our Mission</h1>
@@ -42,7 +42,8 @@ function About() {
                         </div>
                     </div>
                     <div className="right_about">
-                        <img src="https://img.freepik.com/free-vector/product-presentation-concept-illustration_114360-8196.jpg?w=996&t=st=1709324213~exp=1709324813~hmac=ad81937dc9db36f3ca471bb88396dd43a6da4b375d04822b5c0743007a8a5f91" alt="" className='aboutimg' />
+                        <img src="../img/6502432.jpg" alt="" className='aboutimg' />
+                        {/* <img src="https://img.freepik.com/free-vector/product-presentation-concept-illustration_114360-8196.jpg?w=996&t=st=1709324213~exp=1709324813~hmac=ad81937dc9db36f3ca471bb88396dd43a6da4b375d04822b5c0743007a8a5f91" alt="" className='aboutimg' /> */}
 
                     </div>
                 </div>
@@ -54,7 +55,6 @@ function About() {
                     <div className="vision">
                         <h1>Our Vision</h1>
                         <p>Our vision is to be the premier destination for bloggers of all backgrounds and interests to share their stories, engage with a vibrant community, and make a difference in the world. By continuously evolving and innovating our platform, we strive to provide the best possible experience for our users and create a lasting impact in the online blogging landscape.
-
                         </p>
                     </div>
 
@@ -83,9 +83,42 @@ function About() {
                             Nikita-Frontend<br />
                             Siddhi-Frontend<br />
                         </p>
-                       
+
                     </div>
 
+                </div>
+
+                <hr />
+
+                <div className="about2">
+                    <div className="about_left2">
+
+                    <h1>
+                        community Gueidline Rules
+                    </h1>
+                    <ul className='about_ul'>
+                        <li className='about_li'>Respectful Behavior:</li><p>
+                        Treat others with kindness and empathy, avoiding harassment or personal attacks.
+                          </p>
+                        <li className='about_li'>No Offensive Content:</li><p>
+                        Refrain from posting or sharing offensive, obscene, or inappropriate content that promotes violence or discrimination.
+                             </p>
+                        <li className='about_li'>Privacy and Safety:</li><p>
+                        Respect the privacy of others, refrain from sharing personal information without consent, and report abusive behavior.
+                            </p>
+                        <li className='about_li'>Use of Language: </li><p>
+                        Use appropriate language and tone, avoiding offensive or derogatory language and respecting cultural differences.
+                           </p>
+                        <li className='about_li'>Content Moderation: </li><p>
+                        Respect moderation decisions, refrain from circumventing measures, and report violations promptly.
+                           </p>
+
+                    </ul>
+                    </div>
+
+                    <div className="">
+                    <img src="../img/7542093.jpg" alt="" className='about_img2'  />
+                    </div>
                 </div>
             </div>
         </>

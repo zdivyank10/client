@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import './sidebar.css'
 import { RxDashboard } from "react-icons/rx";
 import { FaUsers } from "react-icons/fa";
-import { GiNotebook } from "react-icons/gi";
+import { GiImperialCrown, GiNotebook } from "react-icons/gi";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { ImBlog } from "react-icons/im";
 
@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
      <Link to="/admin">
-       <h2>Admin Panel</h2>
+       <h2 className='admin_panel'>Admin Panel</h2>
       
       </Link>
       <ul>
@@ -23,6 +23,9 @@ const Sidebar = () => {
         </li>
         <li>
           <Link to="/admin/contacts"><MdOutlineContactPhone /> Contact Us</Link>
+        </li>
+        <li>
+          <Link to="/admin/editor"><GiImperialCrown /> Editor's Choice</Link>
         </li>
 
         <li>

@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type : "boolean",
         default : false,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 })
 
     //compare password here and calling there in cntrl
@@ -55,4 +59,4 @@ try {
 
 const user = new mongoose.model("mern_test1",userSchema);
 
-module.exports = user;
+module.exports = user;  

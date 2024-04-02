@@ -28,3 +28,14 @@
     display: flex;
   }
   
+  .blog_function
+  {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    padding: 15px;
+  }
+  .primary-links {
+    color: var(--primary-color);
+    text-decoration: none;
+}

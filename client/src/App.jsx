@@ -35,6 +35,12 @@ import MyNotapprovedblogs from "./components/blog/myblog/MyNotapprovedblogs";
 import MypPendingblogs from "./components/blog/myblog/MypPendingblogs";
 import Myprofile from "./components/blog/myblog/Myprofile";
 import About from "./components/aboutus/About";
+import Update from "./components/blog/myblog/Update";
+import AdminEditor from "./components/layouts/AdminEditor";
+import AlreadyChoice from "./components/layouts/AlreadyChoice";
+import EditorsChoice from "./components/blog/EditorsChoice";
+import Famous from "./components/blog/Famous";
+
 
 
 
@@ -53,6 +59,7 @@ function App() {
 
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
+          <Route path="/editorschoice" element={<EditorsChoice />} />
 
           {/* <Route path="/about" element={<About/>} />  */}
           <Route path="/blog" element={<Blog />} />
@@ -67,6 +74,8 @@ function App() {
           <Route path='/myblog/:_id/notapproved' element={<MyNotapprovedblogs />} />
           <Route path='/myblog/:_id/pending' element={<MypPendingblogs />} />
           <Route path='/myblog/:_id/profile' element={<Myprofile />} />
+          <Route path='/myblog/:_id/update' element={<Update />} />
+          <Route path='/popular' element={<Famous />} />
           {/* <Route path="/myblog" element={<Myblog />} /> */}
           <Route path="*" element={<Error />} />
 
@@ -81,6 +90,8 @@ function App() {
                 <Route path ='approvedblogs' element={<Approvedblogs/>} />
                 <Route path ='notapprovedblogs' element={<NotApprovedblogs/>} />
                 <Route path ='pendingblogs' element={<Pendingblogs/>} />
+                <Route path ='editor' element={<AdminEditor/>} />
+                <Route path ='alreadyeditor' element={<AlreadyChoice/>} />
           </Route>
         </Routes>
       </BrowserRouter>

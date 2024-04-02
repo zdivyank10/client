@@ -9,9 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../store/auth";
 function Login() {
 
-  const {userAuthentication ,storeTokenInLS} = useAuth();
+  const {userAuthentication ,storeTokenInLS,API_BASE_URL} = useAuth();
 
-  const URL = "http://localhost:8000/api/auth/login";
+  const URL = `${API_BASE_URL}api/auth/login`;
      const navigate = useNavigate();
     const [user,setUser] = useState({
       email: "",

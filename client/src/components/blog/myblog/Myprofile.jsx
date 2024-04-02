@@ -7,7 +7,7 @@ import { MdError } from "react-icons/md";
 import { toast } from 'react-toastify';
 
 function Myprofile() {
-    const { user } = useAuth();
+    const { user,API_BASE_URL } = useAuth();
     const [userData, setUserData] = useState({
         username: '',
         email: '',
@@ -28,7 +28,7 @@ function Myprofile() {
     useEffect(() => {
         const getuserinfo = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/auth/${user._id}/user`, {
+                const response = await fetch(`${API_BASE_URL}api/auth/${user._id}/user`, {
                     method: 'GET',
                 });
                 const data = await response.json();
@@ -51,7 +51,7 @@ function Myprofile() {
         }
     
         try {
-            const response = await fetch(`http://localhost:8000/api/auth/${user._id}/upgpass`, {
+            const response = await fetch(`${API_BASE_URL}api/auth/${user._id}/upgpass`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,19 +81,25 @@ function Myprofile() {
             }
     
             // Password successfully updated
-            toast.success(res_data.message,{
-                style: {
-                  background: '#212121',
-                  color: 'white',
-                },
-                position: 'top-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+            if (response.ok) {
+                setNewPassword('');
+                setConfirmNewPassword('');
+                setShowPasswordFields(false);
+                toast.success(res_data.message,{
+                    style: {
+                      background: '#212121',
+                      color: 'white',
+                    },
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+            }
+          
             console.log('Password updated successfully');
         } catch (error) {
             console.error('Error updating password:', error);
