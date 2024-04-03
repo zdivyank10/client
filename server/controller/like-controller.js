@@ -28,11 +28,14 @@ const like = async (req, res) => {
 
   const user = req.params.user;
   try {
+    if (!user) {
+      console.log('User not loggedin');
+    }
     // Find all likes where user is the specified userId
     const likedPosts = await Like.find({ user: user }).select('blog');
     res.json(likedPosts);
   } catch (error) {
-    console.error('Error fetching liked posts:', error);
+    // console.error('Error fetching liked posts:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

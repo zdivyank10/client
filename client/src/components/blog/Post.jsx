@@ -27,26 +27,13 @@ function Post() {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchLikedPosts = async () => {
-  //     try {
-  //       const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
-  //       const data = await response.json();
-  //       console.log('user liked data:',data);
-  //       const likedPostIds = data.map(like => like.blog);
-  //       console.log(likedPostIds);
-  //       setLikedPosts(likedPostIds);
-  //     } catch (error) {
-  //       console.error('Error fetching liked posts:', error);
-  //     }
-  //   };
-
-  //   fetchLikedPosts();
-  // }, [user._id]);
-
   useEffect(() => {
     const fetchLikedPosts = async () => {
       try {
+        if (!user._id) {
+          console.log('User not Logged in');
+          return;
+        }
         const response = await fetch(`${API_BASE_URL}api/like/${user._id}/liked`);
         const data = await response.json();
         console.log('user liked data:', data);
@@ -137,6 +124,15 @@ function Post() {
     });
   }, [approvedblog,likedPosts]);
 
+  // Function to format date as dd/mm/yyyy
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <div className="row blogrow">
@@ -147,6 +143,7 @@ function Post() {
             const totalcmt = totalComments[_id] || 0;
             const totalLike = totalLikes[_id] || 0;
             const isLiked = likedPosts.includes(_id);
+            const formattedDate = formatDate(createdAt);
 
             return (
               <div data-aos="fade-up" className="maincontainer col-md-3" key={index}>
@@ -159,7 +156,7 @@ function Post() {
                     <FaUserAlt className="userpfp" />
                     <div className="info">
                       <p>{author_id?.username}</p>
-                      <p className="blogdate">{createdAt}</p>
+                      <p className="blogdate">{formattedDate}</p> {/* Display formatted date */}
                     </div>
                   </Link>
                   <hr />

@@ -58,6 +58,14 @@ function MypPendingblogs() {
 
         )
     }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
     return (
         <div className="myblogcontainer">
            <MiniNavbar />
@@ -80,7 +88,7 @@ function MypPendingblogs() {
                                     <FaUserAlt className="userpfp" />
                                     <div className="info">
                                         <p>{author_id.username}</p>
-                                        <p className="blogdate">{createdAt}</p>
+                                        <p className="blogdate">{formatDate(createdAt)}</p>
                                     </div>
                                 </div>
                                 <hr />

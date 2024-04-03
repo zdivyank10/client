@@ -334,6 +334,15 @@ function FullBlog() {
   const sanitizedContent = DOMPurify.sanitize(content);
   const isLiked = likedPosts.includes(_id);
 
+  // Function to format date to "dd/mm/yyyy"
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <div className="fullblog_container">
@@ -348,7 +357,7 @@ function FullBlog() {
             <hr />
             <FaUserAlt className='userpfp' />
             <p className='authorname'>{author_id?.username}</p>
-            <p className='authorname'>{createdAt}</p>
+            <p className='authorname'>{formatDate(createdAt)}</p> {/* Format date here */}
           </div>
           <div className="fullblogtitle">
             <hr />
@@ -408,7 +417,7 @@ function FullBlog() {
                   <div className="comment-content">
                     <FaUserAlt className='userpfp' size={25} />
                     <p className='cmt_user'>{commentItem.userid?.username}</p>
-                    <div className='cmt_time mt-1'>{commentItem.createdAt}</div>
+                    <div className='cmt_time mt-1'>{formatDate(commentItem.createdAt)}</div> {/* Format date here */}
                     {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
                       <div className='cmt_time mt-1 ms-5 text-danger'>
                      <p>

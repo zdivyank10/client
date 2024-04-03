@@ -14,7 +14,11 @@ const blogSchema = new mongoose.Schema(
         choice: {type: Boolean,required: true,default: 'false' },
         // permission: { type: Boolean, default:false ,required: true },
         // createdAt:{type: [String], required: true,default:()=> new Date(),}
-        createdAt: { type: String, default: () => new Date().toISOString().split('T')[0] } 
+        // createdAt: { type: String, default: () => new Date().toISOString().split('T')[0] } 
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        }
         
 
     }
