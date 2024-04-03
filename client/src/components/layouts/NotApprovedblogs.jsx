@@ -13,6 +13,9 @@ function NotApprovedblogs() {
   const [showModal, setShowModal] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
 
+  const sortedBlogs = notapprovedblog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  
   useEffect(() => {
     getNotApprovedBlogs();
   }, []);
@@ -84,7 +87,7 @@ const formatDate1 = (dateString) => {
       <div className="row blogrow">
       <h1 className="text-center">Already Declined Blogs</h1>
               <hr />
-              {notapprovedblog && notapprovedblog.map((currEle, index) => {
+              {sortedBlogs && sortedBlogs.map((currEle, index) => {
                     const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
                     const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
                     return (

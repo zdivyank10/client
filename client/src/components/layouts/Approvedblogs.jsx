@@ -19,6 +19,8 @@ function Approvedblogs() {
     //     other: false
     // });
 
+    const sortedBlogs = approvedblog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
     useEffect(() => {
         getApprovedBlogs();
       }, []);
@@ -83,7 +85,7 @@ function Approvedblogs() {
             <div className="row blogrow">
                 <h1 className="text-center">Already Approved Blogs</h1>
                 <hr />
-                {approvedblog && approvedblog.map((currEle, index) => {
+                {sortedBlogs && sortedBlogs.map((currEle, index) => {
                     const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
                     const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
                     return (

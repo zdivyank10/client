@@ -9,6 +9,8 @@ import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
 import { Pagination } from 'react-bootstrap'; 
 import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
+import '../blog/post.css';
 
 function Adminblogs() {
   const { blog, AuthorizationToken, API_BASE_URL, getBlogs } = useAuth();
@@ -20,6 +22,10 @@ function Adminblogs() {
   const [deleteId, setDeleteId] = useState(null);
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
+
+
+
+  const sortedBlogs = blog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   useEffect(() => {
     getBlogs();
@@ -144,12 +150,16 @@ function Adminblogs() {
 
   const indexOfLastItem = activePage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = blog.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortedBlogs.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
 
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  };
 
   return (
     <div className="container">
@@ -160,6 +170,7 @@ function Adminblogs() {
             <th>Cover_Image</th>
             <th>Title</th>
             <th>Author</th>
+            <th>CreatedAt</th>
             <th>Actions</th>
             <th>Approval Status</th>
             <th>Delete</th>
@@ -167,7 +178,7 @@ function Adminblogs() {
         </thead>
         <tbody>
           {currentItems.map((currEle, index) => {
-            const { _id, title, author_id, permission, cover_img } = currEle;
+            const { _id, title,createdAt, author_id, permission, cover_img } = currEle;
             let bgClass = ''; // Default background color
             let approvalStatus = 'Pending'; // Default approval status
 
@@ -197,15 +208,16 @@ function Adminblogs() {
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/blog/${_id}`} className="post-title text-dark">
+                  <Link to={`/blog/${_id}`} className="admin-title text-dark">
                     {title}
                   </Link>
                 </td>
                 <td>{author_id?.username}</td>
+                <td><p className="blogdate">{formatDate1(createdAt)}</p></td>
                 <td>
                   <Button variant="outline-dark me-2" onClick={() => handleApprove(_id)}>Approve</Button>
                   <Button variant="outline-dark me-2" onClick={() => handleDecline(_id)}>Decline</Button>
-                  <Button variant="outline-dark" onClick={() => handlePending(_id)}>Pending</Button>
+                  <Button variant="outline-dark mt-2" onClick={() => handlePending(_id)}>Pending</Button>
                 </td>
                 <td>
                   <span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span>

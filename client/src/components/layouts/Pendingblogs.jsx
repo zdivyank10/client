@@ -13,7 +13,8 @@ function Pendingblogs() {
   const [blogId, setBlogId] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'decline'
 
-  
+  const sortedBlogs = pendingblog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   useEffect(() => {
     getPendingBlogs();
   }, []);
@@ -97,7 +98,7 @@ const formatDate1 = (dateString) => {
       <div className="row blogrow">
         <h1 className="text-center">All Pending Blogs</h1>
         <hr />
-        {pendingblog && pendingblog.map((currEle, index) => {
+        {sortedBlogs && sortedBlogs.map((currEle, index) => {
           const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
           return (
