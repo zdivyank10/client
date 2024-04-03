@@ -133,5 +133,11 @@ nav ul.show {
     justify-content: center;
   }
 
+  .logo
+  {
+    /* display: flex; */
+    float: left;
+    margin: 15px;
+  }
 }
 /* color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1)); */

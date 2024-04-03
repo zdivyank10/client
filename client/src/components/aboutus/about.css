@@ -138,6 +138,18 @@
     width: 510px;
 }
 
+.about_logo
+{
+    display: flex;
+    margin: auto;
+    margin-top: 15px;
+    height: 80%;
+    width: 80%;
+    border-radius: 15px;
+    border: 2px solid var(--third-color);
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
     .about_head {

@@ -164,9 +164,9 @@ function Adminblogs() {
   return (
     <div className="container">
       <h1 className="text-center">All Blogs</h1>
-      <Table striped bordered hover>
+      <Table striped bordered hover >
         <thead>
-          <tr>
+          <tr className="table table-dark">
             <th>Cover_Image</th>
             <th>Title</th>
             <th>Author</th>

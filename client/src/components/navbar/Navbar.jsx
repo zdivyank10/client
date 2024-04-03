@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="logo-brand">
             <ul>
               <li>
-                <NavLink to="/" >Ink Garden</NavLink>
+                <NavLink to="/" >  <img src="../img/logo.jpeg" alt="" className='logo mt-2' height={50} width={150} style={{borderRadius:'15px'}}/></NavLink>
               </li>
             </ul>
           </div>
