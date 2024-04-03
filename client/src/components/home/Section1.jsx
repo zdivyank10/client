@@ -10,14 +10,14 @@ function Section1() {
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState(false); // State variable for search error
   const { searchQuery } = useParams();
-  const {API_BASE_URL} = useAuth();
+  const { API_BASE_URL } = useAuth();
 
   useEffect(() => {
     if (searchQuery) {
       setQuery(searchQuery);
       handleSearch(searchQuery);
     }
-  }, [searchQuery,searchResults]);
+  }, [searchQuery]);
 
   const handleSearch = async (searchQuery) => {
     try {
@@ -34,14 +34,15 @@ function Section1() {
       });
       if (response.ok) {
         const searchData = await response.json();
-        setSearchResults(searchData);
-        if (searchData.length === 0) {
-          setSearchError(true); // Set search error if no results found
+        const approvedResults = searchData.filter(result => result.permission === 'true'); // Filter approved blogs
+        setSearchResults(approvedResults);
+        if (approvedResults.length === 0) {
+          setSearchError(true); // Set search error if no approved results found
         }
       } else {
         console.error('Failed to fetch search results:', response.statusText);
+        setSearchError(true); // Set search error if there's an error
       }
-      console.log('search data:', searchResults);
     } catch (error) {
       console.error('Error searching blogs:', error);
       setSearchError(true); // Set search error if there's an error
@@ -79,10 +80,8 @@ function Section1() {
         </div>
         {loading && <p>Loading...</p>}
         <div>
-          
-        {searchError && <p className='ms-5'>No blogs found related to '{query}'</p>} 
-          {searchResults.filter(result => result.permission === 'true')
-          .map(result => (
+          {searchError && <p className='ms-5'>No approved blogs found related to '{query}'</p>}
+          {searchResults.map(result => (
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
               <img src={`${API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
@@ -95,7 +94,7 @@ function Section1() {
                     </span>
                   ))}
                 </div>
-        <hr />
+                <hr />
               </div>
             </Link>
           ))}
