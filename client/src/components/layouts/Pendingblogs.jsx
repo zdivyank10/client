@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 
 function Pendingblogs() {
   const { user, AuthorizationToken, API_BASE_URL, pendingblog,getPendingBlogs } = useAuth();
@@ -83,7 +84,14 @@ const formatDate = (dateString) => {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
+  // return formatDistanceToNow(date, { addSuffix: true });
 };
+
+const formatDate1 = (dateString) => {
+  const date1 = new Date(dateString);
+  return formatDistanceToNow(date1, { addSuffix: true });
+};
+
   return (
     <>
       <div className="row blogrow">
@@ -104,7 +112,8 @@ const formatDate = (dateString) => {
                     <p>{author_id?.username}</p>
 
                     {/* <p>{author_id.username}</p> */}
-                    <p className="blogdate">{formatDate(createdAt)}</p>
+                    <p className="blogdate">{formatDate1(createdAt)}</p>
+                    
                   </div>
                 </div>
                 <hr />

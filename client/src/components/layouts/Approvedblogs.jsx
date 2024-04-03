@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { formatDistanceToNow } from 'date-fns';
 
 
 function Approvedblogs() {
@@ -65,14 +66,18 @@ function Approvedblogs() {
     //         [name]: checked
     //     }));
     // };
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-      };
+    // const formatDate = (dateString) => {
+    //     const date = new Date(dateString);
+    //     const day = date.getDate();
+    //     const month = date.getMonth() + 1;
+    //     const year = date.getFullYear();
+    //     return `${day}/${month}/${year}`;
+    //   };
 
+      const formatDate1 = (dateString) => {
+        const date1 = new Date(dateString);
+        return formatDistanceToNow(date1, { addSuffix: true });
+      };
     return (
         <>
             <div className="row blogrow">
@@ -93,7 +98,7 @@ function Approvedblogs() {
                                     <p>{author_id?.username}</p>
 
                                         {/* <p>{author_id.username}</p> */}
-                                        <p className="blogdate">{formatDate(createdAt)}</p>
+                                        <p className="blogdate">{formatDate1(createdAt)}</p>
                                     </div>
                                 </div>
                                 <hr />

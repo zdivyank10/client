@@ -6,6 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 
 function NotApprovedblogs() {
   const { AuthorizationToken,API_BASE_URL,notapprovedblog,getNotApprovedBlogs } = useAuth();
@@ -66,12 +67,17 @@ function NotApprovedblogs() {
     )
 }}
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+// const formatDate = (dateString) => {
+//   const date = new Date(dateString);
+//   const day = date.getDate();
+//   const month = date.getMonth() + 1;
+//   const year = date.getFullYear();
+//   return `${day}/${month}/${year}`;
+// };
+
+const formatDate1 = (dateString) => {
+  const date1 = new Date(dateString);
+  return formatDistanceToNow(date1, { addSuffix: true });
 };
   return (
     <>
@@ -93,7 +99,7 @@ const formatDate = (dateString) => {
                                     <p>{author_id?.username}</p>
 
                                         {/* <p>{author_id.username}</p> */}
-                                        <p className="blogdate">{formatDate(createdAt)}</p>
+                                        <p className="blogdate">{formatDate1(createdAt)}</p>
                                     </div>
                                 </div>
                                 <hr />

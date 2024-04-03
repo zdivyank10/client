@@ -6,6 +6,10 @@ import { FaUserAlt } from 'react-icons/fa';
 import { AiFillHeart, AiFillMessage } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { formatDistanceToNow } from 'date-fns';
+import { GoDotFill } from "react-icons/go";
+
+
 
 function Post() {
   const { user, approvedblog, API_BASE_URL } = useAuth();
@@ -133,6 +137,10 @@ function Post() {
     return `${day}/${month}/${year}`;
   };
 
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  };
   return (
     <>
       <div className="row blogrow">
@@ -144,6 +152,7 @@ function Post() {
             const totalLike = totalLikes[_id] || 0;
             const isLiked = likedPosts.includes(_id);
             const formattedDate = formatDate(createdAt);
+            const formattedDate1 = formatDate1(createdAt);
 
             return (
               <div data-aos="fade-up" className="maincontainer col-md-3" key={index}>
@@ -156,7 +165,10 @@ function Post() {
                     <FaUserAlt className="userpfp" />
                     <div className="info">
                       <p>{author_id?.username}</p>
-                      <p className="blogdate">{formattedDate}</p> {/* Display formatted date */}
+                      {/* <GoDotFill size={10} className='m-1'/> */}
+
+                      {/* <p className="blogdate">{formattedDate}</p>  */}
+                      <p className="blogdate">{formattedDate1}</p> {/* Display formatted date */}
                     </div>
                   </Link>
                   <hr />
