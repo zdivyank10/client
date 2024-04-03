@@ -69,7 +69,7 @@ function FullBlog() {
     if (user) {
       fetchLikedPosts();
     }
-  },  [user, blog_id,likedPosts]);
+  }, [user, blog_id, likedPosts]);
 
   const like = async (blogId, liked) => {
 
@@ -92,7 +92,7 @@ function FullBlog() {
       return;
     }
     try {
-      
+
       await fetch(`${API_BASE_URL}api/like`, {
         method: "POST",
         headers: {
@@ -114,7 +114,7 @@ function FullBlog() {
       console.log('Error liking post:', error);
     }
   };
-  
+
 
   const fetchComments = async () => {
     try {
@@ -160,32 +160,32 @@ function FullBlog() {
 
 
   useEffect(() => {
-   
-      const fetchTotalLikes = async () => {
-        try {
-          const response = await fetch(`${API_BASE_URL}api/like/totallike`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ blog: blog_id }),
-          });
-          const responseData = await response.json();
-          setTotalLikes((prevTotalLikes) => ({
-            ...prevTotalLikes,
-            [blog_id]: responseData.totalLikes
-          }));
-          // Check if the user liked the post and add to likedPosts array if liked
-          if (responseData.userLiked) {
-            setLikedPosts(prevLikedPosts => [...prevLikedPosts, blog_id]);
-          }
-        } catch (error) {
-          console.log('Error fetching total likes:', error);
+
+    const fetchTotalLikes = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}api/like/totallike`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ blog: blog_id }),
+        });
+        const responseData = await response.json();
+        setTotalLikes((prevTotalLikes) => ({
+          ...prevTotalLikes,
+          [blog_id]: responseData.totalLikes
+        }));
+        // Check if the user liked the post and add to likedPosts array if liked
+        if (responseData.userLiked) {
+          setLikedPosts(prevLikedPosts => [...prevLikedPosts, blog_id]);
         }
-      };
-      fetchTotalLikes();
-    
-  }, [totalLikes,likedPosts]);
+      } catch (error) {
+        console.log('Error fetching total likes:', error);
+      }
+    };
+    fetchTotalLikes();
+
+  }, [totalLikes, likedPosts]);
 
   // Loading state
   if (loading) {
@@ -330,7 +330,7 @@ function FullBlog() {
     setShowModal(false);
   };
 
-  const { _id,author_id, title, cover_img, content, tags, createdAt } = blogPost;
+  const { _id, author_id, title, cover_img, content, tags, createdAt } = blogPost;
   const sanitizedContent = DOMPurify.sanitize(content);
   const isLiked = likedPosts.includes(_id);
 
@@ -351,9 +351,9 @@ function FullBlog() {
         </div> */}
         <div className="fullblogcontainer">
           <div className="authorinfo">
-          <button className='btn btn-dark back_btn' onClick={() => navigate(-1)}>
-            <IoReturnDownBackOutline size={25} /> Back
-          </button>
+            <button className='btn btn-dark back_btn' onClick={() => navigate(-1)}>
+              <IoReturnDownBackOutline size={25} /> Back
+            </button>
             <hr />
             <FaUserAlt className='userpfp' />
             <p className='authorname'>{author_id?.username}</p>
@@ -377,24 +377,24 @@ function FullBlog() {
             </div>
           </div>
           <div className="actions">
-          {/* {isLikedByUser && isLiked ? ( */}
-          <div className="like_cmt">
+            {/* {isLikedByUser && isLiked ? ( */}
+            <div className="like_cmt">
 
-             {!isLikedByUser===true  ? (
-               <>
-               {/* <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id,false)} /> */}
-               <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id,true)} />
-               <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
-               </>
-               ) : (
-                 <>
-                 {/* <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id,true)} /> */}
-                 <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id,false)} />
-                 <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
+              {!isLikedByUser === true ? (
+                <>
+                  {/* <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id,false)} /> */}
+                  <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id, true)} />
+                  <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
                 </>
-                 )}
-                 {/* <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p> */}
-                 </div>
+              ) : (
+                <>
+                  {/* <AiFillHeart size={25} className="post_like" color="black" onClick={() => like(_id,true)} /> */}
+                  <AiFillHeart size={25} className="post_like" color="red" onClick={() => like(_id, false)} />
+                  <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p>
+                </>
+              )}
+              {/* <p className='fullblog_likeinfo'>{totalLikes[blog_id]} likes</p> */}
+            </div>
             {/* <AiFillHeart size={25} className='fullblog_like' />
             <p className='fullblog_likeinfo'>10 likes</p> */}
             <p className='blog_cmt'>
@@ -415,19 +415,31 @@ function FullBlog() {
               commentsList.map((commentItem, index) => (
                 <div key={index} className="comment">
                   <div className="comment-content">
-                    <FaUserAlt className='userpfp' size={25} />
-                    <p className='cmt_user'>{commentItem.userid?.username}</p>
-                    <div className='cmt_time mt-1'>{formatDate(commentItem.createdAt)}</div> {/* Format date here */}
+                    <div className="">
+
+                      <FaUserAlt className='' size={25} />
+                    </div>
+                    <div className="">
+
+                      <p className='cmt_user'>{commentItem.userid?.username}</p>
+                    </div>
+                    <div className='cmt_time mt-1'>
+                      {formatDate(commentItem.createdAt)}
+                    </div> 
+
+                  <div className="">
+
                     {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
                       <div className='cmt_time mt-1 ms-5 text-danger'>
-                     <p>
+                        <p>
 
-                      <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
-                     </p>
-                    </div>
-                    
-                    )}
+                          <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
+                        </p>
+                      </div>
 
+)}
+
+</div>
                   </div>
                   <div className="cmt_container">
                     <p className='cmt_content justify-content-center align-content-center'>{commentItem.content}</p>
