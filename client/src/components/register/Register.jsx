@@ -9,6 +9,8 @@ import { MdErrorOutline } from "react-icons/md";
 
 
 function Register() {
+
+
   const navigate = useNavigate();
   const { storeTokenInLS, API_BASE_URL } = useAuth();
 
@@ -32,6 +34,16 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formx = document.querySelector('form')
+    if (!formx.checkValidity()) {
+      // Create the temporary button, click and remove it
+      const tmpSubmit = document.createElement('button')
+      formx.appendChild(tmpSubmit)
+      tmpSubmit.click()
+      formx.removeChild(tmpSubmit)
+      return
+    }
 
     // If email is not verified, return
     if (!isEmailVerified) {
@@ -133,7 +145,18 @@ function Register() {
   const verifyEmail = async (e) => {
     e.preventDefault();
 
+    const formx = document.querySelector('form')
+    if (!formx.checkValidity()) {
+      // Create the temporary button, click and remove it
+      const tmpSubmit = document.createElement('button')
+      formx.appendChild(tmpSubmit)
+      tmpSubmit.click()
+      formx.removeChild(tmpSubmit)
+      return
+    }
     try {
+
+      // if()
       // Set sendingOTP to true to display spinner
       setSendingOTP(true);
 
@@ -191,6 +214,16 @@ function Register() {
 
   const verifyOTP = async (e) => {
     e.preventDefault();
+
+    const formx = document.querySelector('form')
+    if (!formx.checkValidity()) {
+      // Create the temporary button, click and remove it
+      const tmpSubmit = document.createElement('button')
+      formx.appendChild(tmpSubmit)
+      tmpSubmit.click()
+      formx.removeChild(tmpSubmit)
+      return
+    }
 
     try {
       // Perform OTP verification
@@ -263,10 +296,10 @@ function Register() {
         <div className="right_container col-md-6">
           <h1 data-aos="fade-up" className="text-center left_h1">Register</h1>
           <div data-aos="zoom-in" className="right_form">
-            <form onSubmit={handleSubmit}>
+            <form >
               <div className="form_div">
                 <label htmlFor="username">Username:</label>
-                <input type="text" name="username" id="username" placeholder="Enter Your Username" onChange={handleInput} value={user.username} required />
+                <input type="text" name="username" id="username" placeholder="Enter Your Username" onChange={handleInput} value={user.username} required  min={3} max={256} />
               </div>
               <div className="form_div">
                 <label htmlFor="email">Email:</label>
@@ -274,7 +307,7 @@ function Register() {
               </div>
               <div className="form_div">
                 <label htmlFor="phone">Phone:</label>
-                <input type="number" name="phone" id="phone" placeholder="Enter Your Phone" onChange={handleInput} value={user.phone} required />
+                <input type="number"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" id="phone" placeholder="Enter Your Phone" onChange={handleInput} value={user.phone} required />
               </div>
               {!isEmailVerified && (
                 <div className="form_div text-center">
@@ -284,7 +317,8 @@ function Register() {
                       {/* <span className="sr-only">Loading...</span> */}
                     </div>
                   ) : (
-                    <button type="submit" onClick={verifyEmail}>Verify Email</button>
+                    <button type="submit" onClick={verifyEmail
+                    } id="verify-email">Verify Email</button>
                   )}
                 </div>
               )}
@@ -296,7 +330,7 @@ function Register() {
                     <p className="mt-3 text-center text-danger"><MdErrorOutline />  Check spam if You can't see mail in your inbox</p>
                   </div>
                   <div className="form_div text-center">
-                    <button onClick={verifyOTP}>Verify OTP</button>
+                    <button  onClick={verifyOTP}>Verify OTP</button>
                   </div>
                 </>
               )}
@@ -307,7 +341,7 @@ function Register() {
                     <input type="password" name="password" id="password" placeholder="Enter Your Password" onChange={handleInput} value={user.password} required />
                   </div>
                   <div className="form_div text-center">
-                    <button type="submit">Register</button>
+                    <button  type="submit" onClick={handleSubmit}>Register</button>
                   </div>
                 </>
               )}
