@@ -32,7 +32,7 @@ const Sidebar = () => {
           <Link to="/admin/blogs"><GiNotebook /> All Blogs Approval</Link>
         </li>
         <li>
-          <Link to="/admin/pendingblogs"><ImBlog /> Pending Blogs</Link>
+          <Link to="/admin/pendingblogs"><ImBlog className='text-warning'/> Pending Blogs</Link>
  
         </li>
         <li>

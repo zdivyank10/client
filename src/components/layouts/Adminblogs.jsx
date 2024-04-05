@@ -11,6 +11,7 @@ import { Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import '../blog/post.css';
+import { GiNotebook } from 'react-icons/gi';
 
 function Adminblogs() {
   const { blog, AuthorizationToken, API_BASE_URL, getBlogs } = useAuth();
@@ -163,7 +164,7 @@ function Adminblogs() {
 
   return (
     <div className="container">
-      <h1 className="text-center">All Blogs</h1>
+      <h1 className="home_left_h1 text-center"><GiNotebook size={80} />  All Blogs</h1>
       <Table striped bordered hover >
         <thead>
           <tr className="table table-dark">

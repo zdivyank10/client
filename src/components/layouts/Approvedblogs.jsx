@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { formatDistanceToNow } from 'date-fns';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { ImBlog } from 'react-icons/im';
 
 function Approvedblogs() {
     const { approvedblog, AuthorizationToken, API_BASE_URL, getApprovedBlogs } = useAuth();
@@ -58,7 +59,7 @@ function Approvedblogs() {
     return (
         <>
             <div className=" row blogrow">
-                <h1 className="text-center">Already Approved Blogs</h1>
+                <h1 className="home_left_h1 text-center"><ImBlog size={80} className='text-success'/>  Already Approved Blogs</h1>
                 <hr />
                 <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
                     <Masonry columnsCount={3}>

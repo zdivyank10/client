@@ -46,8 +46,8 @@ function AdminEditor() {
 
     return (
         <>
-            <Link to={`/admin/alreadyeditor`} className='btn btn-dark'>Already Editor's Choice</Link>
-            <h1 className='text-center'>Make it Editor's Choice</h1>
+            <Link to={`/admin/alreadyeditor`} className='btn btn-dark'><GiImperialCrown size={25 } />  Already Editor's Choice</Link>
+            <h1 className='home_left_h1 text-center'>Make it Editor's Choice</h1>
             <div className="pagination-container align-items-center justify-content-center">
                 <hr />
                 <table className="table  table-hover ">

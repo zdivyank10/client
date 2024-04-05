@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { ImBlog } from 'react-icons/im';
 
 function NotApprovedblogs() {
   const { AuthorizationToken, API_BASE_URL, notapprovedblog, getNotApprovedBlogs } = useAuth();
@@ -88,7 +89,7 @@ function NotApprovedblogs() {
   return (
     <>
       <div className="blogrow">
-        <h1 className="text-center">Already Declined Blogs</h1>
+        <h1 className="home_left_h1 text-center"><ImBlog size={80} className='text-danger'/>  Already Declined Blogs</h1>
         <hr />
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}

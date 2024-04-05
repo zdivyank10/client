@@ -4,6 +4,7 @@ import './admincontact.css';
 import { useAuth } from '../../store/auth';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { MdOutlineContactPhone } from 'react-icons/md';
 
 function Admincontacts() {
   const { AuthorizationToken,API_BASE_URL } = useAuth();
@@ -45,7 +46,7 @@ function Admincontacts() {
 
   return (
     <>
-      <h1 className='text-center'>List of Contact us</h1>
+      <h1 className='home_left_h1 text-center'><MdOutlineContactPhone size={80}/>  List of Contact us</h1>
       <div className="pagination-container align-items-center justify-content-center"> {/* Center the pagination */}
       <hr />
       <table className="table  table-hover ">

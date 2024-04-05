@@ -224,6 +224,7 @@ function AdminDashboard() {
   return (
     <>
 
+<div className="dashboard">
 
       <div className="dashboard_admin">
         <div className="admin_info">
@@ -239,6 +240,7 @@ function AdminDashboard() {
         <img src="../img/admin.jpg" alt="" className='admin_pic' height={175} />
       </div>
 
+      </div>
       <hr />
 
       <div className="chart">
@@ -264,7 +266,7 @@ function AdminDashboard() {
       </div>
 
       <hr />
-
+      <div className="dashboard">
       <div className="head_dashboard">
 
 
@@ -307,11 +309,13 @@ function AdminDashboard() {
             <p>{countcmt.totalCmt}</p>
           </div>
         </div>
+        </div>
 
 
 
 
       </div>
+
     </>
   );
 }

@@ -14,7 +14,7 @@ function Adminlayout() {
 
   // }, []);
   if (isLoading) {
-    return <img src="../img/Ellipsis-1s-217px.gif"height={600} alt="Loading" />
+    return <img src="../img/Ellipsis-1s-217px.gif" height={600} alt="Loading" />
   }
 
   if (!user.isAdmin) {

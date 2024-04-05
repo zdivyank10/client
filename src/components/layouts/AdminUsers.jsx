@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import DeleteConfirmationModal from '../Admin/DeleteConfirmationModal';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { GiImperialCrown } from 'react-icons/gi';
+import { FaUsers } from 'react-icons/fa';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -102,7 +103,7 @@ function AdminUsers() {
 
   return (
     <>
-      <h1 className='text-center'>List of Ink Garden Users</h1>
+      <h1 className='home_left_h1 text-center'><FaUsers size={80}/>  List of Ink Garden Users</h1>
       <hr />
       <table className="table  table-hover ">
         <thead>

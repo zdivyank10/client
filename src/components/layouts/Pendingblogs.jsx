@@ -7,6 +7,7 @@ import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import Masonry,{ResponsiveMasonry} from 'react-responsive-masonry'; 
+import { ImBlog } from 'react-icons/im';
 
 function Pendingblogs() {
   const { user, AuthorizationToken, API_BASE_URL, pendingblog,getPendingBlogs } = useAuth();
@@ -97,7 +98,7 @@ const formatDate1 = (dateString) => {
   return (
     <>
       <div className="blogrow">
-        <h1 className="text-center">All Pending Blogs</h1>
+        <h1 className="home_left_h1 text-center"><ImBlog size={80} className='text-warning'/>  All Pending Blogs</h1>
         <hr />
 
         <ResponsiveMasonry
