@@ -6,6 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
+import Masonry,{ResponsiveMasonry} from 'react-responsive-masonry'; 
 
 function Pendingblogs() {
   const { user, AuthorizationToken, API_BASE_URL, pendingblog,getPendingBlogs } = useAuth();
@@ -95,14 +96,19 @@ const formatDate1 = (dateString) => {
 
   return (
     <>
-      <div className="row blogrow">
+      <div className="blogrow">
         <h1 className="text-center">All Pending Blogs</h1>
         <hr />
+
+        <ResponsiveMasonry
+                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+            >
+      <Masonry columnsCount={3}>
         {sortedBlogs && sortedBlogs.map((currEle, index) => {
           const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
           const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
           return (
-            <div className="maincontainer col-md-4" key={index}>
+            <div className="maincontainer" key={index}>
               <div className="postcontainer text-center m-3">
                 <div className="postimg">
                   <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
@@ -139,6 +145,9 @@ const formatDate1 = (dateString) => {
             </div>
           );
         })}
+        
+        </Masonry>
+      </ResponsiveMasonry>
 
       </div>
       {/* {noPendingBlogs && <h1 className='text-center text-danger'>No Pending Blogs</h1>} */}
