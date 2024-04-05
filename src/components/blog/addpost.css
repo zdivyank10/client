@@ -3,6 +3,8 @@
     height: auto;
     display: flex;
     height: 100%;
+    background-color: var(--forth-color);
+   
    
 }
 
@@ -16,10 +18,11 @@
 .addpostright
 {
     /* border: 2px solid yellow; */
-    width: 50%;
-    margin: 20px;
+    width: 40%;
+    margin: 40px;
     border: 1px solid var(--third-color);
     border-radius: 15px;
+    background : var(--font-color);
 }
 .formcontrol{
     margin: 10px 20px;

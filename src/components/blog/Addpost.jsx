@@ -163,7 +163,7 @@ function Addpost() {
         </div> */}
 
         <div className="addpostright ">
-          <h1 className='text-center'>Write Blog</h1>
+          <h1 className='text-center m-4'>Write Blog</h1>
           <hr />
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="formcontrol">

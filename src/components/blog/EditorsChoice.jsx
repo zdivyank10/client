@@ -86,7 +86,7 @@ function EditorsChoice() {
         <div className="row blogrow">
 
 
-          <h1 className='text-center'>Editor's Choice</h1>
+          <h1 className='home_left_h1 text-center'>Editor's Choice</h1>
           <hr />
           {choice &&
             choice.map((post, index) => {
@@ -133,7 +133,7 @@ function EditorsChoice() {
                       sx={{
                         minHeight: '200px',
                         boxShadow: '0px 4px 10px rgba(0, 10, 9, 1)',
-                        width: 300,
+                        width: 350,
                         backgroundColor: '#fff',
                         borderColor: '#59E4A8',
                         borderRadius: '15px',

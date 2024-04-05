@@ -44,7 +44,7 @@ function Blog() {
   return (
     <>
         <div className="blogcontainer pt-4 text-center">
-        <button data-aos="fade-right" to="/addpost" className='btn btn-dark' onClick={checkuser}><AiFillPlusCircle size={25}/>    Add Your Blog</button>
+        <button data-aos="fade-right" to="/addpost" className='btn btn-dark m-4' onClick={checkuser}><AiFillPlusCircle size={25}/>    Add Your Blog</button>
         <hr />
         <Post />
         </div>

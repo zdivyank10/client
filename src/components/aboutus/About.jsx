@@ -4,7 +4,8 @@ function About() {
     return (
         <>
             <div className="about_container">
-            <h1 className='about_head text-center'>Welcome to Ink Garden</h1>
+            <h1 className='home_left_h1 text-center'>Welcome to Ink Garden</h1>
+            {/* <h1 className='about_head  text-center'>Welcome to Ink Garden</h1> */}
             <img src="../img/logo.jpeg" alt="" className='about_logo mt-5 mb-5'  />
             <hr />
 

@@ -28,7 +28,7 @@ function Famous() {
 
   return (
     <div className="popular_container">
-      <Carousel data-bs-theme="light">
+      <Carousel data-bs-theme="light" className='pop_Carousel'>
         {/* Map over the popularblog state to dynamically render Carousel items */}
         {popularblog.map((blog, index) => (
           <Carousel.Item key={index}>
@@ -40,8 +40,8 @@ function Famous() {
                   alt={blog.title}
                 />
               </div> */}
-              <div class="img-gradient">
-                <img className=" w-100 pop_img "
+              <div className="img-gradient">
+                <img className="pop_img"
                   src={`${API_BASE_URL}uploads/${blog.cover_img}`} />
               </div>
               <Carousel.Caption className=' d-block'>
