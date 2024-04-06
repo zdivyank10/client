@@ -1,0 +1,269 @@
+/* Default styles */
+.fullblog_container {
+    display: flex;
+    background-color: var(--forth-color);
+}
+
+.fullblogcontainer {
+    height: 100%;
+    border: 1px solid var(--third-color);
+    margin: 5% auto;
+    /* Center the container with 5% top and bottom margin */
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    border-radius: 15px;
+    background-color: var(--font-color);
+}
+
+.authorinfo {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-top: -10%;
+}
+.fullblogtitle
+{
+    margin-bottom: 15px;
+}
+
+.authorname {
+    font-size: 35px;
+
+}
+
+.fullblogimg {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.fullimg {
+    max-width: 100%;
+    /* Ensure the image does not exceed its container */
+    height: auto;
+    border-radius: 15px;
+}
+
+.fullblogcontent {
+    text-align: justify;
+    width: 100%;
+    font-size: 20px;
+}
+
+.fullblog_like,
+.fullblog_likeinfo {
+    float: left;
+    margin: 15px;
+}
+
+.fullpost_cmt {
+    float: right;
+    margin: 15px;
+}
+
+.comment_section {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin: 5% auto; */
+    width: 70%;
+}
+
+.send_icon {
+    border: 1px solid var(--primary-color);
+    margin: 5px;
+    padding: 5px;
+}
+
+.comments {
+    border: 1px solid var(--primary-color);
+    margin: 15px;
+    padding: 25px;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.comment {
+    border: 1px solid var(--primary-color);
+    margin: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.comment:hover {
+  transition: 0.5s;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+.cmt_user {
+    font-size: 22px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.comment-content {
+    margin-top: 5px;
+    margin-left: 15px;
+    display: flex;
+}
+
+.cmt_container {
+    /* display: block; */
+    /* justify-content: start; */
+    margin-left: 45px;
+}
+
+.cmt_content {
+    margin-left: 15px;
+
+}
+
+.back {
+    margin: 45px;
+}.blog_cmt
+{
+    display: flex;
+    margin: 15px;
+}
+
+
+.back_btn
+{
+    display: flex;
+    margin-left: -400px;
+    /* float: left; */
+}
+/* Media Queries for responsiveness */
+
+/* Tablets (landscape) and larger */
+@media only screen and (min-width:320px) {
+
+    .fullblog_container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fullblogcontainer {
+        width: 70%;
+        /* Reduce container width for larger screens */
+    }
+
+    .authorname {
+        font-size: 20px;
+        /* Decrease font size for larger screens */
+    }
+
+    .fullblogcontent {
+        font-size: 18px;
+        /* Decrease font size for larger screens */
+    }
+
+    .authorinfo {
+        display: flex;
+        flex-direction: column;
+    }
+    .comments
+    {
+        display:flex;
+        /* font-size: 18px; */
+        width: 100%;
+        /* padding: 20px; */
+        /* margin: 15px; */
+        flex-direction: column;
+    }
+
+    .comment-content {
+       
+        display: flex;
+        width: 100%;
+        /* flex-direction: column; */
+    
+    }
+
+    .cmt_time
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .back_btn
+{
+    /* display: flex; */
+    margin-left: -100px;
+    /* float: left; */
+}
+
+
+
+.cmt_container {
+    display: block;
+    justify-content: start;
+    margin-left: 0px;
+}
+}
+
+@media only screen and (min-width: 768px) {
+
+
+    .fullblog_container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .fullblogcontainer {
+        width: 70%;
+        /* Reduce container width for larger screens */
+    }
+
+    .authorname {
+        font-size: 20px;
+        /* Decrease font size for larger screens */
+    }
+
+    .fullblogcontent {
+        font-size: 18px;
+        /* Decrease font size for larger screens */
+    }
+
+    .authorinfo {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+/* Large desktops and larger */
+@media only screen and (min-width: 1200px) {
+   
+    .fullblogcontainer {
+        width: 40%;
+        
+    }
+
+    .authorname {
+        font-size: 16px;
+      
+    }
+
+    .fullblogcontent {
+        font-size: 14px;
+        
+    }
+
+    .authorinfo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .back_btn
+    {
+        /* display: flex; */
+        margin-left: -400px;
+        /* float: left; */
+    }
+}

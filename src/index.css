@@ -1,0 +1,32 @@
+*{
+ 
+    font-family: 'Asap Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
+}
+body{
+
+    overflow-x: hidden;
+}
+
+:root {
+
+    /* --primary-color: #003C43;  */
+    /* --secondary-color: #135D66; */
+
+    --third-color : #59E4A8;
+     --forth-color:#E3FEF7;
+     /* --forth-color:#dcd8d8; */
+     --font-color:#ffffff;
+     --primary-color:#1A1A1E;
+
+    /* --primary-color:#354259; */
+     /* --secondary-color: #CDC2AE; */
+    /* --third-color : #59E4A8;
+     --forth-color:#EDE6DB;
+     /* --forth-color:#dcd8d8; */
+     /* --font-color:#ffffff;
+
+      */ 
+      --secondary-color: #4e4e50;
+    
+  }
