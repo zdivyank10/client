@@ -72,7 +72,7 @@ function Addpost() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const uploadResponse = await fetch(`${process.env.API_BASE_URL}api/blog/upload`, {
+      const uploadResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -84,7 +84,7 @@ function Addpost() {
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');
-        const response = await fetch(`${process.env.API_BASE_URL}api/blog/addblog`, {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/addblog`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

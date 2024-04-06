@@ -27,7 +27,7 @@ function AdminEditor() {
     const makeEditorsChoice = async(blogId) => {
         console.log("Making blog with ID", blogId, "an editor's choice...");
         try {
-            const response = await fetch(`${process.env.API_BASE_URL}api/admin/choice`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/admin/choice`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function AdminEditor() {
                                 <td>{curEle.title}</td>
                                 <td>{curEle.author_id?.username}</td>
                                 <td>
-                                    <img src={`${process.env.API_BASE_URL}uploads/${curEle.cover_img}`} height={80} width={120} alt="Cover Image" />
+                                    <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${curEle.cover_img}`} height={80} width={120} alt="Cover Image" />
                                 </td>
                                 <td>
                                     {curEle.tags.map((tag, tagIndex) => (

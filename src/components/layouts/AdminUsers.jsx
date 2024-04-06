@@ -12,13 +12,13 @@ function AdminUsers() {
   const [users, setUsers] = useState([]);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
-  const { AuthorizationToken, API_BASE_URL, user } = useAuth();
+  const { AuthorizationToken, REACT_APP_API_BASE_URL, user } = useAuth();
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
 
   const handleDeleteUser = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/users/delete/${userIdToDelete}`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}api/admin/users/delete/${userIdToDelete}`, {
         method: 'DELETE',
         headers: {
           Authorization: AuthorizationToken,
@@ -49,7 +49,7 @@ function AdminUsers() {
 
   const getAllUsersData = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/users`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}api/admin/users`, {
         method: 'GET',
         headers: {
           Authorization: AuthorizationToken,
@@ -66,7 +66,7 @@ function AdminUsers() {
   const removeAdmin = async (userId) => {
     console.log("Removing admin role for user with ID:", userId);
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/remove/${userId}`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}api/admin/remove/${userId}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ function AdminUsers() {
   const makeAdmin = async (userId) => {
     console.log("Making user with ID:", userId, "an admin...");
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/${userId}`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}api/admin/${userId}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',

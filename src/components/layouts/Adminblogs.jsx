@@ -41,7 +41,7 @@ function Adminblogs() {
 
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ function Adminblogs() {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/blog/${deleteId}/delete`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/${deleteId}/delete`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -205,7 +205,7 @@ function Adminblogs() {
               <tr key={index}>
                 <td>
                   <Link to={`/blog/${_id}`} className="postimg">
-                    <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
+                    <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${cover_img}`} height={100} alt="" />
                   </Link>
                 </td>
                 <td>

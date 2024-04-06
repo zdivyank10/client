@@ -18,7 +18,7 @@ function Post() {
 
   const totalcmts = async (blogId) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/comment/${blogId}/count`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/comment/${blogId}/count`);
       const responseData = await response.json();
       setTotalComments((prevTotalComments) => ({
         ...prevTotalComments,
@@ -32,7 +32,7 @@ function Post() {
   useEffect(() => {
     const fetchLikedPosts = async () => {
       try {
-        const response = await fetch(`${process.env.API_BASE_URL}api/like/${user._id}/liked`);
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/like/${user._id}/liked`);
         const data = await response.json();
         console.log('user liked data:', data);
 
@@ -70,7 +70,7 @@ function Post() {
       return;
     }
     try {
-      await fetch(`${process.env.API_BASE_URL}api/like`, {
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}api/like`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function Post() {
       const blogId = post._id;
       const fetchTotalLikes = async () => {
         try {
-          const response = await fetch(`${process.env.API_BASE_URL}api/like/totallike`, {
+          const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/like/totallike`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ function Post() {
                   <div data-aos="fade-up" className="maincontainer small-width-post" key={index}>
                     <div className="postcontainer">
                       <Link to={`/blog/${_id}`} className="postimg">
-                        <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                        <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                       </Link>
 
                       <Link to={`/blog/${_id}`} className="postuserinfo">

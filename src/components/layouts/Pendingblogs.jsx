@@ -22,7 +22,7 @@ function Pendingblogs() {
   }, []);
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const formatDate1 = (dateString) => {
             <div className="maincontainer" key={index}>
               <div className="postcontainer text-center m-3">
                 <div className="postimg">
-                  <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                  <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                 </div>
                 <div className="postuserinfo ">
                   <FaUserAlt className='userpfp' />

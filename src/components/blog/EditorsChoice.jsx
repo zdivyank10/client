@@ -28,7 +28,7 @@ function EditorsChoice() {
 
   const getChoice = async () => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/admin/alreadychoice`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/admin/alreadychoice`, {
         method: "GET",
         headers: {
           Authorization: AuthorizationToken
@@ -48,7 +48,7 @@ function EditorsChoice() {
 
   const totalcmts = async (blogId) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/comment/${blogId}/count`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/comment/${blogId}/count`, {
         method: "GET"
       });
       const responseData = await response.json();
@@ -162,7 +162,7 @@ function EditorsChoice() {
                           }}
                         >
 
-                          <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
+                          <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
                         </Typography>
                       </CardCover>
                       <CardContent

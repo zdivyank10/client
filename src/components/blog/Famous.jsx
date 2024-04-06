@@ -11,7 +11,7 @@ function Famous() {
 
   const popular_blogs = async () => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL}api/like/popular`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/like/popular`, {
         method: "GET",
       });
       const data = await response.json();
@@ -36,13 +36,13 @@ function Famous() {
               {/* <div className="darker">
                 <img
                   className="d-block w-100 pop_img text-center"
-                  src={`${process.env.API_BASE_URL}uploads/${blog.cover_img}`}
+                  src={`${process.env.REACT_APP_API_BASE_URL}uploads/${blog.cover_img}`}
                   alt={blog.title}
                 />
               </div> */}
               <div className="img-gradient">
                 <img className="pop_img"
-                  src={`${process.env.API_BASE_URL}uploads/${blog.cover_img}`} />
+                  src={`${process.env.REACT_APP_API_BASE_URL}uploads/${blog.cover_img}`} />
               </div>
               <Carousel.Caption className=' d-block'>
                 <h1 className='text-light'>{blog.title}</h1>
