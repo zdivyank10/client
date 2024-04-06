@@ -10,7 +10,6 @@ function Section1() {
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState(false); // State variable for search error
   const { searchQuery } = useParams();
-  const { API_BASE_URL } = useAuth();
 
   useEffect(() => {
     if (searchQuery) {
@@ -29,7 +28,7 @@ function Section1() {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -83,7 +82,7 @@ function Section1() {
           {searchError && <p className='ms-5'>No approved blogs found related to '{query}'</p>}
           {searchResults.map(result => (
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
-              <img src={`${API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
+              <img src={`${process.env.API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
                 <h3 className='text-dark'>{result.author_id?.username}</h3>
                 <h5 className='text-dark'>{result.title}</h5>

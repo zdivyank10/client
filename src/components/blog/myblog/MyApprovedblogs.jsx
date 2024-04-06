@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 
 function MyApprovedblogs() {
-    const { user,API_BASE_URL
+    const { user
     } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ function MyApprovedblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}api/blog/${user._id}/approved`, {
+                const response = await fetch(`${process.env.API_BASE_URL}api/blog/${user._id}/approved`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -81,7 +81,7 @@ function MyApprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="row">
                                 <Link to={`/blog/${_id}`} className="postimg">
-                                    <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                 </Link>
 
                                 <Link to={`/blog/${_id}`} className="postuserinfo">

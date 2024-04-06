@@ -10,7 +10,7 @@ import Masonry,{ResponsiveMasonry} from 'react-responsive-masonry';
 import { ImBlog } from 'react-icons/im';
 
 function Pendingblogs() {
-  const { user, AuthorizationToken, API_BASE_URL, pendingblog,getPendingBlogs } = useAuth();
+  const { user, AuthorizationToken, pendingblog,getPendingBlogs } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [blogId, setBlogId] = useState(null);
   const [action, setAction] = useState(null); // 'approve' or 'decline'
@@ -22,7 +22,7 @@ function Pendingblogs() {
   }, []);
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const formatDate1 = (dateString) => {
             <div className="maincontainer" key={index}>
               <div className="postcontainer text-center m-3">
                 <div className="postimg">
-                  <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+                  <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
                 </div>
                 <div className="postuserinfo ">
                   <FaUserAlt className='userpfp' />

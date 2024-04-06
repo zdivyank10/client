@@ -9,7 +9,7 @@ function Contact() {
 //   const navigate = useNavigate();
   
   const [userData,setuserData] = useState(true);
-  const {user,API_BASE_URL} = useAuth();
+  const {user} = useAuth();
  
   const defaultContactForm = {
     username: "",
@@ -51,7 +51,7 @@ function Contact() {
       console.log(contact);
     
       try {
-        const response = await fetch(`${API_BASE_URL}api/form/contact`, {
+        const response = await fetch(`${process.env.API_BASE_URL}api/form/contact`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",

@@ -12,7 +12,7 @@ function Register() {
 
 
   const navigate = useNavigate();
-  const { storeTokenInLS, API_BASE_URL } = useAuth();
+  const { storeTokenInLS } = useAuth();
 
   const [user, setUser] = useState({
     username: "",
@@ -83,7 +83,7 @@ function Register() {
 
     try {
       // Proceed with registration
-      const response = await fetch(`${API_BASE_URL}api/auth/register`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,7 +160,7 @@ function Register() {
       // Set sendingOTP to true to display spinner
       setSendingOTP(true);
 
-      const response = await fetch(`${API_BASE_URL}api/auth/sendmail`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/auth/sendmail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -227,7 +227,7 @@ function Register() {
 
     try {
       // Perform OTP verification
-      const otpResponse = await fetch(`${API_BASE_URL}api/auth/verify`, {
+      const otpResponse = await fetch(`${process.env.API_BASE_URL}api/auth/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

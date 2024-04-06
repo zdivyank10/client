@@ -12,7 +12,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 function Blog() {
 
     const navigate = useNavigate();
-    const {user,API_BASE_URL} = useAuth();
+    const {user} = useAuth();
     const checkuser= async() => {
             try {
                 if (user) {

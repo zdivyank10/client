@@ -6,7 +6,7 @@ import './dashboard.css'
 function AdminDashboard() {
   const [chartData, setChartData] = useState({});
   const [pieChartData, setPieChartData] = useState({});
-  const { API_BASE_URL, user } = useAuth();
+  const { user } = useAuth();
   const [chartInstance, setChartInstance] = useState(null);
   const [piechartInstance, setPieChartInstance] = useState(null);
   const [countblogs, setCountblogs] = useState({});
@@ -18,7 +18,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/monthlyuser`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/monthlyuser`);
         if (!response.ok) {
           throw new Error('Failed to fetch user registration data');
         }
@@ -45,7 +45,7 @@ function AdminDashboard() {
 
     const fetchBlogData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/blogstat`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/blogstat`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -75,7 +75,7 @@ function AdminDashboard() {
 
     const totalLike = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/totallike`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/totallike`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -89,7 +89,7 @@ function AdminDashboard() {
     };
     const totalComment = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/totalcomment`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/totalcomment`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -104,7 +104,7 @@ function AdminDashboard() {
 
     const totalContact = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/totalcontact`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/totalcontact`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -118,7 +118,7 @@ function AdminDashboard() {
     };
     const totalAdmin = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/totaladmin`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/totaladmin`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -136,7 +136,7 @@ function AdminDashboard() {
     totalComment();
     totalContact();
     totalAdmin();
-  }, [API_BASE_URL]);
+  }, [process.env.API_BASE_URL]);
 
   useEffect(() => {
     const renderUserRegistrationChart = () => {

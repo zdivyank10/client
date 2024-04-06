@@ -7,7 +7,7 @@ import { MdError } from "react-icons/md";
 import { toast } from 'react-toastify';
 
 function Myprofile() {
-    const { user,API_BASE_URL } = useAuth();
+    const { user } = useAuth();
     const [userData, setUserData] = useState({
         username: '',
         email: '',
@@ -28,7 +28,7 @@ function Myprofile() {
     useEffect(() => {
         const getuserinfo = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}api/auth/${user._id}/user`, {
+                const response = await fetch(`${process.env.API_BASE_URL}api/auth/${user._id}/user`, {
                     method: 'GET',
                 });
                 const data = await response.json();
@@ -51,7 +51,7 @@ function Myprofile() {
         }
     
         try {
-            const response = await fetch(`${API_BASE_URL}api/auth/${user._id}/upgpass`, {
+            const response = await fetch(`${process.env.API_BASE_URL}api/auth/${user._id}/upgpass`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

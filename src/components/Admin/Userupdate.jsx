@@ -10,13 +10,13 @@ function Userupdate({ _id }) {
     phone: '',
   });
   const { id } = useParams();
-  const { AuthorizationToken ,API_BASE_URL} = useAuth();
+  const { AuthorizationToken } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/admin/users/${id}`, {
+        const response = await fetch(`${process.env.API_BASE_URL}api/admin/users/${id}`, {
           method: "GET",
           headers: {
             Authorization: AuthorizationToken,
@@ -43,7 +43,7 @@ function Userupdate({ _id }) {
     e.preventDefault();
     // console.log(userData);
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/users/${id}/update`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/admin/users/${id}/update`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',

@@ -14,8 +14,6 @@ export const AuthProvider = ({ children }) =>{
     const AuthorizationToken = `Bearer ${token}`;
 
  
-    // const API_BASE_URL = 'https://5922-2402-a00-172-b05b-a922-e714-b569-6c7d.ngrok-free.app/';
-    const API_BASE_URL = 'http://localhost:8000/';
 
     const storeTokenInLS = (serverToken)=>{
         setToken(serverToken);
@@ -37,7 +35,7 @@ export const AuthProvider = ({ children }) =>{
     const userAuthentication = async() =>{
         try {
             setIsLoading(true);
-                const response = await fetch(`${API_BASE_URL}api/auth/user`,
+                const response = await fetch(`${process.env.API_BASE_URL}api/auth/user`,
                 {
                     method : "GET",
                     headers:{
@@ -63,7 +61,7 @@ export const AuthProvider = ({ children }) =>{
     const  getBlogs= async(req,res)=>{
 
         try {
-            const blogdata = await fetch(`${API_BASE_URL}api/blog/blog`,
+            const blogdata = await fetch(`${process.env.API_BASE_URL}api/blog/blog`,
             {
                 method: "GET",
              
@@ -82,7 +80,7 @@ export const AuthProvider = ({ children }) =>{
     }
     const getApprovedBlogs = async (req, res) => {
         try {
-            const approvedblogdata = await fetch(`${API_BASE_URL}api/blog/approvedblog`, {
+            const approvedblogdata = await fetch(`${process.env.API_BASE_URL}api/blog/approvedblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -110,7 +108,7 @@ export const AuthProvider = ({ children }) =>{
 
      const getNotApprovedBlogs = async(req, res) => {
         try {
-            const notapprovedblogdata = await fetch(`${API_BASE_URL}api/blog/notapprovedblog`, {
+            const notapprovedblogdata = await fetch(`${process.env.API_BASE_URL}api/blog/notapprovedblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -136,7 +134,7 @@ export const AuthProvider = ({ children }) =>{
     }
      const getPendingBlogs = async(req, res) => {
         try {
-            const pendingblogdata = await fetch(`${API_BASE_URL}api/blog/pendingblog`, {
+            const pendingblogdata = await fetch(`${process.env.API_BASE_URL}api/blog/pendingblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -184,7 +182,7 @@ export const AuthProvider = ({ children }) =>{
 
     // token
     return(
-     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading,API_BASE_URL,notapprovedblog,pendingblog,getNotApprovedBlogs,getApprovedBlogs,getPendingBlogs,getBlogs}}>
+     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,blog,AuthorizationToken,approvedblog,isLoading,notapprovedblog,pendingblog,getNotApprovedBlogs,getApprovedBlogs,getPendingBlogs,getBlogs}}>
     {children}
     </AuthContext.Provider>
     )

@@ -6,12 +6,12 @@ import { useAuth } from '../../store/auth';
 
 function Singlepost({ postId }) {
   const [post, setPost] = useState(null);
-const {API_BASE_URL} =useAuth();
+
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}api/blog/${postId}`);
+        const response = await fetch(`${process.env.API_BASE_URL}api/blog/${postId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch post');
         }
@@ -37,7 +37,7 @@ const {API_BASE_URL} =useAuth();
     <>
       <div data-aos="fade-up" className="postcontainer col-md-3">
         <div className="postimg">
-          <img src={`${API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+          <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
         </div>
 
         <div className="postuserinfo">

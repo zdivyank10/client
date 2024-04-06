@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { MdOutlineContactPhone } from 'react-icons/md';
 
 function Admincontacts() {
-  const { AuthorizationToken,API_BASE_URL } = useAuth();
+  const { AuthorizationToken } = useAuth();
   const [contact, setContact] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
@@ -18,7 +18,7 @@ function Admincontacts() {
 
   const getContact = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/form/contact`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/form/contact`, {
         method: 'GET',
         headers: {
           Authorization: AuthorizationToken,

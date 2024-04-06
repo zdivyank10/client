@@ -14,7 +14,7 @@ import Typography from '@mui/joy/Typography';
 
 
 function EditorsChoice() {
-  const { approvedblog, AuthorizationToken, API_BASE_URL, getApprovedBlogs } = useAuth();
+  const { approvedblog, AuthorizationToken, getApprovedBlogs } = useAuth();
   const [choice, setChoice] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function EditorsChoice() {
 
   const getChoice = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/admin/alreadychoice`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/admin/alreadychoice`, {
         method: "GET",
         headers: {
           Authorization: AuthorizationToken
@@ -48,7 +48,7 @@ function EditorsChoice() {
 
   const totalcmts = async (blogId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}api/comment/${blogId}/count`, {
+      const response = await fetch(`${process.env.API_BASE_URL}api/comment/${blogId}/count`, {
         method: "GET"
       });
       const responseData = await response.json();
@@ -162,7 +162,7 @@ function EditorsChoice() {
                           }}
                         >
 
-                          <img src={`${API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
+                          <img src={`${process.env.API_BASE_URL}uploads/${cover_img}`} alt="" className='fullimg' />
                         </Typography>
                       </CardCover>
                       <CardContent

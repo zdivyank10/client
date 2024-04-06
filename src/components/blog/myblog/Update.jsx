@@ -11,7 +11,7 @@ import { IoReturnDownBackOutline } from 'react-icons/io5';
 
 function Update() {
     const { _id } = useParams();
-    const { user, AuthorizationToken,API_BASE_URL } = useAuth();
+    const { user, AuthorizationToken } = useAuth();
     const navigate = useNavigate();
     const [tags, setTags] = useState([]);
     const [file, setFile] = useState(null);
@@ -26,7 +26,7 @@ function Update() {
     useEffect(() => {
         const gettingDetails = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}api/blog/blog/${_id}`);
+                const response = await fetch(`${process.env.API_BASE_URL}api/blog/blog/${_id}`);
                 if (response.ok) {
                     const blogData = await response.json();
                     console.log('getting blog data', blogData);
@@ -69,7 +69,7 @@ function Update() {
             const formData = new FormData();
             formData.append('file', file);
 
-            const uploadResponse = await fetch(`${API_BASE_URL}api/blog/upload`, {
+            const uploadResponse = await fetch(`${process.env.API_BASE_URL}api/blog/upload`, {
                 method: 'POST',
                 body: formData,
             });
@@ -107,7 +107,7 @@ function Update() {
             }
 
             // Update blog content with updatedCoverImg
-            const response = await fetch(`${API_BASE_URL}api/blog/${_id}/update`, {
+            const response = await fetch(`${process.env.API_BASE_URL}api/blog/${_id}/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
