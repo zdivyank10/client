@@ -3,10 +3,11 @@
     text-decoration: none !important;
     color: inherit;
 }
+
 .maincontainer
 {
-    /* margin: 20px; */
-    padding: 20px;
+    margin: 20px;
+    /* padding: 20px; */
     display: flex;
     /* flex-direction: column; */
     /* background-color: var(--forth-color); */
@@ -24,16 +25,16 @@
     display: flex;
     flex-direction: column;
     /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
-    transition:  transform 0.3s ease-in; 
-    overflow: hidden;
+    transition:  transform 0.3s ease-in-out; 
+    /* overflow: hidden; */
     max-width: 100%; 
 }
 
 .postcontainer:hover {
 
-    margin: 15px;
+    /* margin: 15px; */
     box-shadow:var(--forth-color) 0px 20px 40px, rgba(0, 0, 0, 0.27) 0px 15px 15px;
-    transform: scale(1.070);
+    transform: scale(1.009);
 }
 
 
@@ -148,14 +149,18 @@
 @media screen and (max-width: 768px) {
    
     .maincontainer {
-        overflow-x: hidden; /* Prevent overflow on x-axis */
+        /* overflow-x: hidden;  */
         margin: 20px;
     }
-    .postcontainer {
+    /* .postcontainer {
         overflow-x: hidden;
-        max-width: 100%; /* Ensure the post container occupies full width */
+        
         margin: 20px 0; 
-        overflow: hidden; /* Hide overflowing content */
+        overflow: hidden; 
+    } */
+
+    .postcontainer {
+        margin: 0px 0; /* Adjust the top and bottom margin */
     }
 
     .banner_img {

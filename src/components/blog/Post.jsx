@@ -130,7 +130,7 @@ function Post() {
     <>
       <div className="blogrow">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 4 }}>
-          <Masonry columnsCount={3}>
+          <Masonry columnsCount={4}>
             {approvedblog &&
               approvedblog.map((post, index) => {
                 const { _id, title, author_id, cover_img, content, tags, createdAt } = post;
@@ -140,10 +140,10 @@ function Post() {
                 const isLiked = likedPosts.includes(_id);
 
                 return (
-                  <div data-aos="fade-up" className="maincontainer small-width-post" key={index}>
+                  <div data-aos="fade-up" className="maincontainer" key={index}>
                     <div className="postcontainer">
                       <Link to={`/blog/${_id}`} className="postimg">
-                        <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                        <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`}  className="banner_img" alt="Cover Image" />
                       </Link>
 
                       <Link to={`/blog/${_id}`} className="postuserinfo">
