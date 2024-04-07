@@ -43,7 +43,7 @@ function MyNotapprovedblogs() {
             <>
                 <div className="text-center">
 
-                    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className= 'error_img m-3' alt=""   />
+                    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif"  height={50} className= 'error_img m-3' alt=""   />
                 </div>
             </>
         );

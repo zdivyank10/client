@@ -14,7 +14,14 @@ function Adminlayout() {
 
   // }, []);
   if (isLoading) {
-    return <img src="../img/Ellipsis-1s-217px.gif" height={600} alt="Loading" />
+    return (
+      <>
+      <div className="text-center">
+
+      <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={50} className='error_img mt-3 m-3' />
+      </div>
+      </>
+  );
   }
 
   if (!user.isAdmin) {

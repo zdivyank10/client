@@ -62,7 +62,7 @@ function Section1() {
           In our digital haven, every thought, idea, and emotion finds expression.
           Welcome to Ink Garden, where the power of words blossoms into captivating narratives.
         </p>
-        <div className="search_container">
+        <div className="search_container ">
           <MdOutlineSearch className='searchicon' />
           <input
             data-aos="fade-right"
@@ -79,13 +79,13 @@ function Section1() {
         </div>
         {loading && <p>Loading...</p>}
         <div>
-          {searchError && <p className='ms-5'>No approved blogs found related to '{query}'</p>}
+          {searchError && <p className='ms-5 '>No approved blogs found related to '{query}'</p>}
           {searchResults.map(result => (
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
               <img src={`https://server-2ei1.onrender.com/uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
                 <h3 className='text-dark'>{result.author_id?.username}</h3>
-                <h5 className='text-dark'>{result.title}</h5>
+                <p className='text-dark'>{result.title}</p>
                 <div className="tags">
                   {result.tags.map((tag, tagIndex) => (
                     <span key={tagIndex} className="text-dark tag">

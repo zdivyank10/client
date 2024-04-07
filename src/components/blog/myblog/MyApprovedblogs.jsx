@@ -38,7 +38,7 @@ function MyApprovedblogs() {
             <>
             <div className="text-center">
 
-            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" className= 'error_img m-3' />
+            <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" height={50} className= 'error_img m-3' />
             </div>
             </>
         );

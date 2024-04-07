@@ -189,7 +189,16 @@ function FullBlog() {
 
   // Loading state
   if (loading) {
-    return <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" alt="" />;
+    return (
+
+      <>
+     <div className="text-center">
+
+    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className= 'error_img m-3' height={50} alt="" />;
+     </div>
+    
+    </>
+    )
   }
 
   // Error state
