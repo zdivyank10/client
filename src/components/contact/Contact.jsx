@@ -51,7 +51,7 @@ function Contact() {
       console.log(contact);
     
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/form/contact`, {
+        const response = await fetch(`https://server-2ei1.onrender.com/api/form/contact`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",

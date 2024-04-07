@@ -16,7 +16,7 @@ function MyNotapprovedblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/${user._id}/notapproved`, {
+                const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${user._id}/notapproved`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -86,7 +86,7 @@ function MyNotapprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <div className="postimg">
-                                    <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                 </div>
 
                                 <div className="postuserinfo">

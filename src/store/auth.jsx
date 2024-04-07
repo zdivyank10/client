@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) =>{
     const userAuthentication = async() =>{
         try {
             setIsLoading(true);
-                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/auth/user`,
+                const response = await fetch(`https://server-2ei1.onrender.com/api/auth/user`,
                 {
                     method : "GET",
                     headers:{
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) =>{
     const  getBlogs= async(req,res)=>{
 
         try {
-            const blogdata = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/blog`,
+            const blogdata = await fetch(`https://server-2ei1.onrender.com/api/blog/blog`,
             {
                 method: "GET",
              
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) =>{
     }
     const getApprovedBlogs = async (req, res) => {
         try {
-            const approvedblogdata = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/approvedblog`, {
+            const approvedblogdata = await fetch(`https://server-2ei1.onrender.com/api/blog/approvedblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) =>{
 
      const getNotApprovedBlogs = async(req, res) => {
         try {
-            const notapprovedblogdata = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/notapprovedblog`, {
+            const notapprovedblogdata = await fetch(`https://server-2ei1.onrender.com/api/blog/notapprovedblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken
@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }) =>{
     }
      const getPendingBlogs = async(req, res) => {
         try {
-            const pendingblogdata = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/pendingblog`, {
+            const pendingblogdata = await fetch(`https://server-2ei1.onrender.com/api/blog/pendingblog`, {
                 method: "GET",
                 headers: {
                     'Authorization': AuthorizationToken

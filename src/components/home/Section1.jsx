@@ -28,7 +28,7 @@ function Section1() {
         return;
       }
 
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
+      const response = await fetch(`https://server-2ei1.onrender.com/api/blog/search?query=${encodeURIComponent(searchQuery)}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -82,7 +82,7 @@ function Section1() {
           {searchError && <p className='ms-5'>No approved blogs found related to '{query}'</p>}
           {searchResults.map(result => (
             <Link to={`/blog/${result._id}`} key={result.id} className="search_result">
-              <img src={`${process.env.REACT_APP_API_BASE_URL}uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
+              <img src={`https://server-2ei1.onrender.com/uploads/${result.cover_img}`} alt={result.title} className="search_result_image" height={100} />
               <div className="searchinfo m-3">
                 <h3 className='text-dark'>{result.author_id?.username}</h3>
                 <h5 className='text-dark'>{result.title}</h5>
