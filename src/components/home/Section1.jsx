@@ -86,14 +86,15 @@ function Section1() {
               <div className="searchinfo m-3">
                 <h3 className='text-dark'>{result.author_id?.username}</h3>
                 <p className='text-dark'>{result.title}</p>
-                <div className="tags">
+                <hr />
+                <div className="tags text-center">
                   {result.tags.map((tag, tagIndex) => (
                     <span key={tagIndex} className="text-dark tag">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <hr />
+       
               </div>
             </Link>
           ))}

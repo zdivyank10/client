@@ -192,12 +192,12 @@ function FullBlog() {
     return (
 
       <>
-     <div className="text-center">
+        <div className="text-center">
 
-    <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className= 'error_img m-3' height={50} alt="" />;
-     </div>
-    
-    </>
+          <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className='error_img m-3' height={50} alt="" />;
+        </div>
+
+      </>
     )
   }
 
@@ -414,51 +414,87 @@ function FullBlog() {
             </p>
           </div>
           <div className="comment_section text-center">
+
             <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange} required />
             <button className="btn btn-secondary m-3" type="button" onClick={handleSubmit}><IoMdSend /></button>
           </div>
           <hr />
+
+
+
           <h1>Comment Section</h1>
-          <div className="comments" id='comment'>
+
+          {/* <div className="comment_container">
+
             {Array.isArray(commentsList) && commentsList.length > 0 ? (
               commentsList.map((commentItem, index) => (
-                <div key={index} className="comment">
-                  <div className="comment-content">
-                    <div className="">
 
-                      <FaUserAlt className='' size={25} />
+                <div className="each_comment">
+
+                  <div className="each_comment_info">
+
+                    <FaUserAlt className='' size={25} />
+                    <h2>{commentItem.userid?.username}</h2>
+
+                    <div className="date_delete">
+
+                      <p> {formatDate(commentItem.createdAt)}</p>
+                 
+
+                      {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
+                        <div className='comment_delete_icontext-danger'>
+                          <p>
+
+                            <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
+                          </p>
+                        </div>
+
+                      )}
+
+
                     </div>
-                    <div className="">
-
-                      <p className='cmt_user'>{commentItem.userid?.username}</p>
-                    </div>
-                    <div className='cmt_time mt-1'>
-                      {formatDate(commentItem.createdAt)}
-                    </div> 
-
-                  <div className="">
-
-                    {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
-                      <div className='cmt_time mt-1 ms-5 text-danger'>
-                        <p>
-
-                          <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
-                        </p>
-                      </div>
-
-)}
-
-</div>
+                    <hr />
+                    <p>{commentItem.content}</p>
                   </div>
-                  <div className="cmt_container">
-                    <p className='cmt_content justify-content-center align-content-center'>{commentItem.content}</p>
-                  </div>
+
                 </div>
-              ))
-            ) : (
+              ) : (
               <p className='text-center'> No comments yet.</p>
             )}
+          </div> */}
+
+
+<div className="comment_container">
+  {Array.isArray(commentsList) && commentsList.length > 0 ? (
+    commentsList.map((commentItem, index) => (
+      <div className="each_comment" key={index}>
+        <div className="each_comment_info">
+
+          <div className="logo_username">
+
+          <FaUserAlt className='userpfp' size={25} />
+          <h2 className='comment_user'>{commentItem.userid?.username}</h2>
           </div>
+          <div className="date_delete">
+            <p className='comment_data'> {formatDate(commentItem.createdAt)}</p>
+            {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
+              <div className='comment_delete_icon text-danger'>
+                <p>
+                  <MdDeleteOutline size={25} onClick={() => handleShowModal(commentItem._id)} />
+                </p>
+              </div>
+            )}
+          </div>
+          {/* <hr /> */}
+          <p className='comment_content'>{commentItem.content}</p>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p className='text-center'> No comments yet.</p>
+  )}
+</div>
+
         </div>
       </div>
 
