@@ -18,8 +18,8 @@ dist-ssr/
 *.local
 
 # Environment variables
-# .env
-# client/.env
+.env
+client/.env
 server/.env
 mern/server/.env
 

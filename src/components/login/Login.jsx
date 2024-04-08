@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 // import React from 'react';
+import { CONFIGS } from "../../../config";
 
 import {Link} from "react-router-dom";
 import "./login.css";
@@ -11,7 +12,7 @@ function Login() {
 
   const {userAuthentication ,storeTokenInLS} = useAuth();
 
-  const URL = `https://server-2ei1.onrender.com/api/auth/login`;
+  const URL = `${CONFIGS.API_BASE_URL}/api/auth/login`;
      const navigate = useNavigate();
     const [user,setUser] = useState({
       email: "",
