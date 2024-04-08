@@ -1,6 +1,7 @@
 .popular_container
 {
     background-color: var(--forth-color);
+    width: 100%;
 }
 .pop_Carousel
 {
@@ -45,8 +46,8 @@
   
   @media (max-width: 768px) {
     .pop_img {
-      filter: blur(2px);
-      height: 400px; /* Adjust height for smaller screens */
-    }
+      /* filter: blur(2px); */
+      height: 800px; }
+
   }
   

@@ -147,7 +147,7 @@
     }
 
     .fullblogcontainer {
-        width: 70%;
+        width: 90%;
         /* Reduce container width for larger screens */
     }
 
@@ -169,7 +169,8 @@
 
     .back_btn {
         /* display: flex; */
-        margin-left: -100px;
+        margin-top: 15px;
+        margin-left: -130px;
         /* float: left; */
     }
 

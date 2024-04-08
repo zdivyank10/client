@@ -133,14 +133,14 @@ function EditorsChoice() {
                       sx={{
                         minHeight: '200px',
                         boxShadow: '0px 4px 10px rgba(0, 10, 9, 1)',
-                        width: 350,
+                        width: 320,
                         backgroundColor: '#fff',
                         borderColor: '#59E4A8',
                         borderRadius: '15px',
 
                       }}
                     >
-                      <Typography  fontSize="xl" textColor="#000">
+                      <Typography  fontSize="" textColor="#000">
                       <p className='' style={{ marginTop: "-10px" }}>{title}</p>
 
                       </Typography>

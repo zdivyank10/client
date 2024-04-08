@@ -108,7 +108,7 @@ function Addpost() {
             author_id: "",
           });
           setTags([]);
-          toast.success('Blog Posted successful!', {
+          toast.success('Your blog post has been submitted for approval. Thank you for your patience.', {
             style: {
               background: '#212121',
               color: 'white',
