@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../store/auth';
 import { toast } from 'react-toastify';
+import { CONFIGS } from "../../../config";
 
 function Userupdate({ _id }) {
   const [userData, setUserData] = useState({
@@ -16,7 +17,7 @@ function Userupdate({ _id }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/users/${id}`, {
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/users/${id}`, {
           method: "GET",
           headers: {
             Authorization: AuthorizationToken,
@@ -43,7 +44,7 @@ function Userupdate({ _id }) {
     e.preventDefault();
     // console.log(userData);
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/admin/users/${id}/update`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}//api/admin/users/${id}/update`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',

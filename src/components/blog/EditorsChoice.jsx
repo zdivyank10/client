@@ -10,6 +10,7 @@ import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
+import { CONFIGS } from "../../../config";
 
 
 
@@ -28,7 +29,7 @@ function EditorsChoice() {
 
   const getChoice = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/admin/alreadychoice`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/alreadychoice`, {
         method: "GET",
         headers: {
           Authorization: AuthorizationToken
@@ -48,7 +49,7 @@ function EditorsChoice() {
 
   const totalcmts = async (blogId) => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/comment/${blogId}/count`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blogId}/count`, {
         method: "GET"
       });
       const responseData = await response.json();
@@ -162,7 +163,7 @@ function EditorsChoice() {
                           }}
                         >
 
-                          <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} alt="" className='fullimg' />
+                          <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} alt="" className='fullimg' />
                         </Typography>
                       </CardCover>
                       <CardContent

@@ -8,6 +8,7 @@ import 'react-tagsinput/react-tagsinput.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IoReturnDownBackOutline } from "react-icons/io5";
+import { CONFIGS } from "../../../config";
 
 
 function Addpost() {
@@ -72,7 +73,7 @@ function Addpost() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const uploadResponse = await fetch(`https://server-2ei1.onrender.com/api/blog/upload`, {
+      const uploadResponse = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -84,7 +85,7 @@ function Addpost() {
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');
-        const response = await fetch(`https://server-2ei1.onrender.com/api/blog/addblog`, {
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/addblog`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

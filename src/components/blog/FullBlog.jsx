@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdDeleteOutline } from "react-icons/md";
 import { Modal, Button } from 'react-bootstrap';
+import { CONFIGS } from "../../../config";
 
 function FullBlog() {
   const [blogPost, setBlogPost] = useState(null);
@@ -34,7 +35,7 @@ function FullBlog() {
 
   const totalcmts = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/comment/${blog_id}/count`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blog_id}/count`, {
         method: "GET"
       });
       const responseData = await response.json();
@@ -53,7 +54,7 @@ function FullBlog() {
   useEffect(() => {
     const fetchLikedPosts = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/like/${blog_id}/${user._id}/liked`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/like/${blog_id}/${user._id}/liked`);
         if (response.ok) {
           const likedPosts = await response.json();
           // console.log(likedPosts.isLiked);
@@ -93,7 +94,7 @@ function FullBlog() {
     }
     try {
 
-      await fetch(`https://server-2ei1.onrender.com/api/like`, {
+      await fetch(`${CONFIGS.API_BASE_URL}/api/like`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +119,7 @@ function FullBlog() {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/comment/${blog_id}`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blog_id}`, {
         method: 'GET',
       });
 
@@ -138,7 +139,7 @@ function FullBlog() {
   useEffect(() => {
     const fetchBlogPost = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/blog/blog/${blog_id}`, {
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/blog/${blog_id}`, {
 
         });
         if (!response.ok) {
@@ -163,7 +164,7 @@ function FullBlog() {
 
     const fetchTotalLikes = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/like/totallike`, {
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/like/totallike`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -237,7 +238,7 @@ function FullBlog() {
         return;
       }
       const userId = user._id;
-      const response = await fetch(`https://server-2ei1.onrender.com/api/comment/${blog_id}/comment`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blog_id}/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -292,7 +293,7 @@ function FullBlog() {
   const deleteComment = async (commentId) => {
     try {
       const userId = user._id;
-      const response = await fetch(`https://server-2ei1.onrender.com/api/comment/${blog_id}/delete`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blog_id}/delete`, {
         method: 'DELETE',
         headers: {
           "Authorization": AuthorizationToken,
@@ -373,7 +374,7 @@ function FullBlog() {
             <h1>{title}</h1>
           </div>
           <div className="fullblogimg text-center">
-            <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} alt="" className='fullimg' />
+            <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} alt="" className='fullimg' />
           </div>
           <div className="fullblogcontent">
             <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>

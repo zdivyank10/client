@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../store/auth";
 import { MdErrorOutline } from "react-icons/md";
+import { CONFIGS } from "../../../config";
 
 
 function Register() {
@@ -83,7 +84,7 @@ function Register() {
 
     try {
       // Proceed with registration
-      const response = await fetch(`https://server-2ei1.onrender.com/api/auth/register`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,7 +161,7 @@ function Register() {
       // Set sendingOTP to true to display spinner
       setSendingOTP(true);
 
-      const response = await fetch(`https://server-2ei1.onrender.com/api/auth/sendmail`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/auth/sendmail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -227,7 +228,7 @@ function Register() {
 
     try {
       // Perform OTP verification
-      const otpResponse = await fetch(`https://server-2ei1.onrender.com/api/auth/verify`, {
+      const otpResponse = await fetch(`${CONFIGS.API_BASE_URL}/api/auth/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

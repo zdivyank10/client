@@ -3,6 +3,7 @@ import "./post.css";
 import DOMPurify from 'dompurify';
 import { FaUserAlt } from "react-icons/fa";
 import { useAuth } from '../../store/auth';
+import { CONFIGS } from "../../../config";
 
 function Singlepost({ postId }) {
   const [post, setPost] = useState(null);
@@ -11,7 +12,7 @@ function Singlepost({ postId }) {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${postId}`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/${postId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch post');
         }
@@ -37,7 +38,7 @@ function Singlepost({ postId }) {
     <>
       <div data-aos="fade-up" className="postcontainer col-md-3">
         <div className="postimg">
-          <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+          <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
         </div>
 
         <div className="postuserinfo">

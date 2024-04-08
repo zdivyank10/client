@@ -4,6 +4,7 @@ import { useAuth } from '../../store/auth';
 import './famous.css'; // Import CSS file for custom styles
 import Carousel from 'react-bootstrap/Carousel'; // Import the Carousel component
 import DOMPurify from 'dompurify'; // Import DOMPurify for sanitization
+import { CONFIGS } from "../../../config";
 
 function Famous() {
 
@@ -11,7 +12,7 @@ function Famous() {
 
   const popular_blogs = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/like/popular`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/like/popular`, {
         method: "GET",
       });
       const data = await response.json();
@@ -36,13 +37,13 @@ function Famous() {
               {/* <div className="darker">
                 <img
                   className="d-block w-100 pop_img text-center"
-                  src={`https://server-2ei1.onrender.com/uploads/${blog.cover_img}`}
+                  src={`${CONFIGS.API_BASE_URL}//uploads/${blog.cover_img}`}
                   alt={blog.title}
                 />
               </div> */}
               <div className="img-gradient">
                 <img className="pop_img"
-                  src={`https://server-2ei1.onrender.com/uploads/${blog.cover_img}`} />
+                  src={`${CONFIGS.API_BASE_URL}/uploads/${blog.cover_img}`} />
               </div>
               <Carousel.Caption className=' d-block'>
                 <h1 className='text-light'>{blog.title}</h1>

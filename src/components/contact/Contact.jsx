@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../store/auth";
+import { CONFIGS } from "../../../config";
 
 function Contact() {
 //   const navigate = useNavigate();
@@ -51,7 +52,7 @@ function Contact() {
       console.log(contact);
     
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/form/contact`, {
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/form/contact`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 import './myprofile.css';
+import { CONFIGS } from "../../../../config";
 //css written in myprofile.css
 
 function MypPendingblogs() {
@@ -16,7 +17,7 @@ function MypPendingblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${user._id}/pending`, {
+                const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/${user._id}/pending`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -81,7 +82,7 @@ function MypPendingblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <div className="postimg">
-                                    <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                 </div>
 
                                 <div className="postuserinfo">

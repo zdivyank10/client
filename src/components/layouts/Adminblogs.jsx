@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import '../blog/post.css';
 import { GiNotebook } from 'react-icons/gi';
+import { CONFIGS } from "../../../config";
 
 function Adminblogs() {
   const { blog, AuthorizationToken, getBlogs } = useAuth();
@@ -41,7 +42,7 @@ function Adminblogs() {
 
   const updatePermission = async (blogId, permission) => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/admin/blog/${blogId}/permission`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/blog/${blogId}/permission`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ function Adminblogs() {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${deleteId}/delete`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/${deleteId}/delete`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -205,7 +206,7 @@ function Adminblogs() {
               <tr key={index}>
                 <td>
                   <Link to={`/blog/${_id}`} className="postimg">
-                    <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={100} alt="" />
+                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={100} alt="" />
                   </Link>
                 </td>
                 <td>

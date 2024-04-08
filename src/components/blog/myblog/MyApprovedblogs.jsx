@@ -4,6 +4,7 @@ import MiniNavbar from './MiniNavbar';
 import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
+import { CONFIGS } from "../../../../config/index";
 
 function MyApprovedblogs() {
     const { user
@@ -15,7 +16,7 @@ function MyApprovedblogs() {
     useEffect(() => {
         const getMyBlogs = async () => {
             try {
-                const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${user._id}/approved`, {
+                const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/${user._id}/approved`, {
                     method: 'GET',
                 });
                 if (!response.ok) {
@@ -81,7 +82,7 @@ function MyApprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="row">
                                 <Link to={`/blog/${_id}`} className="postimg">
-                                    <img src={`https://server-2ei1.onrender.com/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
                                 </Link>
 
                                 <Link to={`/blog/${_id}`} className="postuserinfo">

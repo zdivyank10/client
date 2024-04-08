@@ -5,6 +5,7 @@ import { useAuth } from '../../../store/auth';
 import MiniNavbar from './MiniNavbar';
 import { MdError } from "react-icons/md";
 import { toast } from 'react-toastify';
+import { CONFIGS } from "../../../../config";
 
 function Myprofile() {
     const { user } = useAuth();
@@ -28,7 +29,7 @@ function Myprofile() {
     useEffect(() => {
         const getuserinfo = async () => {
             try {
-                const response = await fetch(`https://server-2ei1.onrender.com/api/auth/${user._id}/user`, {
+                const response = await fetch(`${CONFIGS.API_BASE_URL}/api/auth/${user._id}/user`, {
                     method: 'GET',
                 });
                 const data = await response.json();
@@ -51,7 +52,7 @@ function Myprofile() {
         }
     
         try {
-            const response = await fetch(`https://server-2ei1.onrender.com/api/auth/${user._id}/upgpass`, {
+            const response = await fetch(`${CONFIGS.API_BASE_URL}/api/auth/${user._id}/upgpass`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
+import { CONFIGS } from "../../../../config";
 
 function Update() {
     const { _id } = useParams();
@@ -26,7 +27,7 @@ function Update() {
     useEffect(() => {
         const gettingDetails = async () => {
             try {
-                const response = await fetch(`https://server-2ei1.onrender.com/api/blog/blog/${_id}`);
+                const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/blog/${_id}`);
                 if (response.ok) {
                     const blogData = await response.json();
                     console.log('getting blog data', blogData);
@@ -69,7 +70,7 @@ function Update() {
             const formData = new FormData();
             formData.append('file', file);
 
-            const uploadResponse = await fetch(`https://server-2ei1.onrender.com/api/blog/upload`, {
+            const uploadResponse = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/upload`, {
                 method: 'POST',
                 body: formData,
             });
@@ -107,7 +108,7 @@ function Update() {
             }
 
             // Update blog content with updatedCoverImg
-            const response = await fetch(`https://server-2ei1.onrender.com/api/blog/${_id}/update`, {
+            const response = await fetch(`${CONFIGS.API_BASE_URL}/api/blog/${_id}/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

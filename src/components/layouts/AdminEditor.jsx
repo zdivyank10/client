@@ -6,6 +6,7 @@ import { Pagination, Dropdown, DropdownButton } from 'react-bootstrap';
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { GiImperialCrown } from "react-icons/gi";
 import { Link } from 'react-router-dom';
+import { CONFIGS } from "../../../config";
 
 function AdminEditor() {
     const { approvedblog, AuthorizationToken, getApprovedBlogs } = useAuth();
@@ -27,7 +28,7 @@ function AdminEditor() {
     const makeEditorsChoice = async(blogId) => {
         console.log("Making blog with ID", blogId, "an editor's choice...");
         try {
-            const response = await fetch(`https://server-2ei1.onrender.com/api/admin/choice`, {
+            const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/choice`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function AdminEditor() {
                                 <td>{curEle.title}</td>
                                 <td>{curEle.author_id?.username}</td>
                                 <td>
-                                    <img src={`https://server-2ei1.onrender.com/uploads/${curEle.cover_img}`} height={80} width={120} alt="Cover Image" />
+                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${curEle.cover_img}`} height={80} width={120} alt="Cover Image" />
                                 </td>
                                 <td>
                                     {curEle.tags.map((tag, tagIndex) => (

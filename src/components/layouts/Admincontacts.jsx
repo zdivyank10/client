@@ -5,6 +5,7 @@ import { useAuth } from '../../store/auth';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { MdOutlineContactPhone } from 'react-icons/md';
+import { CONFIGS } from "../../../config";
 
 function Admincontacts() {
   const { AuthorizationToken } = useAuth();
@@ -18,7 +19,7 @@ function Admincontacts() {
 
   const getContact = async () => {
     try {
-      const response = await fetch(`https://server-2ei1.onrender.com/api/form/contact`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/form/contact`, {
         method: 'GET',
         headers: {
           Authorization: AuthorizationToken,

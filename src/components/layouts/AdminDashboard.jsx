@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { useAuth } from '../../store/auth';
-import './dashboard.css'
+import './dashboard.css';
+import { CONFIGS } from "../../../config";
 
 function AdminDashboard() {
   const [chartData, setChartData] = useState({});
@@ -18,7 +19,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/monthlyuser`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/monthlyuser`);
         if (!response.ok) {
           throw new Error('Failed to fetch user registration data');
         }
@@ -45,7 +46,7 @@ function AdminDashboard() {
 
     const fetchBlogData = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/blogstat`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/blogstat`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -75,7 +76,7 @@ function AdminDashboard() {
 
     const totalLike = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/totallike`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/totallike`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -89,7 +90,7 @@ function AdminDashboard() {
     };
     const totalComment = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/totalcomment`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/totalcomment`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -104,7 +105,7 @@ function AdminDashboard() {
 
     const totalContact = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/totalcontact`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/totalcontact`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -118,7 +119,7 @@ function AdminDashboard() {
     };
     const totalAdmin = async () => {
       try {
-        const response = await fetch(`https://server-2ei1.onrender.com/api/admin/totaladmin`);
+        const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/totaladmin`);
         if (!response.ok) {
           throw new Error('Failed to fetch blog data');
         }
@@ -136,7 +137,7 @@ function AdminDashboard() {
     totalComment();
     totalContact();
     totalAdmin();
-  }, ['https://server-2ei1.onrender.com/']);
+  }, [`${CONFIGS.API_BASE_URL}`]);
 
   useEffect(() => {
     const renderUserRegistrationChart = () => {
