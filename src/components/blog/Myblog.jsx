@@ -11,12 +11,15 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { CONFIGS } from "../../../config";
+import { formatDistanceToNow } from 'date-fns';
 
 function Myblog() {
     const { user } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
+
+    const sortedBlogs = blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     useEffect(() => {
         const getMyBlogs = async () => {
@@ -94,12 +97,18 @@ function Myblog() {
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
       };
+
+            
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  }
     return (
         <div className="myblogcontainer">
             <MiniNavbar />
 
             <div className="row blogrow">
-                {blogs.map((post, index) => {
+                {sortedBlogs.map((post, index) => {
                     const { _id, title, author_id, cover_img, content, tags, createdAt, username, permission } = post;
                     const sanitizedContent = DOMPurify.sanitize(content);
 
@@ -118,7 +127,7 @@ function Myblog() {
                                                 <FaUserAlt className="userpfp" />
                                                 <div className="info">
                                                     <p>{author_id.username}</p>
-                                                    <p className="blogdate">{formatDate(createdAt)}</p>
+                                                    <p className="blogdate">{formatDate1(createdAt)}</p>
                                                 </div>
                                             </Link>
                                             <hr />

@@ -15,6 +15,9 @@ function Approvedblogs() {
     const [showModal, setShowModal] = useState(false);
     const [selectedBlogId, setSelectedBlogId] = useState(null);
 
+    const sortedBlogs = approvedblog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+
     useEffect(() => {
         getApprovedBlogs();
     }, []);
@@ -64,7 +67,7 @@ function Approvedblogs() {
                 <hr />
                 <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
                     <Masonry columnsCount={3}>
-                        {approvedblog && approvedblog.map((currEle, index) => {
+                        {sortedBlogs && sortedBlogs.map((currEle, index) => {
                             const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
                             const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
                             return (

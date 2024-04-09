@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 import './myprofile.css';
 import { CONFIGS } from "../../../../config";
+import { formatDistanceToNow } from 'date-fns';
 //css written in myprofile.css
 
 function MypPendingblogs() {
@@ -67,6 +68,12 @@ function MypPendingblogs() {
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
       };
+
+            
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  }
     return (
         <div className="myblogcontainer">
            <MiniNavbar />
@@ -89,7 +96,7 @@ function MypPendingblogs() {
                                     <FaUserAlt className="userpfp" />
                                     <div className="info">
                                         <p>{author_id.username}</p>
-                                        <p className="blogdate">{formatDate(createdAt)}</p>
+                                        <p className="blogdate">{formatDate1(createdAt)}</p>
                                     </div>
                                 </div>
                                 <hr />

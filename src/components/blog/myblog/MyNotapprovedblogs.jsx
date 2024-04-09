@@ -7,11 +7,14 @@ import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import './myprofile.css'
 import { CONFIGS } from "../../../../config";
+import { formatDistanceToNow } from 'date-fns';
 
 function MyNotapprovedblogs() {
     const { user } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
+
+  
 
 
     useEffect(() => {
@@ -64,6 +67,7 @@ function MyNotapprovedblogs() {
 
         )
     }
+    const sortedBlogs = blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -72,12 +76,18 @@ function MyNotapprovedblogs() {
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
       };
+
+            
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  }
     return (
         <div className="myblogcontainer">
            <MiniNavbar />
 
             <div className="row blogrow">
-                {blogs.map((post, index) => {
+                {sortedBlogs.map((post, index) => {
                     const { _id, title, author_id, cover_img, content, tags, createdAt, username } = post;
                     const sanitizedContent = DOMPurify.sanitize(content);
                     
@@ -94,7 +104,7 @@ function MyNotapprovedblogs() {
                                     <FaUserAlt className="userpfp" />
                                     <div className="info">
                                         <p>{author_id.username}</p>
-                                        <p className="blogdate">{formatDate(createdAt)}</p>
+                                        <p className="blogdate">{formatDate1(createdAt)}</p>
                                     </div>
                                 </div>
                                 <hr />

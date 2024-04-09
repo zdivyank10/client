@@ -17,6 +17,8 @@ function Post() {
   const [totalLikes, setTotalLikes] = useState({});
   const navigate = useNavigate();
 
+  const sortedBlogs = approvedblog.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   const totalcmts = async (blogId) => {
     try {
       const response = await fetch(`${CONFIGS.API_BASE_URL}/api/comment/${blogId}/count`);
@@ -132,8 +134,8 @@ function Post() {
       <div className="blogrow">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 4 }}>
           <Masonry columnsCount={4}>
-            {approvedblog &&
-              approvedblog.map((post, index) => {
+            {sortedBlogs &&
+              sortedBlogs.map((post, index) => {
                 const { _id, title, author_id, cover_img, content, tags, createdAt } = post;
                 const sanitizedContent = DOMPurify.sanitize(content);
                 const totalcmt = totalComments[_id] || 0;

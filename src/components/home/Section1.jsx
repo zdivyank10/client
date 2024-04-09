@@ -60,7 +60,7 @@ function Section1() {
       <div className="home_left">
         <h1 data-aos="fade-right" className='home_left_h1'>Welcome to Ink Garden</h1>
         <p data-aos="fade-right" className='home_left_p'>
-          In our digital haven, every thought, idea, and emotion finds expression.
+          In our digital haven, IT related idea, and emotion finds expression.
           Welcome to Ink Garden, where the power of words blossoms into captivating narratives.
         </p>
         <div className="search_container ">
