@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { MdDeleteOutline } from "react-icons/md";
 import { Modal, Button } from 'react-bootstrap';
 import { CONFIGS } from "../../../config";
+import { formatDistanceToNow } from 'date-fns';
 
 function FullBlog() {
   const [blogPost, setBlogPost] = useState(null);
@@ -195,7 +196,7 @@ function FullBlog() {
       <>
         <div className="text-center">
 
-          <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className='error_img m-3' height={50} alt="" />;
+          <img src="https://cdn.dribbble.com/userupload/6665658/file/original-a7d9005448729a1860ed9be4205b660b.gif" className='error_img m-3' height={50} alt="" />
         </div>
 
       </>
@@ -340,6 +341,7 @@ function FullBlog() {
     setShowModal(false);
   };
 
+
   const { _id, author_id, title, cover_img, content, tags, createdAt } = blogPost;
   const sanitizedContent = DOMPurify.sanitize(content);
   const isLiked = likedPosts.includes(_id);
@@ -353,6 +355,11 @@ function FullBlog() {
     return `${day}/${month}/${year}`;
   };
 
+        
+  const formatDate1 = (dateString) => {
+    const date1 = new Date(dateString);
+    return formatDistanceToNow(date1, { addSuffix: true });
+  }
   return (
     <>
       <div className="fullblog_container">
@@ -366,8 +373,12 @@ function FullBlog() {
             </button>
             <hr />
             <FaUserAlt className='userpfp' />
+            {/* <Link to={`/blog/${author_id}/${_id}/blogbyuser`} > */}
+            <Link to={`/blog/${author_id.username}/blogbyuser` } className='text-dark'>
+
             <p className='authorname'>{author_id?.username}</p>
-            <p className='authorname'>{formatDate(createdAt)}</p> {/* Format date here */}
+              </Link>
+            <p className='authorname'>{formatDate1(createdAt)}</p> {/* Format date here */}
           </div>
           <div className="fullblogtitle">
             <hr />
@@ -376,7 +387,7 @@ function FullBlog() {
           <div className="fullblogimg text-center">
             <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} alt="" className='fullimg' />
           </div>
-          <div className="fullblogcontent">
+          <div className="fullblogcontent text-center">
             <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
             <hr />
             <div className="tags text-center">
@@ -474,10 +485,11 @@ function FullBlog() {
           <div className="logo_username">
 
           <FaUserAlt className='userpfp' size={25} />
+
           <h2 className='comment_user'>{commentItem.userid?.username}</h2>
           </div>
           <div className="date_delete">
-            <p className='comment_data'> {formatDate(commentItem.createdAt)}</p>
+            <p className='comment_data'> {formatDate1(commentItem.createdAt)}</p>
             {user && user._id && commentItem.userid && commentItem.userid._id && user._id === commentItem.userid._id && (
               <div className='comment_delete_icon text-danger'>
                 <p>

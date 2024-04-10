@@ -40,6 +40,7 @@ import AdminEditor from "./components/layouts/AdminEditor";
 import AlreadyChoice from "./components/layouts/AlreadyChoice";
 import EditorsChoice from "./components/blog/EditorsChoice";
 import Famous from "./components/blog/Famous";
+import Blogbyuser from "./components/blog/Blogbyuser";
 
 
 
@@ -76,6 +77,7 @@ function App() {
           <Route path='/myblog/:_id/profile' element={<Myprofile />} />
           <Route path='/myblog/:_id/update' element={<Update />} />
           <Route path='/popular' element={<Famous />} />
+          <Route path='/blog/:username/blogbyuser' element={<Blogbyuser />} />
           {/* <Route path="/myblog" element={<Myblog />} /> */}
           <Route path="*" element={<Error />} />
 

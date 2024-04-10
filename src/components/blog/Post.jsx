@@ -149,11 +149,14 @@ function Post() {
                         <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`}  className="banner_img" alt="Cover Image" />
                       </Link>
 
-                      <Link to={`/blog/${_id}`} className="postuserinfo">
+                      {/* <Link to={`/blog/${_id}`} className="postuserinfo"> */}
+                      <Link to={`/blog/${author_id?.username}/blogbyuser` } className='postuserinfo text-dark'>
+
+                        
                         <FaUserAlt className="userpfp" />
                         <div className="info">
-                          <p>{author_id?.username}</p>
-                          <p className="blogdate">{formatDate1(createdAt)}</p>
+                          <p>{author_id?.username}  </p>
+                          <p className="blogdate">{formatDate1(createdAt)}  </p>
                           {/* <p className="blogdate">{createdAt}</p> */}
                         </div>
                       </Link>
