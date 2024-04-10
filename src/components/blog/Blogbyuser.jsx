@@ -31,30 +31,25 @@ function Blogbyuser() {
   return (
     <>
 
-{/* <div className="dashboard"> */}
 
 <div className="dashboard_admin">
-  {/* <div className=""> */}
-  {/* <img src="../../img/admin.jpg" alt="" className='' height={175} /> */}
-    <h1 className='text-center blog_user'>{username}</h1>
+
+    <h1 className='text-center blog_user'><FaUserAlt className="user_pfp"/> {username}</h1>
   
-  {/* </div> */}
 </div>
 
-{/* </div> */}
-{/* </div> */}
+
     <div className="container">
 
-      {/* <h2 className=" text-center">  <FaUserAlt style={{borderRadius:"15px",padding:'1px solid' ,border:'1px solid'}}/> {username}</h2> */}
-    <div className="blogbyuser_container m-3">
+    <div className="blogbyuser_container p-4 m-3">
       <div className="row">
         {blogs.length > 0 ? (
           blogs.map(blog => (
             <div key={blog._id} className="col-md-4 mb-3">
-               <Link to={`/blog/${blog._id}`} className="postuserinfo">
+               <Link to={`/blog/${blog._id}`} className="">
                 
               <div className="blog-card text-center">
-                <img src={`${CONFIGS.API_BASE_URL}/uploads/${blog.cover_img}`} alt={blog.title} className="img-fluid" />
+                <img src={`${CONFIGS.API_BASE_URL}/uploads/${blog.cover_img}`} alt={blog.title}  />
                 <h1 className="blog-title text-center">{blog.title}</h1>
               </div>
                </Link>
