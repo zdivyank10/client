@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IoReturnDownBackOutline } from "react-icons/io5";
 import { CONFIGS } from "../../../config";
+import 'react-tagsinput-component/dist/react-tagsinput-component.css'; 
 
 
 function Addpost() {

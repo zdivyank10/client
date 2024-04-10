@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
 import { CONFIGS } from "../../../../config";
 import { TagsInput } from "react-tag-input-component";
+import 'react-tagsinput-component/dist/react-tagsinput-component.css'; 
 
 function Update() {
     const { _id } = useParams();
