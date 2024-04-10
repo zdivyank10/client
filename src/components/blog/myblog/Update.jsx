@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import MyQuillEditor from '../MyDraftEditor';
-import 'react-tagsinput/react-tagsinput.css';
 import { useAuth } from '../../../store/auth';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';

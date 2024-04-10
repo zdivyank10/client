@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import MyQuillEditor from './MyDraftEditor';
 // import TagsInput from 'react-tagsinput';
 import { TagsInput } from "react-tag-input-component";
-import 'react-tagsinput/react-tagsinput.css';
+
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IoReturnDownBackOutline } from "react-icons/io5";
