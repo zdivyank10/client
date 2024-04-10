@@ -3,7 +3,8 @@ import "./addpost.css";
 import { useAuth } from "../../store/auth";
 import { Link } from 'react-router-dom';
 import MyQuillEditor from './MyDraftEditor';
-import TagsInput from 'react-tagsinput';
+// import TagsInput from 'react-tagsinput';
+import { TagsInput } from "react-tag-input-component";
 import 'react-tagsinput/react-tagsinput.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -181,7 +182,14 @@ function Addpost() {
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Tags :</label>
-              <TagsInput value={tags} onChange={handleChange} />
+           
+              <TagsInput
+        
+        value={tags}
+        onChange={handleChange}
+        name="Tags"
+        placeHolder="Enter Tags"
+      />
             </div>
             <div className="formcontrol">
               <label htmlFor="file">Write Blog :</label>

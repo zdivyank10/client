@@ -120,7 +120,7 @@ function Myblog() {
                                         <>
 
                                             <Link to={`/blog/${_id}`} className="postimg">
-                                                <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                                <img src={cover_img} height={200} className="banner_img" alt="Cover Image" />
                                             </Link>
 
                                             <Link to={`/blog/${_id}`} className="postuserinfo">
@@ -153,7 +153,7 @@ function Myblog() {
                                         <>
                                             <div data-aos="fade-up" className="">
                                                 <div className="postimg">
-                                                    <img src={`${CONFIGS.API_BASE_URL}//uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                                    <img src={cover_img} height={200} className="banner_img" alt="Cover Image" />
                                                 </div>
 
                                                 <div className="postuserinfo">

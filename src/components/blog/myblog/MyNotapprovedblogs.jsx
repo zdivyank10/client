@@ -97,7 +97,7 @@ function MyNotapprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="">
                                 <div className="postimg">
-                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={cover_img} height={200} className="banner_img" alt="Cover Image" />
                                 </div>
 
                                 <div className="postuserinfo">

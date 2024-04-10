@@ -91,7 +91,7 @@ function MyApprovedblogs() {
                         <div  className="postcontainer  text-center m-3">
                             <div data-aos="fade-up" className="row">
                                 <Link to={`/blog/${_id}`} className="postimg">
-                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className="banner_img" alt="Cover Image" />
+                                    <img src={cover_img}  height={200} className="banner_img" alt="Cover Image" />
                                 </Link>
 
                                 <Link to={`/blog/${_id}`} className="postuserinfo">

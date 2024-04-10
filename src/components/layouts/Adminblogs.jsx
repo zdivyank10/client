@@ -206,7 +206,7 @@ function Adminblogs() {
               <tr key={index}>
                 <td>
                   <Link to={`/blog/${_id}`} className="postimg">
-                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={100} alt="" />
+                    <img src={cover_img} height={100} alt="" />
                   </Link>
                 </td>
                 <td>

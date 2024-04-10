@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import MyQuillEditor from '../MyDraftEditor';
-import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import { useAuth } from '../../../store/auth';
 import ReactQuill from 'react-quill';
@@ -9,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
 import { CONFIGS } from "../../../../config";
+import { TagsInput } from "react-tag-input-component";
 
 function Update() {
     const { _id } = useParams();
@@ -91,7 +91,7 @@ function Update() {
         }
     };
 
-    
+
 
     // Function to handle updating blog content
     const handleUpdateBlog = async () => {
@@ -122,22 +122,22 @@ function Update() {
                     tags: tags,
                 }),
             });
-            if ( !blog.title || !blog.content || tags.length === 0) {
+            if (!blog.title || !blog.content || tags.length === 0) {
                 toast.error('Please fill in all required fields', {
-                  style: {
-                    background: '#212121',
-                    color: 'white',
-                  },
-                  position: 'top-center',
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
+                    style: {
+                        background: '#212121',
+                        color: 'white',
+                    },
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
                 return;
-              }
+            }
             if (response.ok) {
                 const updatedBlog = await response.json();
                 console.log('Blog updated successfully:', updatedBlog);
@@ -163,7 +163,7 @@ function Update() {
                     progress: undefined,
                 });
                 navigate(`/myblog/${user._id}`);
-              
+
             } else {
                 console.error('Failed to update blog:', response.statusText);
             }
@@ -180,8 +180,8 @@ function Update() {
     return (
         <>
             <div className="back text-center">
-          <Link to={`/myblog/${user._id}`} className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
-        </div>
+                <Link to={`/myblog/${user._id}`} className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+            </div>
             <div className="addpostcontainer justify-content-center">
                 <div className="addpostright">
                     <h1 className='text-center'>Edit Blog</h1>
@@ -193,15 +193,23 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Edit Picture :</label>
-                            <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange}  />
+                            <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Title :</label>
-                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} required/>
+                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} required />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Tags :</label>
-                            <TagsInput value={tags} onChange={handleChange} />
+                          
+
+                            <TagsInput
+
+                                value={tags}
+                                onChange={handleChange}
+                                name="Tags"
+                                placeHolder="Enter Tags"
+                            />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Edit Blog :</label>

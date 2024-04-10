@@ -385,7 +385,7 @@ function FullBlog() {
             <h1>{title}</h1>
           </div>
           <div className="fullblogimg text-center">
-            <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} alt="" className='fullimg' />
+            <img src={cover_img} alt="" className='fullimg' />
           </div>
           <div className="fullblogcontent text-center">
             <div className='content' dangerouslySetInnerHTML={{ __html: sanitizedContent }}></div>
@@ -486,7 +486,10 @@ function FullBlog() {
 
           <FaUserAlt className='userpfp' size={25} />
 
-          <h2 className='comment_user'>{commentItem.userid?.username}</h2>
+          <h2 className='comment_user'>
+  {commentItem.userid ? commentItem.userid.username : "Deleted User"}
+</h2>
+
           </div>
           <div className="date_delete">
             <p className='comment_data'> {formatDate1(commentItem.createdAt)}</p>
