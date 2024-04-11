@@ -54,7 +54,8 @@ function Addpost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file || !blog.title || !blog.content || tags.length === 0) {
+    // if (!file || !blog.title || !blog.content || tags.length === 0) {
+    if (!file || !blog.title || !blog.content ) {
       toast.error('Please fill in all required fields', {
         style: {
           background: '#212121',
@@ -84,7 +85,7 @@ function Addpost() {
       if (uploadResponse.ok) {
         const fileURL = uploadData.fileURL;
         console.log('file URL', uploadResponse.url);
-        console.log('file URL', uploadData);
+        console.log('file URL', fileURL);
 
         // const fullurl = uploadResponse.url+'/'+uploadData
         // console.log('fulll url');

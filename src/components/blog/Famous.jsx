@@ -34,13 +34,7 @@ function Famous() {
         {popularblog.map((blog, index) => (
           <Carousel.Item key={index}>
             <Link to={`/blog/${blog._id}`} className="postuserinfo">
-              {/* <div className="darker">
-                <img
-                  className="d-block w-100 pop_img text-center"
-                  src={`${CONFIGS.API_BASE_URL}//uploads/${blog.cover_img}`}
-                  alt={blog.title}
-                />
-              </div> */}
+          
               <div className="img-gradient">
                 <img className="pop_img"
                   src={blog.cover_img} />
