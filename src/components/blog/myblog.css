@@ -1,4 +1,6 @@
 .myblogcontainer {
+  background-color: var(--forth-color);
+  margin-top: -12px;
     /* display: flex; */
     justify-content: center; /* Horizontally center the .status container */
     /* flex-direction: column; */

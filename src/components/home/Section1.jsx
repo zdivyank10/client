@@ -63,10 +63,10 @@ function Section1() {
           In our digital haven, IT related idea, and emotion finds expression.
           Welcome to Ink Garden, where the power of words blossoms into captivating narratives.
         </p>
-        <div className="search_container ">
+        <div   data-aos="fade-right" className="search_container ">
           <MdOutlineSearch className='searchicon' />
           <input
-            data-aos="fade-right"
+          
             type="text"
             className='left_search'
             placeholder='Search blog'

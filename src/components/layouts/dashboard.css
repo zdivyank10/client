@@ -65,7 +65,7 @@ width: 250px;
 }
 .dashboard
 {
-    background-color: var(--forth-color);
+    background-color: var(--font-color);
     height: 100%;
     width: 100%;
     padding: 15px;
@@ -114,6 +114,11 @@ width: 250px;
     display: flex;
     /* margin: 15px; */
     /* padding: 15px; */
+}
+
+.main-content
+{
+    background-color: var(--forth-color);
 }
 
 @media screen and (max-width: 768px) {
