@@ -146,7 +146,7 @@ function Post() {
                   <div data-aos="fade-up" className="maincontainer" key={index}>
                     <div className="postcontainer">
                       <Link to={`/blog/${_id}`} className="postimg">
-                        <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`}  className="banner_img" alt="Cover Image" />
+                        <img src={cover_img}  className="banner_img" alt="Cover Image" />
                       </Link>
 
                       {/* <Link to={`/blog/${_id}`} className="postuserinfo"> */}

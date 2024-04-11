@@ -163,7 +163,7 @@ function EditorsChoice() {
                           }}
                         >
 
-                          <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} alt="" className='fullimg' />
+                          <img src={cover_img} alt="" className='fullimg' />
                         </Typography>
                       </CardCover>
                       <CardContent

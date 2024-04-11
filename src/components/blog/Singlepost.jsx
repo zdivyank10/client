@@ -38,7 +38,7 @@ function Singlepost({ postId }) {
     <>
       <div data-aos="fade-up" className="postcontainer col-md-3">
         <div className="postimg">
-          <img src={`${CONFIGS.API_BASE_URL}/uploads/${cover_img}`} height={200} className='banner_img' alt="Cover Image" />
+          <img src={cover_img} height={200} className='banner_img' alt="Cover Image" />
         </div>
 
         <div className="postuserinfo">

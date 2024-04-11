@@ -67,7 +67,7 @@ function AdminEditor() {
                                 <td>{curEle.title}</td>
                                 <td>{curEle.author_id?.username}</td>
                                 <td>
-                                    <img src={`${CONFIGS.API_BASE_URL}/uploads/${curEle.cover_img}`} height={80} width={120} alt="Cover Image" />
+                                    <img src={curEle.cover_img} height={80} width={120} alt="Cover Image" />
                                 </td>
                                 <td>
                                     {curEle.tags.map((tag, tagIndex) => (

@@ -43,7 +43,7 @@ function Famous() {
               </div> */}
               <div className="img-gradient">
                 <img className="pop_img"
-                  src={`${CONFIGS.API_BASE_URL}/uploads/${blog.cover_img}`} />
+                  src={blog.cover_img} />
               </div>
               <Carousel.Caption className=' d-block'>
                 <h1 className='text-light'>{blog.title}</h1>

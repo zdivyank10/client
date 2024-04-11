@@ -80,6 +80,7 @@ function Addpost() {
         body: formData,
       });
       const uploadData = await uploadResponse.json();
+      console.log('uploaded data:::::::::',uploadData);
       if (uploadResponse.ok) {
         const fileURL = uploadData.fileURL;
         console.log('file URL', uploadResponse.url);
@@ -101,6 +102,7 @@ function Addpost() {
         });
 
         const res_data = await response.json();
+        console.log('::::::::::',res_data);
 
         if (response.ok) {
           setBlog({
