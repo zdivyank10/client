@@ -7,7 +7,9 @@ import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
 import { CONFIGS } from "../../../../config";
-import { TagsInput } from "react-tag-input-component";
+// import { TagsInput } from "react-tag-input-component";
+import { TagsInput } from '@mantine/core';
+import '@mantine/core/styles.css';
 // import 'react-tagsinput-component/dist/react-tagsinput-component.css'; 
 
 function Update() {
