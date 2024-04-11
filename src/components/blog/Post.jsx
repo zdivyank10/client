@@ -143,7 +143,7 @@ function Post() {
                 const isLiked = likedPosts.includes(_id);
 
                 return (
-                  <div data-aos="fade-up" className="maincontainer" key={index}>
+                  <div data-aos="zoom-in" className="maincontainer" key={index}>
                     <div className="postcontainer">
                       <Link to={`/blog/${_id}`} className="postimg">
                         <img src={cover_img}  className="banner_img" alt="Cover Image" />

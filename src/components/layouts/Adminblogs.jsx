@@ -165,8 +165,8 @@ function Adminblogs() {
 
   return (
     <div className="container">
-      <h1 className="home_left_h1 text-center"><GiNotebook size={80} />  All Blogs</h1>
-      <Table striped bordered hover >
+      <h1 data-aos="flip-down" className="home_left_h1 text-center"><GiNotebook size={80} />  All Blogs</h1>
+      <Table data-aos="fade-right" striped bordered hover >
         <thead>
           <tr className="table table-dark">
             <th>Cover_Image</th>

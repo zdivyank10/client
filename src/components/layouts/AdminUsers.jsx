@@ -104,9 +104,9 @@ function AdminUsers() {
 
   return (
     <>
-      <h1 className='home_left_h1 text-center'><FaUsers size={80}/>  List of Ink Garden Users</h1>
+      <h1 data-aos="flip-down" className='home_left_h1 text-center'><FaUsers size={80}/>  List of Ink Garden Users</h1>
       <hr />
-      <table className="table  table-hover ">
+      <table data-aos="fade-right" className="table  table-hover ">
         <thead>
           <tr>
             <th scope="col">UserName</th>

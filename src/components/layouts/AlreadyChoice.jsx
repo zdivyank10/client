@@ -74,8 +74,8 @@ function AlreadyChoice() {
     return (
         <>
             <Link to={`/admin/editor`} className='btn btn-dark'><IoReturnDownBack /> BACK</Link>
-            <h1 className='home_left_h1 text-center'><GiImperialCrown size={80} /> List of Editor's Choice Blogs</h1>
-            <div className="pagination-container align-items-center justify-content-center">
+            <h1 data-aos="flip-down" className='home_left_h1 text-center'><GiImperialCrown size={80} /> List of Editor's Choice Blogs</h1>
+            <div data-aos="fade-right" className="pagination-container align-items-center justify-content-center">
                 <hr />
                 <table className="table  table-hover ">
                     <thead>

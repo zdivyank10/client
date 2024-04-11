@@ -48,10 +48,10 @@ function AdminEditor() {
     return (
         <>
             <Link to={`/admin/alreadyeditor`} className='btn btn-dark'><GiImperialCrown size={25 } />  Already Editor's Choice</Link>
-            <h1 className='home_left_h1 text-center'>Make it Editor's Choice</h1>
+            <h1 data-aos="flip-down" className='home_left_h1 text-center'>Make it Editor's Choice</h1>
             <div className="pagination-container align-items-center justify-content-center">
                 <hr />
-                <table className="table  table-hover ">
+                <table data-aos="fade-right" className="table  table-hover ">
                     <thead>
                         <tr>
                             <th scope="col">Title</th>

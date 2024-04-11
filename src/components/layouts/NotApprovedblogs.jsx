@@ -90,7 +90,7 @@ function NotApprovedblogs() {
   return (
     <>
       <div className="blogrow">
-        <h1 className="home_left_h1 text-center"><ImBlog size={80} className='text-danger'/>  Already Declined Blogs</h1>
+        <h1 data-aos="flip-down" className="home_left_h1 text-center"><ImBlog size={80} className='text-danger'/>  Already Declined Blogs</h1>
         <hr />
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
@@ -102,7 +102,7 @@ function NotApprovedblogs() {
               const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
               return (
                 <div className="maincontainer" key={index}>
-                  <div className="postcontainer text-center m-3">
+                  <div data-aos="fade-right" className="postcontainer text-center m-3">
                     <div className="postimg">
                       <img src={cover_img} height={200} className='banner_img' alt="Cover Image" />
                     </div>

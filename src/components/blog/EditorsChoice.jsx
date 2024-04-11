@@ -87,7 +87,7 @@ function EditorsChoice() {
         <div className="row blogrow">
 
 
-          <h1 className='home_left_h1 text-center'>Editor's Choice</h1>
+          <h1 data-aos="flip-down" className='home_left_h1 text-center'>Editor's Choice</h1>
           <hr />
           {choice &&
             choice.map((post, index) => {
@@ -98,10 +98,10 @@ function EditorsChoice() {
 
               return (
                 // <div data-aos="fade-up" className="maincontainer col-md-3  m-3" key={index}>
-                <div className="maincontainer col-lg-3 col-md-5 col-sm-6  m-3 " key={index}>
+                <div data-aos="zoom-in-down" className="maincontainer col-lg-3 col-md-5 col-sm-6  m-3 " key={index}>
               
                   <Link to={`/blog/${_id}`} className="">
-                     <Box
+                     <Box 
                     sx={{
                       perspective: '1000px',
                       transition: 'transform 0.4s',

@@ -29,7 +29,7 @@ function Famous() {
 
   return (
     <div className="popular_container">
-      <Carousel data-bs-theme="light" className='pop_Carousel'>
+      <Carousel data-aos="fade-up" data-bs-theme="light" className='pop_Carousel'>
         {/* Map over the popularblog state to dynamically render Carousel items */}
         {popularblog.map((blog, index) => (
           <Carousel.Item key={index}>

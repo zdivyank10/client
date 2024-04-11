@@ -101,7 +101,7 @@ function Section1() {
           ))}
         </div>
       </div>
-      <div data-aos="fade-left" className="home_right">
+      <div data-aos="zoom-in" className="home_right">
         <img
           src="https://images.pexels.com/photos/267569/pexels-photo-267569.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="image for homepage"

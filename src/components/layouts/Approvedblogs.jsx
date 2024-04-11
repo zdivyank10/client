@@ -63,16 +63,16 @@ function Approvedblogs() {
     return (
         <>
             <div className=" row blogrow">
-                <h1 className="home_left_h1 text-center"><ImBlog size={80} className='text-success'/>  Already Approved Blogs</h1>
+                <h1 data-aos="flip-down" className="home_left_h1 text-center"><ImBlog size={80} className='text-success'/>  Already Approved Blogs</h1>
                 <hr />
-                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+                <ResponsiveMasonry  columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
                     <Masonry columnsCount={3}>
                         {sortedBlogs && sortedBlogs.map((currEle, index) => {
                             const { title, author_id, cover_img, content, tags, createdAt, username, _id } = currEle;
                             const sanitizedContent = DOMPurify.sanitize(content); // Sanitize the content
                             return (
                                 <div className="maincontainer" key={index}>
-                                    <div className="postcontainer text-center m-3">
+                                    <div data-aos="fade-right" className="postcontainer text-center m-3">
                                         <div className="postimg">
                                         <img src={cover_img} height={200} className="banner_img" alt="Cover Image" />
                                         </div>

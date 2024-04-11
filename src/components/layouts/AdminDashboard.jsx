@@ -225,9 +225,9 @@ function AdminDashboard() {
   return (
     <>
 
-<div className="dashboard">
+<div data-aos="fade-down" className="dashboard">
 
-      <div className="dashboard_admin">
+      <div data-aos="fade-down" className="dashboard_admin">
         <div className="admin_info">
 
           <h2>{user.username}</h2>
@@ -244,7 +244,7 @@ function AdminDashboard() {
       </div>
       <hr />
 
-      <div className="chart">
+      <div data-aos="fade-up" className="chart">
         <div className='barchart'>
           <h1 className='text-center'>User Registration Chart</h1>
           <canvas id="userRegistrationChart" width="800" height="500"></canvas>
@@ -267,7 +267,7 @@ function AdminDashboard() {
       </div>
 
       <hr />
-      <div className="dashboard">
+      <div data-aos="fade-down" className="dashboard">
       <div className="head_dashboard">
 
 
