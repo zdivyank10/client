@@ -1,13 +1,17 @@
 import React from 'react'
 import './about.css'
+import { AiOutlineInstagram } from 'react-icons/ai'
+import { FaSquareXTwitter } from 'react-icons/fa6'
+import { SiFacebook } from 'react-icons/si'
+import { Link } from 'react-router-dom'
 function About() {
     return (
         <>
             <div className="about_container">
-            <h1 className='home_left_h1 text-center'>Welcome to Ink Garden</h1>
-            {/* <h1 className='about_head  text-center'>Welcome to Ink Garden</h1> */}
-            <img src="../img/logo.jpeg" alt="" className='about_logo mt-5 mb-5'  />
-            <hr />
+                <h1 className='home_left_h1 text-center'>Welcome to Ink Garden</h1>
+                {/* <h1 className='about_head  text-center'>Welcome to Ink Garden</h1> */}
+                <img src="../img/logo.jpeg" alt="" className='about_logo mt-5 mb-5' />
+                <hr />
 
                 <div className="ourmission text-center">
                     <h1>Our Mission</h1>
@@ -57,7 +61,7 @@ function About() {
 
                     <div className="vision">
                         <h1>Our Vision</h1>
-                        <p>Our vision is to be the premier destination for bloggers of all backgrounds and interests to share their stories, engage with a vibrant community, and make a difference in the world. By continuously evolving and innovating our platform, we strive to provide the best possible experience for our users and create a lasting impact in the online blogging landscape.
+                        <p>Our vision is to be the premier destination for bloggers of IT backgrounds and interests to share their stories, engage with a vibrant community, and make a difference in the world. By continuously evolving and innovating our platform, we strive to provide the best possible experience for our users and create a lasting impact in the online blogging landscape.
                         </p>
                     </div>
 
@@ -72,9 +76,45 @@ function About() {
                         <h1>Join Our Community</h1>
                         <p>Connect with us on social media to stay updated on the latest blog posts, community events, and more:
 
-                            Facebook
-                            Twitter
-                            Instagram
+                            <div
+                                style={{
+                                    backgroundColor: '#000',
+                                    borderRadius: '15px',
+                                }}
+                                className='m-3'
+                            >
+
+                                <Link to='https://www.facebook.com/divyank.zaveri/'>
+                                    <SiFacebook
+                                        style={{
+                                            color: '#59e4a8',
+                                        }} size={25}
+                                        className='m-3'
+                                    />
+                                </Link>
+
+
+                                <Link to='https://www.instagram.com/zdivyank/'>
+                                    <AiOutlineInstagram style={{
+                                        color: '#59e4a8',
+                                    }} size={30} className='m-3'
+                                    />
+                                </Link>
+
+                                 <Link to='https://twitter.com/DivyankZaveri?t=VMloUue7kwtwdNCmkCAsTg'>
+                                <FaSquareXTwitter
+                                    style={{
+                                        color: '#59e4a8',
+                                    }} size={25} className='m-3'
+                                    />
+                                    </Link>
+
+
+
+                            </div>
+
+
+
 
                         </p>
                     </div>
@@ -96,31 +136,31 @@ function About() {
                 <div className="about2">
                     <div className="about_left2">
 
-                    <h1>
-                        community Gueidline Rules
-                    </h1>
-                    <ul className='about_ul'>
-                        <li className='about_li'>Respectful Behavior:</li><p>
-                        Treat others with kindness and empathy, avoiding harassment or personal attacks.
-                          </p>
-                        <li className='about_li'>No Offensive Content:</li><p>
-                        Refrain from posting or sharing offensive, obscene, or inappropriate content that promotes violence or discrimination.
-                             </p>
-                        <li className='about_li'>Privacy and Safety:</li><p>
-                        Respect the privacy of others, refrain from sharing personal information without consent, and report abusive behavior.
+                        <h1>
+                            community Gueidline Rules
+                        </h1>
+                        <ul className='about_ul'>
+                            <li className='about_li'>Respectful Behavior:</li><p>
+                                Treat others with kindness and empathy, avoiding harassment or personal attacks.
                             </p>
-                        <li className='about_li'>Use of Language: </li><p>
-                        Use appropriate language and tone, avoiding offensive or derogatory language and respecting cultural differences.
-                           </p>
-                        <li className='about_li'>Content Moderation: </li><p>
-                        Respect moderation decisions, refrain from circumventing measures, and report violations promptly.
-                           </p>
+                            <li className='about_li'>No Offensive Content:</li><p>
+                                Refrain from posting or sharing offensive, obscene, or inappropriate content that promotes violence or discrimination.
+                            </p>
+                            <li className='about_li'>Privacy and Safety:</li><p>
+                                Respect the privacy of others, refrain from sharing personal information without consent, and report abusive behavior.
+                            </p>
+                            <li className='about_li'>Use of Language: </li><p>
+                                Use appropriate language and tone, avoiding offensive or derogatory language and respecting cultural differences.
+                            </p>
+                            <li className='about_li'>Content Moderation: </li><p>
+                                Respect moderation decisions, refrain from circumventing measures, and report violations promptly.
+                            </p>
 
-                    </ul>
+                        </ul>
                     </div>
 
                     <div className="">
-                    <img src="../img/7542093.jpg" alt="" className='about_img2'  />
+                        <img src="../img/7542093.jpg" alt="" className='about_img2' />
                     </div>
                 </div>
             </div>
