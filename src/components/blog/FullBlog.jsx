@@ -427,7 +427,7 @@ function FullBlog() {
           </div>
           <div className="comment_section text-center">
 
-            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='content' onChange={handleChange} required />
+            <input type="text" className='form-control ' placeholder='Enter Comment' value={comment} name='comment' id='comment' onChange={handleChange} required />
             <button className="btn btn-secondary m-3" type="button" onClick={handleSubmit}><IoMdSend /></button>
           </div>
           <hr />
