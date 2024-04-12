@@ -37,6 +37,8 @@ function Addpost() {
     setTags(newTags);
   };
 
+
+  
   const handleInput = (e) => {
     const { name, value } = e.target;
     setBlog({
@@ -180,11 +182,11 @@ function Addpost() {
             </div>
             <div className="formcontrol">
               <label htmlFor="file">Add Picture :</label>
-              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} required  />
+              <input type="file" name="file" id="file" className='form-control' onChange={handleFileChange} placeholder='Add Picture' required  />
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Title :</label>
-              <input type="text" name="title" id="title" className='form-control ' value={blog.title} onChange={handleInput} required/>
+              <input type="text" name="title" id="title" className='form-control ' value={blog.title} placeholder='Add Title' onChange={handleInput} required/>
             </div>
             <div className="formcontrol">
               <label htmlFor="title">Tags :</label>
@@ -197,7 +199,9 @@ function Addpost() {
         placeHolder="Enter Tags"
       /> */}
 
-<TagsInput  placeHolder="Enter Tags" value={tags} onChange={handleChange} />
+<TagsInput  placeHolder="Enter Tags" value={tags} onChange={handleChange} className='tags-input'/>
+
+
             </div>
             <div className="formcontrol">
               <label htmlFor="file">Write Blog :</label>

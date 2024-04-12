@@ -7,9 +7,9 @@ import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
 import { CONFIGS } from "../../../../config";
-// import { TagsInput } from "react-tag-input-component";
 import { TagsInput } from '@mantine/core';
 import '@mantine/core/styles.css';
+
 // import 'react-tagsinput-component/dist/react-tagsinput-component.css'; 
 
 function Update() {
@@ -205,19 +205,22 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Title :</label>
-                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput} required />
+                            <input type="text" name="title" id="title" className='form-control' value={blog.title} onChange={handleInput}  placeholder='Add Title' required />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Tags :</label>
 
 
-                            <TagsInput
+                            {/* <TagsInput
 
                                 value={tags}
                                 onChange={handleChange}
                                 name="Tags"
                                 placeHolder="Enter Tags"
-                            />
+                            /> */}
+
+
+<TagsInput  placeholder="Enter Tags" value={tags} onChange={handleChange} className='tags-input'/>
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Edit Blog :</label>

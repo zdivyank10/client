@@ -54,6 +54,8 @@
     border-radius: 15px;
 }
 
+
+
 @media only screen and (max-width: 768px) {
     .addpostcontainer {
         flex-direction: column;
@@ -77,4 +79,10 @@
         justify-self: center;
         border-radius: 15px;
     }
+
+
+    .tags-input
+{
+    pointer-events: none;
+}
 }
