@@ -44,7 +44,7 @@ function Userupdate({ _id }) {
     e.preventDefault();
     // console.log(userData);
     try {
-      const response = await fetch(`${CONFIGS.API_BASE_URL}//api/admin/users/${id}/update`, {
+      const response = await fetch(`${CONFIGS.API_BASE_URL}/api/admin/users/${id}/update`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',

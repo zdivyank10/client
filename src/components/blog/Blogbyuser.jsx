@@ -36,17 +36,17 @@ function Blogbyuser() {
 
 
 
-<div className="dashboard_admin">
+<div data-aos="zoom-out" className="dashboard_admin">
 
     <h1 className='text-center blog_user'><FaUserAlt className="user_pfp"/> {username}</h1>
   
 </div>
 
 
-    <div className="container">
+    <div  className="container">
 
-    <div className="blogbyuser_container p-4 m-3">
-      <div className="row">
+    <div data-aos="flip-up" className="blogbyuser_container p-4 m-3">
+      <div data-aos="zoom-in"  className="row">
         {blogs.length > 0 ? (
           blogs.map(blog => (
             <div key={blog._id} className="col-md-4 mb-3">

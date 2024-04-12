@@ -181,11 +181,17 @@ function Update() {
 
     return (
         <>
-            <div className="back text-center">
+            {/* <div className="back text-center">
+                <Link to={`/myblog/${user._id}`} className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
+            </div> */}
+
+            <div data-aos="fade-in" className="back text-center m-5">
+
                 <Link to={`/myblog/${user._id}`} className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
             </div>
-            <div className="addpostcontainer justify-content-center">
-                <div className="addpostright">
+
+            <div  className="addpostcontainer justify-content-center">
+                <div data-aos="zoom-in"   className="addpostright">
                     <h1 className='text-center'>Edit Blog</h1>
                     <hr />
                     <form encType="multipart/form-data">
@@ -203,7 +209,7 @@ function Update() {
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="title">Edit Tags :</label>
-                          
+
 
                             <TagsInput
 

@@ -366,9 +366,9 @@ function FullBlog() {
         {/* <div className="back text-center">
         
         </div> */}
-        <div className="fullblogcontainer">
+        <div  data-aos="zoom-out"  className="fullblogcontainer">
           <div className="authorinfo">
-            <button className='btn btn-dark back_btn' onClick={() => navigate(-1)}>
+            <button data-aos="fade-in"  className='btn btn-dark back_btn' onClick={() => navigate(-1)}>
               <IoReturnDownBackOutline size={25} /> Back
             </button>
             <hr />

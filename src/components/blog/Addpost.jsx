@@ -156,7 +156,7 @@ function Addpost() {
 
   return (
     <>
-      <div className="back text-center m-5">
+      <div data-aos="fade-in" className="back text-center m-5">
 
         <Link to='/blog' className='btn btn-dark '><IoReturnDownBackOutline size={25} />  Back</Link>
       </div>
@@ -170,7 +170,7 @@ function Addpost() {
           <Link to='/blog' className='btn btn-primary'> Go Back</Link>
         </div> */}
 
-        <div className="addpostright ">
+        <div data-aos="fade-right" className="addpostright ">
           <h1 className='text-center m-4'>Write Blog</h1>
           <hr />
           <form onSubmit={handleSubmit} encType="multipart/form-data">

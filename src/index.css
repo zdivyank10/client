@@ -8,6 +8,12 @@ body{
     overflow-x: hidden;
 }
 
+::selection
+{
+    background-color: var(--forth-color);
+    color: var(--third-color);
+}
+
 :root {
 
     /* --primary-color: #003C43;  */
