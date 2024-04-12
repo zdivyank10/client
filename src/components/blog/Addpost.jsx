@@ -199,7 +199,7 @@ function Addpost() {
         placeHolder="Enter Tags"
       /> */}
 
-<TagsInput  placeHolder="Enter Tags" value={tags} onChange={handleChange} className='tags-input'/>
+<TagsInput  placeHolder="Enter Tags" value={tags} onChange={handleChange} />
 
 
             </div>

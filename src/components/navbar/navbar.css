@@ -125,14 +125,16 @@ nav ul.show {
     transform: translateY(0%);
     padding: 0px;
     margin: 0; /* Remove margin */
+  
   }
 
   .logo-brand ul {
     padding-top: 15px;
-    padding-right: 15px;
+    /* padding-right: 15px; */
     /* justify-content: center; */
     display: flex;
     margin: auto;
+    margin-bottom: 20px;
   }
 
 }

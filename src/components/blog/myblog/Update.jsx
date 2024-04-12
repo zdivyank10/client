@@ -220,7 +220,7 @@ function Update() {
                             /> */}
 
 
-<TagsInput  placeholder="Enter Tags" value={tags} onChange={handleChange} className='tags-input'/>
+<TagsInput  placeholder="Enter Tags" value={tags} onChange={handleChange} />
                         </div>
                         <div className="formcontrol">
                             <label htmlFor="file">Edit Blog :</label>
