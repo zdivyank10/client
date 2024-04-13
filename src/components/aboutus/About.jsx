@@ -121,10 +121,10 @@ function About() {
                     <div data-aos="fade-up-left" className="vision">
                         <h1>Our Team</h1>
                         <p>
-                            Divyank-Frontend,Backend,Database <br />
-                            Sahil-Frontend<br />
-                            Nikita-Frontend<br />
-                            Siddhi-Frontend<br />
+                            Divyank-6421 <br />
+                            Sahil-6028<br />
+                            Nikita-6325<br />
+                            Siddhi-6335<br />
                         </p>
 
                     </div>

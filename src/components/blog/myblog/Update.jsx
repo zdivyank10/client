@@ -124,7 +124,7 @@ function Update() {
                     tags: tags,
                 }),
             });
-            if (!blog.title || !blog.content || tags.length === 0) {
+            if (!blog.title || !blog.content ) {
                 toast.error('Please fill in all required fields', {
                     style: {
                         background: '#212121',

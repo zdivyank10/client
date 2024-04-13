@@ -259,7 +259,7 @@ function AdminDashboard() {
             <p>{countAdmin}</p>
           </div>
           <div className="top_dashboard">
-            <h3>Total Contect Us : </h3>
+            <h3>Total Contact Us : </h3>
             <p>{countcontact}</p>
           </div>
         </div>
