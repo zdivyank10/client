@@ -219,7 +219,7 @@ function Adminblogs() {
                 <td>
                   <Button variant="outline-dark me-2" onClick={() => handleApprove(_id)}>Approve</Button>
                   <Button variant="outline-dark me-2" onClick={() => handleDecline(_id)}>Decline</Button>
-                  <Button variant="outline-dark mt-2" onClick={() => handlePending(_id)}>Pending</Button>
+                  <Button variant="outline-dark me-2" onClick={() => handlePending(_id)}>Pending</Button>
                 </td>
                 <td>
                   <span className={`approval-status ${bgClass} text-light text-center m-3`} style={{ borderRadius: '5px', padding: '5px', margin: '5px' }}>{approvalStatus}</span>
