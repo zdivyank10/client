@@ -13,12 +13,12 @@ function About() {
                 <img data-aos="flip-up" src="../img/logo.jpeg" alt="" className='about_logo mt-5 mb-5' />
                 <hr />
 
-                <div  data-aos="fade-left" className="ourmission text-center">
-                    <h1>Our Mission</h1>
-                    <p className='mission  justify-content-center align-items-center'>
-                        Our mission at Ink Garden is to provide a nurturing space where individuals can freely express themselves through the written word. We strive to cultivate a community where every voice is valued and every story is celebrated. By offering a platform for creative expression, we aim to inspire, connect, and empower individuals from all walks of life. Through storytelling, we seek to foster understanding, empathy, and positive change in the world. Our ultimate goal is to build a vibrant community of writers and readers who share a passion for storytelling and a commitment to making a difference in the world.</p>
+                    <div  data-aos="fade-left" className="ourmission text-center">
+                        <h1>Our Mission</h1>
+                        <p className='mission  justify-content-center align-items-center'>
+                            Our mission at Ink Garden is to provide a nurturing space where individuals can freely express themselves through the written word. We strive to cultivate a community where every voice is valued and every story is celebrated. By offering a platform for creative expression, we aim to inspire, connect, and empower individuals from all walks of life. Through storytelling, we seek to foster understanding, empathy, and positive change in the world. Our ultimate goal is to build a vibrant community of writers and readers who share a passion for storytelling and a commitment to making a difference in the world.</p>
 
-                </div>
+                    </div>
 
                 <hr /><br />
 
@@ -119,12 +119,10 @@ function About() {
                         </p>
                     </div>
                     <div data-aos="fade-up-left" className="vision">
-                        <h1>Our Team</h1>
+                        <h1>Get Involved</h1>
                         <p>
-                            Divyank-6421 <br />
-                            Sahil-6028<br />
-                            Nikita-6325<br />
-                            Siddhi-6335<br />
+                        At Ink garden, we believe in the power of community and collaboration. Whether you're a seasoned IT professional, a student eager to learn, or simply a technology enthusiast, there are plenty of ways to get involved and contribute to our vibrant community. <br />
+                
                         </p>
 
                     </div>
